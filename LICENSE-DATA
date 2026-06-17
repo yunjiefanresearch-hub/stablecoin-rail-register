@@ -1,0 +1,44 @@
+Stablecoin Rail Register — DATA LICENSE
+=======================================
+
+The DATA in this repository — all `*.yaml` records, the corridor file(s), the
+compiled `dataset.json`, and the generated `COVERAGE.md` / `records.md` tables —
+is licensed under the
+
+    Creative Commons Attribution 4.0 International License (CC BY 4.0)
+
+You are free to:
+  • Share — copy and redistribute the material in any medium or format.
+  • Adapt — remix, transform, and build upon the material for any purpose,
+    including commercially.
+
+Under the following term:
+  • Attribution — You must give appropriate credit, provide a link to this
+    license, and indicate if changes were made. You may do so in any reasonable
+    manner, but not in any way that suggests the licensor endorses you or your
+    use.
+
+No additional restrictions — You may not apply legal terms or technological
+measures that legally restrict others from doing anything the license permits.
+
+-----------------------------------------------------------------------------
+HOW TO ATTRIBUTE
+-----------------------------------------------------------------------------
+Please cite the DOI of the version you used (see CITATION.cff). A suggested form:
+
+  Fan, Yunjie. "Stablecoin Rail Register" (version vX.Y.Z). DOI: 10.5281/zenodo.XXXXXXX.
+  Licensed under CC BY 4.0.
+
+-----------------------------------------------------------------------------
+FULL LEGAL CODE
+-----------------------------------------------------------------------------
+This is a human-readable summary of (and not a substitute for) the license.
+The full, legally binding text — incorporated here by reference — is the
+Creative Commons Attribution 4.0 International Public License, available at:
+
+  Legal code:  https://creativecommons.org/licenses/by/4.0/legalcode
+  Summary:     https://creativecommons.org/licenses/by/4.0/
+  SPDX-License-Identifier: CC-BY-4.0
+
+Note: the CODE in this repository (`build.py`, the JSON Schema, and any tooling)
+is licensed separately under the Apache License 2.0 — see LICENSE-CODE.
