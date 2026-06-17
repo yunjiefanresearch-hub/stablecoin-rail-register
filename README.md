@@ -1,19 +1,19 @@
 # Stablecoin Rail Register
-*(working title — see "Naming" below)*
+*(working title; see "Naming" below)*
 
 An **open, versioned, machine-readable** register of how jurisdictions regulate the
 **permitted-activity / yield boundary on stablecoin payment rails**, with a
 **corridor-level interoperability layer**. Built from primary sources, citable by DOI.
 
-**Focus:** APAC — Hong Kong, Taiwan · Latin America — Brazil  ·  **Doctrinal anchor:** United States (CLARITY Act §404)
+**Focus:** APAC (Hong Kong, Taiwan) · Latin America (Brazil)  ·  **Doctrinal anchor:** United States (CLARITY Act §404)
 **Status:** v0.1.0 (in active build) · **Cadence:** quarterly diffs + event patches · **License:** CC-BY-4.0 (data) / Apache-2.0 (code)
 
 ---
 
-## What this is — and what it is not
+## What this is, and what it is not
 This is **not** another broad, shallow, proprietary "200-country" tracker, and it is **not** a scrape.
-It is a focused, **depth-first** reference whose value is the **judgment in the data** — sourcing and
-ambiguity resolution made transparent (see [`METHODOLOGY.md`](METHODOLOGY.md)) — and whose
+It is a focused, **depth-first** reference whose value is the **judgment in the data**: sourcing and
+ambiguity resolution made transparent (see [`METHODOLOGY.md`](METHODOLOGY.md)); and whose
 differentiator is the **corridor layer**: what actually clears, and what breaks, at each regulatory
 boundary along a cross-border flow (see [the corridor file](hk-br-usd-stablecoin-settlement.yaml)).
 
@@ -45,7 +45,7 @@ python build.py        # validates records, compiles dataset.json, regenerates c
 - Add a record: copy [`_TEMPLATE.yaml`](_TEMPLATE.yaml); see [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 ## Cite
-Each tagged release is archived to **Zenodo** for a DOI — see [`CITATION.cff`](CITATION.cff).
+Each tagged release is archived to **Zenodo** for a DOI; see [`CITATION.cff`](CITATION.cff).
 Cite the DOI of the version you used.
 
 ## Roadmap & methodology
@@ -58,5 +58,5 @@ Cite the DOI of the version you used.
 and `ROADMAP.md`.
 
 ## Maintainer
-**Founder & maintainer:** `<your name>` — independent research on cross-jurisdictional digital-asset
+**Founder & maintainer:** Yunjie Fan. Independent research on cross-jurisdictional digital-asset
 regulation. Contributions welcome under the verification rule in `METHODOLOGY.md`.

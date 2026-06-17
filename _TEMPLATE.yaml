@@ -17,7 +17,7 @@ source:
   url: ""
   pinpoint: ""
 secondary: []
-interpretation_note: ""             # the judgment layer — where ambiguity is resolved
+interpretation_note: ""             # the judgment layer: where ambiguity is resolved
 confidence: low                     # high | medium | low
 last_reviewed: "2026-06-17"           # YYYY-MM-DD
 version_added: 0.1.0
