@@ -1,12 +1,14 @@
 # Stablecoin Rail Register
 *(working title — see "Naming" below)*
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20730359.svg)](https://doi.org/10.5281/zenodo.20730359)
+
 An **open, versioned, machine-readable** register of how jurisdictions regulate the
 **permitted-activity / yield boundary on stablecoin payment rails**, with a
 **corridor-level interoperability layer**. Built from primary sources, citable by DOI.
 
 **Focus:** US · Hong Kong · EU · UK · Singapore · Mainland China  ·  **Doctrinal anchor:** United States (CLARITY Act §404 / GENIUS Act)
-**Backfill:** Brazil, Taiwan  ·  **Status:** v0.2.0-dev (in active build) · **Cadence:** quarterly diffs + event patches · **License:** CC-BY-4.0 (data) / Apache-2.0 (code)
+**Backfill:** Brazil (corridor-only), Taiwan (parked)  ·  **Status:** v0.2.0 (released · actively maintained) · **Cadence:** quarterly diffs + event patches · **License:** CC-BY-4.0 (data) / Apache-2.0 (code)
 
 ---
 

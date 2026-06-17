@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stablecoin Rail Register — regulatory intelligence infrastructure</title>
+<meta name="description" content="An open, versioned, machine-readable register of cross-jurisdictional stablecoin payment-rail regulation. Every fact sourced, dated, versioned, and confidence-rated.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --canvas:#F1F4F7; --panel:#FFFFFF; --ink:#0C1726; --ink-2:#43526B; --ink-3:#76839A;
+  --navy:#0A2540; --navy-2:#103253; --accent:#1C4E80; --accent-2:#2E6FB7;
+  --verified:#15784E; --verified-bg:#E4F1EA; --verified-line:#9FCDB5;
+  --draft:#955600; --draft-bg:#F8EEDC; --draft-line:#E0C58C;
+  --planned:#AAB3C0; --planned-bg:#E9ECF1; --planned-line:#D5DAE2;
+  --spine:#9A3D1B;
+  --rule:#D9DEE6; --rule-2:#C3CAD5;
+  --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono)}
+:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px;border-radius:2px}
+
+/* ---------- masthead ---------- */
+.masthead{background:var(--navy);color:#EAF0F7;border-bottom:3px solid #06182B}
+.mast-top{display:flex;align-items:baseline;justify-content:space-between;gap:18px;
+  padding:18px 0 4px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.wordmark{font-family:var(--serif);font-weight:600;font-size:27px;letter-spacing:-.01em;color:#fff;line-height:1}
+.reg-tag{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:#8FB0D0;
+  border:1px solid #2C4D6E;padding:3px 7px;border-radius:3px;text-transform:uppercase;white-space:nowrap}
+.mast-links{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.mlink{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:#CFE0F0;
+  border:1px solid #2C4D6E;padding:5px 9px;border-radius:4px;background:#0d2c4b}
+.mlink:hover{background:#11375c;text-decoration:none;border-color:#3a5a7c}
+.mlink b{color:#fff;font-weight:600}
+.tagline{font-family:var(--serif);font-size:17px;color:#C5D6E8;padding:6px 0 16px;max-width:760px;font-weight:500}
+.statstrip{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid #1d3f60;font-family:var(--mono)}
+.stat{padding:11px 18px 12px;border-right:1px solid #1d3f60;display:flex;flex-direction:column;gap:2px}
+.stat:last-child{border-right:0}
+.stat .n{font-size:18px;font-weight:600;color:#fff;letter-spacing:.01em}
+.stat .l{font-size:10px;letter-spacing:.13em;color:#7FA0C2;text-transform:uppercase}
+.stat.doi .n{font-size:13px;padding-top:3px}
+.stat.doi a{color:#9FC4E8}
+
+/* ---------- generic section ---------- */
+section{padding:44px 0;border-bottom:1px solid var(--rule)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);display:flex;align-items:center;gap:10px;margin:0 0 10px}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--accent);display:inline-block}
+h2.sec{font-family:var(--serif);font-weight:600;font-size:24px;letter-spacing:-.01em;margin:0 0 6px}
+.sec-sub{color:var(--ink-2);max-width:740px;margin:0 0 22px}
+
+/* ---------- thesis ---------- */
+.thesis{background:var(--panel);border-bottom:1px solid var(--rule)}
+.thesis .wrap{padding:34px 24px}
+.thesis p{font-family:var(--serif);font-size:20px;line-height:1.5;margin:0;color:var(--ink);max-width:840px;font-weight:500}
+.thesis .dual{font-family:var(--sans);font-size:14px;color:var(--ink-2);margin-top:14px;max-width:780px;font-weight:400}
+.thesis .dual code{font-family:var(--mono);font-size:12.5px;background:var(--canvas);
+  padding:1px 5px;border-radius:3px;border:1px solid var(--rule)}
+
+/* ---------- matrix ---------- */
+.mtoolbar{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+.searchbox{position:relative;flex:1;min-width:240px;max-width:420px}
+.searchbox input{width:100%;font-family:var(--mono);font-size:13px;padding:9px 12px 9px 32px;
+  border:1px solid var(--rule-2);border-radius:6px;background:var(--panel);color:var(--ink)}
+.searchbox input::placeholder{color:var(--ink-3)}
+.searchbox svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);opacity:.5}
+.matchcount{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);white-space:nowrap}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--ink-2);margin-left:auto}
+.legend span{display:flex;align-items:center;gap:6px}
+.lg{width:12px;height:12px;border-radius:2px;display:inline-block}
+.lg.v{background:var(--verified)}
+.lg.p{background:var(--panel);border:1px solid var(--planned-line)}
+.lg.s{background:var(--panel);border:1px solid var(--spine);box-shadow:inset 0 0 0 1px var(--spine)}
+
+.matrix-scroll{overflow-x:auto;border:1px solid var(--rule-2);border-radius:8px;background:var(--panel)}
+table.matrix{border-collapse:collapse;font-family:var(--mono);width:100%}
+table.matrix th,table.matrix td{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+table.matrix thead th{position:sticky;top:0;background:#F7F9FB;z-index:2}
+.corner{text-align:left;padding:10px 12px;font-size:10px;letter-spacing:.1em;color:var(--ink-3);
+  text-transform:uppercase;position:sticky;left:0;background:#F7F9FB;z-index:3;min-width:118px}
+.dimhead{padding:9px 6px;font-size:10.5px;font-weight:500;color:var(--ink-2);cursor:pointer;
+  white-space:nowrap;min-width:38px;text-align:center;letter-spacing:.02em;user-select:none}
+.dimhead:hover{background:#EEF3F8;color:var(--accent)}
+.dimhead.spine{color:var(--spine)}
+.dimhead .star{display:block;font-size:8px;line-height:1;margin-top:1px;color:var(--spine)}
+.jurcell{position:sticky;left:0;background:var(--panel);z-index:1;padding:0}
+.jurbtn{display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:9px 12px;width:100%;
+  background:none;border:0;cursor:pointer;font-family:var(--mono);text-align:left;border-right:1px solid var(--rule-2)}
+.jurbtn:hover{background:#F2F6FA}
+.jurbtn .code{font-size:14px;font-weight:600;color:var(--ink);letter-spacing:.02em}
+.jurbtn .full{font-size:9.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+td.cell{padding:0;text-align:center;height:42px;vertical-align:middle}
+.dot{width:100%;height:42px;border:0;background:none;cursor:default;display:flex;align-items:center;justify-content:center;padding:0}
+.dot.v{cursor:pointer}
+.dot .mk{width:13px;height:13px;border-radius:3px;background:var(--verified);transition:transform .12s ease}
+.dot.v:hover .mk{transform:scale(1.45)}
+.dot.v:hover{background:var(--verified-bg)}
+.dot.p .mk{width:5px;height:5px;border-radius:50%;background:var(--planned-line)}
+.cell.spinecol{background:#FCF6F2}
+.dot.dim{opacity:.16;filter:grayscale(1)}
+.dot.hit{background:#FFF6E9}
+.dot.hit .mk{box-shadow:0 0 0 3px rgba(154,93,0,.25)}
+
+/* ---------- inspector ---------- */
+.inspector{margin-top:22px;display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--rule-2);
+  border-radius:8px;overflow:hidden;background:var(--panel)}
+.insp-head{display:flex;align-items:center;gap:12px;padding:14px 18px;background:#F7F9FB;
+  border-bottom:1px solid var(--rule);flex-wrap:wrap}
+.insp-jd{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.04em}
+.insp-jd .arr{color:var(--ink-3);margin:0 6px}
+.insp-dimfull{font-size:12.5px;color:var(--ink-2);font-family:var(--sans)}
+.badge{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  padding:3px 8px;border-radius:20px;font-weight:600;white-space:nowrap}
+.badge.high{background:var(--verified-bg);color:var(--verified);border:1px solid var(--verified-line)}
+.badge.medium{background:var(--draft-bg);color:var(--draft);border:1px solid var(--draft-line)}
+.badge.low{background:var(--planned-bg);color:var(--ink-2);border:1px solid var(--planned-line)}
+.badge.cref{background:#EAF0F7;color:var(--accent);border:1px solid #C2D5E8}
+.badge.spineb{background:#F6E9E1;color:var(--spine);border:1px solid #E0B59E}
+.insp-id{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.insp-body{padding:18px 18px 20px}
+.insp-summary{font-size:14.5px;line-height:1.62;color:var(--ink);margin:0 0 18px}
+.prov{font-family:var(--mono);font-size:12px;border:1px solid var(--rule);border-radius:6px;overflow:hidden;margin-bottom:16px}
+.prov-row{display:grid;grid-template-columns:118px 1fr;border-bottom:1px solid var(--rule)}
+.prov-row:last-child{border-bottom:0}
+.prov-k{background:#F7F9FB;padding:8px 12px;color:var(--ink-3);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;border-right:1px solid var(--rule)}
+.prov-v{padding:8px 12px;color:var(--ink);line-height:1.5;word-break:break-word}
+.prov-v .em{color:var(--accent)}
+.metaline{display:flex;flex-wrap:wrap;gap:0;font-family:var(--mono);font-size:11.5px;
+  border:1px solid var(--rule);border-radius:6px;overflow:hidden;margin-bottom:16px}
+.metaline div{padding:8px 12px;border-right:1px solid var(--rule);flex:1;min-width:120px}
+.metaline div:last-child{border-right:0}
+.metaline .mk2{font-size:9.5px;letter-spacing:.1em;color:var(--ink-3);text-transform:uppercase;display:block;margin-bottom:2px}
+.metaline .mv{color:var(--ink);font-weight:500}
+details.struct{border:1px solid var(--rule);border-radius:6px;margin-bottom:14px;background:#FAFBFC}
+details.struct summary{cursor:pointer;padding:9px 12px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);user-select:none}
+details.struct summary:hover{color:var(--accent)}
+details.struct pre{margin:0;padding:12px 14px;border-top:1px solid var(--rule);overflow-x:auto;
+  font-family:var(--mono);font-size:12px;line-height:1.55;color:#0B2540;background:#fff}
+.note{font-size:13px;color:var(--ink-2);line-height:1.55;border-left:3px solid var(--rule-2);padding-left:14px;margin:2px 0 0}
+.note b{color:var(--ink);font-weight:600}
+.insp-hint{padding:14px 18px;font-family:var(--mono);font-size:12px;color:var(--ink-3);background:#F7F9FB;border-top:1px solid var(--rule)}
+.cmp-list{display:grid;gap:12px}
+.cmp-item{border:1px solid var(--rule);border-radius:6px;padding:12px 14px;background:#fff}
+.cmp-item .ch{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.cmp-item .cj{font-family:var(--mono);font-weight:600;font-size:13px}
+.cmp-item p{margin:0;font-size:13.5px;line-height:1.55;color:var(--ink-2)}
+.cmp-item .src{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:7px;display:block}
+
+/* ---------- access / cards ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--rule-2);border-radius:8px;padding:16px 16px 15px;display:flex;flex-direction:column}
+.card .ct{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.card h3{font-family:var(--serif);font-size:16px;margin:0 0 6px;font-weight:600}
+.card h3 a{color:var(--ink)}
+.card p{margin:0 0 12px;font-size:13px;color:var(--ink-2);line-height:1.5}
+.card .go{margin-top:auto;font-family:var(--mono);font-size:12px}
+.card code{font-family:var(--mono);font-size:12px;background:var(--canvas);padding:1px 5px;border-radius:3px;border:1px solid var(--rule)}
+.agentnote{margin-top:16px;font-family:var(--mono);font-size:12px;color:var(--ink-2);
+  background:#0C1726;color:#C9D6E5;border-radius:8px;padding:14px 16px;line-height:1.6}
+.agentnote b{color:#fff}
+.agentnote .gk{color:#7FB0E0}
+
+/* ---------- methodology ---------- */
+.method{display:grid;grid-template-columns:1.3fr 1fr;gap:30px;align-items:start}
+.method ul{margin:0;padding:0;list-style:none}
+.method li{padding:10px 0;border-bottom:1px solid var(--rule);display:flex;gap:12px}
+.method li:last-child{border-bottom:0}
+.method li .ix{font-family:var(--mono);font-size:11px;color:var(--accent);padding-top:3px;min-width:20px}
+.method li .tx{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.method li .tx b{color:var(--ink)}
+.rulebox{background:#0C1726;color:#DBE5F0;border-radius:8px;padding:18px 20px;font-size:13.5px;line-height:1.6}
+.rulebox .rk{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#7FB0E0;margin-bottom:10px}
+.rulebox b{color:#fff}
+
+/* ---------- roadmap ---------- */
+.rm-note{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--draft);
+  background:var(--draft-bg);border:1px solid var(--draft-line);border-radius:6px;padding:9px 13px;display:inline-block;margin-bottom:20px}
+.rm{display:grid;gap:0;border:1px solid var(--rule-2);border-radius:8px;overflow:hidden;background:var(--panel)}
+.rm-item{display:grid;grid-template-columns:96px 1fr auto;gap:14px;padding:15px 18px;border-bottom:1px solid var(--rule);align-items:start}
+.rm-item:last-child{border-bottom:0}
+.rm-ver{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink)}
+.rm-ver.cur{color:var(--verified)}
+.rm-txt h4{margin:0 0 3px;font-size:14px;font-weight:600;font-family:var(--sans)}
+.rm-txt p{margin:0;font-size:13px;color:var(--ink-2);line-height:1.5}
+.rm-txt .feat{font-family:var(--mono);font-size:11.5px;color:var(--accent)}
+.tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:20px;white-space:nowrap;font-weight:600;height:fit-content}
+.tag.shipped{background:var(--verified-bg);color:var(--verified);border:1px solid var(--verified-line)}
+.tag.planned{background:var(--planned-bg);color:var(--ink-2);border:1px solid var(--planned-line)}
+
+/* ---------- footer ---------- */
+footer{background:var(--navy);color:#B9CBDD;padding:34px 0 40px}
+footer .fgrid{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}
+footer .fb{font-family:var(--serif);font-size:18px;color:#fff;font-weight:600;margin-bottom:4px}
+footer .fm{font-family:var(--mono);font-size:12px;line-height:1.8;color:#9FB4CA}
+footer .fm a{color:#BFD6EC}
+footer .cite{font-family:var(--mono);font-size:11.5px;background:#0d2c4b;border:1px solid #1d3f60;
+  border-radius:6px;padding:12px 14px;color:#CFE0F0;max-width:420px;line-height:1.6}
+footer .cite .ck{color:#7FA0C2;display:block;margin-bottom:5px;letter-spacing:.12em;font-size:9.5px;text-transform:uppercase}
+
+@media (max-width:760px){
+  .method{grid-template-columns:1fr}
+  .thesis p{font-size:18px}
+  .rm-item{grid-template-columns:1fr;gap:6px}
+  .rm-item .tag{justify-self:start}
+  .stat{flex:1 0 40%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="mast-top">
+      <div class="brand">
+        <span class="wordmark">Stablecoin Rail Register</span>
+        <span class="reg-tag">Open Register · v0.2.0</span>
+      </div>
+      <nav class="mast-links">
+        <a class="mlink" href="https://doi.org/10.5281/zenodo.20730359">DOI <b>10.5281/zenodo.20730359</b></a>
+        <a class="mlink" href="https://github.com/yunjiefanresearch-hub/stablecoin-rail-register">GitHub</a>
+        <a class="mlink" href="./dataset.json"><b>dataset.json</b></a>
+      </nav>
+    </div>
+    <p class="tagline">Regulatory intelligence infrastructure for the permitted-activity / yield boundary on cross-border stablecoin payment rails.</p>
+    <div class="statstrip">
+      <div class="stat"><span class="n">6</span><span class="l">Jurisdictions</span></div>
+      <div class="stat"><span class="n">15</span><span class="l">Dimensions</span></div>
+      <div class="stat"><span class="n">30</span><span class="l">Verified records</span></div>
+      <div class="stat"><span class="n">1</span><span class="l">Corridor</span></div>
+      <div class="stat"><span class="n">2</span><span class="l">Doctrinal spines</span></div>
+      <div class="stat doi"><span class="n"><a href="https://doi.org/10.5281/zenodo.20730359">CC-BY-4.0</a></span><span class="l">Data license</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="thesis">
+  <div class="wrap">
+    <p>Each record is one sourced <span class="mono" style="font-size:.8em;color:var(--ink-2)">(jurisdiction × instrument × dimension)</span> regulatory fact — cited to a primary instrument with a pinpoint, dated, version-stamped, confidence-rated, and validated against a published JSON Schema.</p>
+    <p class="dual">Built for humans and machines alike. Browse the live coverage matrix below, or consume <code>dataset.json</code> and <code>record.schema.json</code> directly. Not a 200-country scrape — a depth-first reference whose value is the judgment in the data and the corridor layer that models what clears, and what breaks, at each regulatory boundary.</p>
+  </div>
+</div>
+
+<section id="coverage">
+  <div class="wrap">
+    <p class="eyebrow">Coverage matrix</p>
+    <h2 class="sec">Six focus jurisdictions × fifteen dimensions</h2>
+    <p class="sec-sub">Each filled cell is a verified, sourced record. Select a cell to inspect it; a column header to compare all jurisdictions on that dimension; a jurisdiction to read its full profile. Empty cells are on the roadmap — this is an actively-built standard, not a finished table.</p>
+    <div class="mtoolbar">
+      <div class="searchbox">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="q" type="search" placeholder="Filter records — keyword (e.g. MiCA, reserve, PIPL)" autocomplete="off" aria-label="Filter records by keyword">
+      </div>
+      <span class="matchcount" id="matchcount"></span>
+      <div class="legend">
+        <span><i class="lg v"></i>verified</span>
+        <span><i class="lg p"></i>planned</span>
+        <span><i class="lg s"></i>spine dimension</span>
+      </div>
+    </div>
+    <div class="matrix-scroll">
+      <table class="matrix" id="matrix"><thead></thead><tbody></tbody></table>
+    </div>
+    <div class="inspector" id="inspector"></div>
+  </div>
+</section>
+
+<section id="access">
+  <div class="wrap">
+    <p class="eyebrow">Access — humans &amp; agents</p>
+    <h2 class="sec">Consume the register</h2>
+    <p class="sec-sub">Everything is open, versioned, and machine-readable. Cite the DOI of the version you use.</p>
+    <div class="grid">
+      <div class="card">
+        <span class="ct">Dataset</span>
+        <h3><a href="./dataset.json">dataset.json</a></h3>
+        <p>The full compiled register — every record with its source, pinpoint, dates, version and confidence, plus the corridor model.</p>
+        <span class="go"><a href="./dataset.json">Open dataset →</a></span>
+      </div>
+      <div class="card">
+        <span class="ct">Schema · the standard</span>
+        <h3><a href="./record.schema.json">record.schema.json</a></h3>
+        <p>The JSON Schema every record validates against — 15 dimensions, constraint references, provenance fields. Vocabulary in <code>taxonomy.md</code>.</p>
+        <span class="go"><a href="./record.schema.json">View schema →</a></span>
+      </div>
+      <div class="card">
+        <span class="ct">Coverage</span>
+        <h3><a href="./COVERAGE.md">COVERAGE.md</a></h3>
+        <p>The full machine-generated coverage grid including planned cells and the roadmap schedule.</p>
+        <span class="go"><a href="./COVERAGE.md">Open coverage →</a></span>
+      </div>
+      <div class="card">
+        <span class="ct">Cite</span>
+        <h3>DOI 10.5281/zenodo.20730359</h3>
+        <p>Each tagged release is archived to Zenodo with a DOI. Citation metadata in <code>CITATION.cff</code>.</p>
+        <span class="go"><a href="https://doi.org/10.5281/zenodo.20730359">Resolve DOI →</a></span>
+      </div>
+      <div class="card">
+        <span class="ct">Source</span>
+        <h3><a href="https://github.com/yunjiefanresearch-hub/stablecoin-rail-register">GitHub repository</a></h3>
+        <p>Records, schema, build pipeline, methodology, corridor layer. Contributions under the verification rule.</p>
+        <span class="go"><a href="https://github.com/yunjiefanresearch-hub/stablecoin-rail-register">Open repo →</a></span>
+      </div>
+      <div class="card">
+        <span class="ct">Methodology</span>
+        <h3><a href="./METHODOLOGY.md">METHODOLOGY.md</a></h3>
+        <p>How a record becomes "verified", the source-level citation rule, and the no-AI-generated-citations firewall.</p>
+        <span class="go"><a href="./METHODOLOGY.md">Read method →</a></span>
+      </div>
+    </div>
+    <div class="agentnote">
+      <b>For agents.</b> The register is a single JSON document at <span class="gk">/dataset.json</span>, validated against a published JSON Schema, with a stable <span class="gk">id</span> per record and explicit <span class="gk">source.primary</span> · <span class="gk">source.pinpoint</span> · <span class="gk">confidence</span> · <span class="gk">version_added</span> fields. A queryable <span class="gk">MCP server</span> is on the roadmap (see below) — until then, fetch and filter the dataset directly.
+    </div>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <p class="eyebrow">Methodology</p>
+    <h2 class="sec">Why the data can be trusted</h2>
+    <div class="method">
+      <ul>
+        <li><span class="ix">01</span><span class="tx"><b>One fact, one source.</b> Every record cites a primary instrument (statute, regulation, or bill) with a clause-level pinpoint — not a secondary summary.</span></li>
+        <li><span class="ix">02</span><span class="tx"><b>Dated and versioned.</b> Each record carries an effective date, a last-reviewed date, and the register version it entered, so staleness is visible.</span></li>
+        <li><span class="ix">03</span><span class="tx"><b>Confidence is explicit.</b> Every record states a confidence level; interpretive tensions are flagged rather than smoothed over.</span></li>
+        <li><span class="ix">04</span><span class="tx"><b>Verified means checked.</b> A record is verified only when it has no open markers and a human has checked every source and pinpoint against the instrument itself.</span></li>
+      </ul>
+      <div class="rulebox">
+        <div class="rk">Citation firewall</div>
+        No citation in this register is ever machine-generated. <b>A single fabricated source is fatal</b> to a reference like this, so every pinpoint is transcribed from primary text and human-verified. Secondary provenance is recorded openly alongside the primary source.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <p class="eyebrow">Roadmap</p>
+    <h2 class="sec">What ships next</h2>
+    <span class="rm-note">▲ Items tagged PLANNED are on the roadmap and not yet available.</span>
+    <div class="rm">
+      <div class="rm-item">
+        <span class="rm-ver cur">v0.2.0</span>
+        <div class="rm-txt"><h4>15-dimension framework · six focus jurisdictions</h4><p>Two doctrinal spines (yield boundary + securities classification); 30 sourced records; corridor layer. <span class="feat">— current release</span></p></div>
+        <span class="tag shipped">Shipped</span>
+      </div>
+      <div class="rm-item">
+        <span class="rm-ver">v0.3.0</span>
+        <div class="rm-txt"><h4>Deepen the focus set</h4><p>Custody and disclosure cells across jurisdictions; securities classification applied comparatively beyond the US; a second corridor built from focus jurisdictions.</p></div>
+        <span class="tag planned">Planned</span>
+      </div>
+      <div class="rm-item">
+        <span class="rm-ver">v0.4.0</span>
+        <div class="rm-txt"><h4>Agent interface</h4><p class="feat">MCP server — agent-queryable obligation endpoints &nbsp;·&nbsp; semantic search &nbsp;·&nbsp; jurisdiction comparison / query API</p></div>
+        <span class="tag planned">Planned</span>
+      </div>
+      <div class="rm-item">
+        <span class="rm-ver">later</span>
+        <div class="rm-txt"><h4>Breadth, once the substrate exists</h4><p>Backfill additional jurisdictions and instruments from primary sources — depth before breadth, always.</p></div>
+        <span class="tag planned">Planned</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap fgrid">
+    <div>
+      <div class="fb">Stablecoin Rail Register</div>
+      <div class="fm">
+        Founder &amp; maintainer: Yunjie Fan<br>
+        Data: CC-BY-4.0 · Code: Apache-2.0<br>
+        Cadence: quarterly diffs + event patches<br>
+        <a href="https://github.com/yunjiefanresearch-hub/stablecoin-rail-register">github.com/yunjiefanresearch-hub/stablecoin-rail-register</a><br>
+        <span style="color:#6E86A0">Working title · v0.2.0 · generated 2026-06-17</span>
+      </div>
+    </div>
+    <div class="cite">
+      <span class="ck">Cite this version</span>
+      Fan, Yunjie. <i>Stablecoin Rail Register</i> (v0.2.0). Zenodo. https://doi.org/10.5281/zenodo.20730359 — licensed CC-BY-4.0.
+    </div>
+  </div>
+</footer>
+
+<script id="embedded-data" type="application/json">{"name": "Stablecoin Rail Register", "version": "0.2.0", "generated": "2026-06-17", "record_count": 30, "records": [{"id": "cn-prc-cross_border_data-001", "jurisdiction": "CN", "authority": "CAC; PBOC", "instrument_type": "other", "instrument_label_local": "出境数据 (cross-border data); wallet KYC / merchant onboarding data", "dimension": "cross_border_data", "constraint_ref": "C6", "requirement_summary": "Even where issuance is prohibited, stablecoin-related personal data (wallet KYC and merchant-onboarding data tied to PRC residents) falls within PIPL outbound-transfer scope and is the binding constraint that reaches non-PRC-affiliated cross-border firms. PIPL (effective 1 Nov 2021) requires that any cross-border transfer of personal information satisfy one of three gates: (a) a CAC security assessment, (b) personal-information-protection certification by a CAC-approved body, or (c) a CAC Standard Contract. The Data Security Law (DSL, effective 1 Sep 2021) subjects cross-border transfer of 'important data' to security review. The 22 March 2024 Provisions on Promoting and Regulating Cross-Border Data Flows raise the thresholds for mandatory security assessment, giving partial relief for routine business data (e.g. HR and contract-performance data). Free Trade Zone negative lists (Shanghai, Beijing, Hainan, and others) provide additional zone-specific relief.", "requirement_structured": {"pipl_transfer_gates": ["CAC security assessment", "CAC-approved certification", "CAC Standard Contract"], "dsl_important_data": "cross-border transfer subject to security review", "march_2024_provisions": "raises mandatory-assessment thresholds; partial relief for routine business data", "ftz_relief": "zone-specific negative lists (Shanghai/Beijing/Hainan/etc.)", "reaches_non_prc_firms": true}, "status": "in_force", "effective_date": "2021-11-01", "source": {"primary": "Personal Information Protection Law (PIPL, eff. 1 Nov 2021); Data Security Law (DSL, eff. 1 Sep 2021); CAC Provisions on Promoting and Regulating Cross-Border Data Flows (22 Mar 2024)", "pinpoint": "PIPL three-gate outbound transfer; DSL important-data review; March 2024 threshold relief; FTZ negative lists"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.26 (Mainland China — Cross-Border Data Treatment)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3. This is the one PRC constraint that binds firms with no PRC entity affiliation: when their KYC/onboarding flows touch PRC-resident personal data, the PIPL and DSL gates apply regardless of where the stablecoin is issued.", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["apac", "focus", "from_matrix_v0.9.3", "data_sovereignty"]}, {"id": "cn-prc-distribution-001", "jurisdiction": "CN", "authority": "PBOC; CSRC; SAFE; CAC", "instrument_type": "other", "instrument_label_local": "推广与发售 (promotion and offering)", "dimension": "distribution", "constraint_ref": "C8", "requirement_summary": "All cryptocurrency promotion, offering, and trading is prohibited within PRC territory, so there is no domestic distribution channel. For PRC-connected groups operating via Hong Kong, the indirect pathway carries three independent layers of constraint: (i) A-share listing rules — a Hong Kong subsidiary's stablecoin activities are subject to related-party-transaction disclosure, results consolidate into the listed parent under the Accounting Standards for Business Enterprises, and the CSRC may require special disclosure or pre-notification; (ii) SAFE outbound-capital control — capital injections into the HK subsidiary, profit repatriation, and intra-group financing are subject to SAFE registration and quota limits; and (iii) PBOC/CAC supervisory posture — the October 2025 verbal guidance signaled disapproval of private RMB-linked or RMB-substitute issuance, producing observable behavioral effects without a published rule.", "requirement_structured": {"domestic_distribution": "prohibited (all crypto promotion/offering/trading)", "indirect_hk_pathway_layers": {"a_share_disclosure": "related-party disclosure; consolidation; CSRC special disclosure/pre-notification", "safe_capital": "registration + quota on injections, repatriation, intra-group financing", "pboc_cac_posture": "Oct 2025 verbal guidance; behavioral effect without published rule"}}, "status": "in_force", "effective_date": null, "source": {"primary": "PRC prohibition on cryptocurrency promotion/offering/trading within territory; CSRC A-share disclosure rules; SAFE outbound-capital controls; PBOC/CAC October 2025 guidance", "pinpoint": "Domestic distribution prohibited; three indirect-pathway constraint layers (A-share / SAFE / PBOC-CAC)"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), pp.26-27 (Mainland China — Distribution and Offering Restrictions; Indirect pathway constraints)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3. Mapped to C8 (disclosure/reporting/supervisory coordination) because the operative constraints on the indirect pathway are disclosure-, capital-control-, and supervisory-posture constraints rather than a product distribution rule.", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["apac", "focus", "from_matrix_v0.9.3", "prohibition"]}, {"id": "cn-prc-issuer_pathway-001", "jurisdiction": "CN", "authority": "PBOC; CAC; MIIT; SAFE", "instrument_type": "other", "instrument_label_local": "无合法境内发行路径 (no lawful domestic issuance pathway)", "dimension": "issuer_pathway", "constraint_ref": "C1", "requirement_summary": "There is no domestic stablecoin issuance pathway. The 2017 ICO Notice (94 公告) and the 2021 PBOC framework remain in force and treat token issuance and virtual-currency business activity as prohibited. The live regulatory questions for PRC-connected groups therefore concern the indirect pathway through Hong Kong and the cross-border data, capital, and disclosure constraints that condition it, not a domestic licence. The behavioral boundary observed in 2025 tracks a private/state distinction rather than a PRC-connected/non-PRC-connected one: private internet groups (Ant, JD) applied for HK licences and then withdrew in October 2025; state-linked banks expressed interest and paused; and no PRC-affiliated applicant received a licence in the April 2026 first round.", "requirement_structured": {"domestic_pathway": "none", "prohibition_instruments": ["2017 ICO Notice (94 公告)", "2021 PBOC virtual-currency framework"], "observed_boundary": "private vs state issuance, not PRC-connected vs non-PRC-connected"}, "status": "in_force", "effective_date": "2021-09-24", "source": {"primary": "PBOC et al., Notice on Risks Associated with Token Offering and Financing (4 Sep 2017, 94 公告); PBOC Notice on Further Preventing and Disposing of Risks from Virtual Currency Trading Speculation (24 Sep 2021)", "pinpoint": "No domestic issuance pathway; token issuance / virtual-currency business prohibited"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), pp.25-27 (Mainland China — Statutory Framework; Indirect pathway)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3. The Ant/JD October 2025 suspension and the absence of any PRC-affiliated licensee in the April 2026 HK cohort are the empirical anchors for the 'stable prohibition' characterization.", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["apac", "focus", "from_matrix_v0.9.3", "prohibition"]}, {"id": "cn-prc-monetary_sovereignty-001", "jurisdiction": "CN", "authority": "PBOC; CAC", "instrument_type": "other", "instrument_label_local": "非人民币代币 (non-RMB currency tokens)", "dimension": "monetary_sovereignty", "constraint_ref": "C7", "requirement_summary": "Mainland China occupies the prohibitive pole of the monetary-sovereignty constraint: it prohibits all non-RMB currency tokens within PRC territory outright, rather than imposing a quantitative usage cap (contrast EU Article 23) or a qualitative distribution restriction (contrast Hong Kong's professional-investor limit on non-HKD FRS). The boundary the PBOC is actively policing runs between private and state authority to issue currency-like instruments: the October 2025 verbal guidance targeted private RMB-linked or RMB-substitute issuance because PBOC concerns center on private currency challenging the e-CNY, and the April 2026 HK first-license cohort excluded both private (Ant, JD) and state-owned (BOCHK, ICBC Asia, BOCom HK, CCB Asia, PetroChina) PRC-connected applicants alike. The structural rationale is reserve-currency and monetary-sovereignty protection, with the sovereign digital currency (e-CNY) reserved as the state instrument.", "requirement_structured": {"cap_type": "total prohibition (non-RMB tokens), not quantitative", "policed_boundary": "private vs state authority to issue currency-like instruments", "sovereign_instrument": "e-CNY", "spectrum_position": "prohibitive pole (vs EU quantitative cap, HK qualitative restriction)"}, "status": "in_force", "effective_date": null, "source": {"primary": "PRC prohibition on non-RMB currency tokens within PRC territory; PBOC October 2025 verbal guidance (private RMB-linked / RMB-substitute issuance)", "pinpoint": "All non-RMB currency tokens prohibited in PRC territory; PBOC policing private vs state currency issuance, protecting e-CNY"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.5 (Comparison Table — Non-domestic currency caps) and pp.25-27"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3. This is the PRC instance of Constraint 7. The three-jurisdiction sovereignty spectrum (EU quantitative cap / HK qualitative restriction / PRC total prohibition) is the comparative payload of the author's monetary-sovereignty paper.", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["apac", "focus", "from_matrix_v0.9.3", "new_dimension"]}, {"id": "cn-prc-regulatory_authority-001", "jurisdiction": "CN", "authority": "PBOC; CAC; CSRC; MIIT; SAFE", "instrument_type": "other", "instrument_label_local": "虚拟货币 / stablecoin (no lawful domestic instrument)", "dimension": "regulatory_authority", "constraint_ref": "C1", "requirement_summary": "No single stablecoin regulator exists because there is no lawful domestic issuance pathway; instead, a coordinated multi-agency prohibition perimeter governs. The People's Bank of China (PBOC) is the primary financial regulator and in October 2025 issued verbal guidance to PRC tech groups against private RMB-linked stablecoin issuance. The Cyberspace Administration of China (CAC) governs ICP, deep-synthesis/generative-AI content, and cross-border data flows, and joined the October 2025 guidance. The China Securities Regulatory Commission (CSRC) governs A-share issuer disclosure and has directed brokerages to pause Hong Kong tokenization activity. The Ministry of Industry and Information Technology (MIIT) and the State Administration of Foreign Exchange (SAFE) supply supporting administrative measures (telecoms/ICP and outbound-capital control respectively).", "requirement_structured": {"agencies": {"PBOC": "primary financial regulator; private RMB-linked issuance guidance (Oct 2025)", "CAC": "cross-border data, ICP, content; joined Oct 2025 guidance", "CSRC": "A-share disclosure; brokerage tokenization pause", "MIIT": "telecoms / ICP supporting measures", "SAFE": "outbound capital and profit repatriation control"}, "single_stablecoin_regulator": false}, "status": "in_force", "effective_date": null, "source": {"primary": "PBOC et al., Notice on Further Preventing and Disposing of Risks from Virtual Currency Trading Speculation (24 Sep 2021); supporting measures from PBOC, CAC, MIIT, SAFE", "pinpoint": "Multi-agency coordination; PBOC primary; CAC data/content; CSRC disclosure; MIIT/SAFE supporting"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.25 (Mainland China — Regulators)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3. The relevant 'authority' question for PRC-connected groups is not who licenses issuance (no one does) but which agencies condition the indirect Hong Kong pathway.", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["apac", "focus", "from_matrix_v0.9.3"]}, {"id": "eu-emt-monetary_sovereignty-001", "jurisdiction": "EU", "authority": "EBA, ESMA, NCAs", "instrument_type": "e_money_token", "instrument_label_local": "non-EU-currency EMT", "dimension": "monetary_sovereignty", "constraint_ref": "C7", "requirement_summary": "MiCA Article 23 caps the usage of non-EU-currency EMTs at EUR 200 million per day or 1 million transactions per day, measured on a quarterly-average basis. The cap applies only to use as a means of exchange within a single currency area, not to store-of-value use or to trading on crypto-asset venues. A separate reporting obligation triggers at EUR 100 million in issuance value globally. This is the canonical quantitative monetary-sovereignty cap and the clearest instance of Constraint 7.", "requirement_structured": {"cap_type": "quantitative", "thresholds": ["EUR 200,000,000 / day", "1,000,000 transactions / day"], "measurement": "quarterly average", "scope": "means of exchange within a single currency area only", "reporting_trigger": "EUR 100,000,000 global issuance value"}, "status": "in_force", "effective_date": null, "source": {"primary": "Regulation (EU) 2023/1114 (MiCA), Article 23", "pinpoint": "Art. 23 — non-EU-currency EMT usage caps; means-of-exchange scope"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.5 (Comparison Table — Non-domestic currency caps)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3. The exemplar quantitative cap for the monetary_sovereignty dimension; contrast HK (qualitative, professional-investor restriction) and PRC (total prohibition).", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["eu", "focus", "new_dimension", "from_matrix_v0.9.3"]}, {"id": "eu-emt-permitted_activity_yield-001", "jurisdiction": "EU", "authority": "EBA, ESMA, NCAs", "instrument_type": "e_money_token", "instrument_label_local": "e-money token (EMT)", "dimension": "permitted_activity_yield", "constraint_ref": "C3", "requirement_summary": "MiCA Article 50 imposes a yield ban on EMT holders: holders may not receive interest. The prohibition attaches to the holding of the token, paralleling the US GENIUS §4(a)(11) structure but expressed as a flat ban rather than a 'solely'-qualified one.", "status": "in_force", "effective_date": null, "source": {"primary": "Regulation (EU) 2023/1114 (MiCA), Article 50", "pinpoint": "Art. 50 — no interest to EMT holders"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.5 / p.2 (Executive Summary) (EU — Yield)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3.", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["eu", "focus", "spine", "from_matrix_v0.9.3"]}, {"id": "eu-emt-regulatory_authority-001", "jurisdiction": "EU", "authority": "EBA, ESMA, national competent authorities (NCAs)", "instrument_type": "e_money_token", "instrument_label_local": "e-money token (EMT) / asset-referenced token (ART)", "dimension": "regulatory_authority", "requirement_summary": "The Markets in Crypto-Assets Regulation (MiCA, Reg. (EU) 2023/1114) governs EMTs and ARTs, supervised by the EBA (significant tokens), ESMA, and national competent authorities. The transitional regime ends 1 July 2026; a PSD2/MiCAR interplay question is addressed by the EBA No-Action Letter (10 June 2025).", "status": "in_force", "effective_date": null, "source": {"primary": "Regulation (EU) 2023/1114 (MiCA)", "pinpoint": "MiCA Titles III (ARTs) / IV (EMTs); EBA/ESMA/NCA supervisory architecture"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.5 (Comparison Table) and EU detailed entry"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3.", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["eu", "focus", "from_matrix_v0.9.3"]}, {"id": "eu-emt-reserve_backing-001", "jurisdiction": "EU", "authority": "EBA, NCAs", "instrument_type": "e_money_token", "instrument_label_local": "e-money token (EMT) / asset-referenced token (ART)", "dimension": "reserve_backing", "constraint_ref": "C2", "requirement_summary": "MiCA requires EMT reserves to hold at least 60% in bank deposits; ART reserves at least 30% in bank deposits. (Distinct from the US/HK same-currency short-dated-sovereign model.)", "requirement_structured": {"emt_bank_deposit_floor": ">=60%", "art_bank_deposit_floor": ">=30%"}, "status": "in_force", "effective_date": null, "source": {"primary": "Regulation (EU) 2023/1114 (MiCA), reserve composition provisions", "pinpoint": "EMT >=60% bank deposits; ART >=30% bank deposits"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.5 (Comparison Table — Reserve backing)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3. Reserve half of the split dimension.", "confidence": "medium", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["eu", "focus", "from_matrix_v0.9.3", "dimension_split"]}, {"id": "hk-frs-aml_kyc-001", "jurisdiction": "HK", "authority": "HKMA", "instrument_type": "fiat_referenced_stablecoin", "instrument_label_local": "specified stablecoin", "dimension": "aml_kyc", "requirement_summary": "The HKMA AML/CFT Guideline for licensed stablecoin issuers applies: standard FATF KYC, transaction monitoring, and suspicious-transaction reporting, plus distribution-channel KYC obligations executed via licensed VATPs and SFC Type 1 corporations.", "status": "in_force", "effective_date": "2025-08-01", "source": {"primary": "HKMA AML/CFT Guideline for licensed stablecoin issuers (under Cap. 656)", "pinpoint": "FATF KYC; transaction monitoring; STR; distribution-channel KYC"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.22 (Hong Kong — AML/KYC Framework)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3.", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["apac", "focus", "from_matrix_v0.9.3"]}, {"id": "hk-frs-capital_requirements-001", "jurisdiction": "HK", "authority": "HKMA", "instrument_type": "fiat_referenced_stablecoin", "instrument_label_local": "specified stablecoin", "dimension": "capital_requirements", "constraint_ref": "C2", "requirement_summary": "HK$25 million minimum paid-up share capital (or currency equivalent), with HKMA empowered to require more based on business plan; HK$3 million minimum liquid capital; and excess liquid capital equivalent to at least 12 months of operating expenses. The HK$25m threshold, combined with the HK-incorporation-or-authorised-institution requirement, effectively limits applicants to banks and JV-backed large corporates.", "requirement_structured": {"min_paid_up_capital": "HK$25,000,000", "min_liquid_capital": "HK$3,000,000", "liquidity_buffer": ">=12 months operating expenses"}, "status": "in_force", "effective_date": "2025-08-01", "source": {"primary": "Stablecoins Ordinance (Cap. 656), capital requirements", "pinpoint": "HK$25m paid-up; HK$3m liquid capital; 12-month opex buffer"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.21-22 (Hong Kong — Capital Requirements)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3. Split-out capital half of the former reserve_capital dimension.", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["apac", "focus", "from_matrix_v0.9.3", "dimension_split"]}, {"id": "hk-frs-cross_border_data-001", "jurisdiction": "HK", "authority": "HKMA; PCPD", "instrument_type": "fiat_referenced_stablecoin", "instrument_label_local": "specified stablecoin", "dimension": "cross_border_data", "constraint_ref": "C6", "requirement_summary": "Personal data is governed by the Personal Data (Privacy) Ordinance (PDPO). Cross-border data transfer governance under PDPO Section 33 remains pending final commencement. HKMA Supervisory Policy Manual provisions on outsourcing and data hosting apply.", "status": "in_force", "effective_date": null, "source": {"primary": "Personal Data (Privacy) Ordinance (PDPO); s.33 (cross-border transfer, not yet commenced)", "pinpoint": "PDPO s.33 pending commencement; HKMA SPM outsourcing/data-hosting modules"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.22 (Hong Kong — Cross-Border Data Treatment)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3.", "interpretive_flag": {"tension": "PDPO s.33 (cross-border transfer restriction) has long been enacted but not commenced; its eventual commencement would change the cross-border data posture.", "resolution_channel": "PCPD / government commencement notice."}, "confidence": "medium", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["apac", "focus", "from_matrix_v0.9.3"]}, {"id": "hk-frs-distribution-001", "jurisdiction": "HK", "authority": "HKMA; SFC", "instrument_type": "fiat_referenced_stablecoin", "instrument_label_local": "specified stablecoin", "dimension": "distribution", "requirement_summary": "Permitted offerors of FRS in Hong Kong are HKMA-licensed FRS issuers, SFC-licensed VATPs, SFC-licensed Type 1 corporations, and Authorised Institutions. Foreign-based issuers of non-HKD-linked FRS may offer to professional investors only. Unlicensed activity carries HK$5 million fine + 7 years' imprisonment + HK$100,000 per day of continuing offence. Pre-existing-issuer transitional treatment required applications by 31 Oct 2025; the closing-down period began 1 Nov 2025 for non-applicants. The April 2026 cohort contrasts distribution models: HSBC plans direct retail integration via PayMe (3.3m users) and its mobile app from H2 2026; Anchorpoint plans a phased Q2 2026 B2B2C rollout of HKDAP via authorised partners.", "status": "in_force", "effective_date": "2025-08-01", "source": {"primary": "Stablecoins Ordinance (Cap. 656), offering / distribution restrictions and offence provisions", "pinpoint": "Permitted-offeror list; non-HKD FRS -> professional investors only; penalty (HK$5m + 7yrs + HK$100k/day)"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.22 (Hong Kong — Distribution and Offering Restrictions)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3. The 'non-HKD FRS -> professional investors only' rule is also the HK datapoint for the monetary_sovereignty dimension (see hk-frs-monetary_sovereignty-001).", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["apac", "focus", "from_matrix_v0.9.3"]}, {"id": "hk-frs-implementation_status-001", "jurisdiction": "HK", "authority": "HKMA", "instrument_type": "fiat_referenced_stablecoin", "instrument_label_local": "specified stablecoin", "dimension": "implementation_status", "requirement_summary": "Live regime. Key milestones: HKMA discussion paper (Jan 2022); FSTB/HKMA consultation (Dec 2023); conclusions + sandbox (Jul 2024); Ordinance and guidelines effective (1 Aug 2025); Ant/JD applications suspended (18-20 Oct 2025); pre-existing-issuer application deadline (31 Oct 2025); closing-down period begins (1 Nov 2025); transitional operating window ends (31 Jan 2026); first two licences granted (10 Apr 2026, HSBC = FRS02, Anchorpoint = FRS01). Expected: Anchorpoint HKDAP B2B2C launch (Q2 2026); HSBC retail launch via PayMe (H2 2026); HKMA second-cohort licences (Q3 2026).", "status": "in_force", "effective_date": "2025-08-01", "source": {"primary": "Stablecoins Ordinance (Cap. 656) commencement + HKMA licensing actions", "pinpoint": "Timeline Jan 2022 -> Q3 2026; first cohort 10 Apr 2026"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.23 (Hong Kong — Implementation Timeline)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3.", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["apac", "focus", "from_matrix_v0.9.3"]}, {"id": "hk-frs-issuer_pathway-001", "jurisdiction": "HK", "authority": "HKMA", "instrument_type": "fiat_referenced_stablecoin", "instrument_label_local": "specified stablecoin", "dimension": "issuer_pathway", "constraint_ref": "C1", "requirement_summary": "A licence is required for (1) FRS issuers in Hong Kong, (2) issuers outside HK of stablecoins referencing the HK dollar, and (3) entities actively marketing FRS to the HK public. Eligible applicants are companies incorporated in HK under the Companies Ordinance, or authorised institutions (banks / restricted-licence / deposit-taking companies under the Banking Ordinance). Shell entities or mere pre-1-Aug-2025 establishment do not qualify for transitional treatment. The first-licence cohort (10 Apr 2026) was HSBC and Anchorpoint Financial Limited (a Standard Chartered (HK)–HKT–Animoca JV intending HKDAP on a B2B2C model); no PRC-connected entities were licensed.", "requirement_structured": {"first_cohort": ["HSBC (FRS02)", "Anchorpoint Financial Limited (FRS01)"], "prc_connected_in_cohort": false}, "status": "in_force", "effective_date": "2025-08-01", "source": {"primary": "Stablecoins Ordinance (Cap. 656), licensing provisions", "pinpoint": "Licensable activities (FRS issuance / HKD-referencing / active marketing); eligibility (HK-incorporated company or authorised institution)"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.21 (Hong Kong — Issuer Pathways and Eligibility)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3. The first-cohort composition signals HKMA risk appetite (banks / authorised-institution-backed JVs at or above the statutory minimum).", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["apac", "focus", "from_matrix_v0.9.3"]}, {"id": "hk-frs-monetary_sovereignty-001", "jurisdiction": "HK", "authority": "HKMA", "instrument_type": "fiat_referenced_stablecoin", "instrument_label_local": "non-HKD-linked FRS", "dimension": "monetary_sovereignty", "constraint_ref": "C7", "requirement_summary": "Hong Kong does not impose a quantitative non-domestic-currency usage cap of the MiCA Article 23 type, but it draws a sovereignty-adjacent line through distribution: foreign-based issuers of non-HKD-linked FRS may offer to professional investors only, while HKD-referencing stablecoins (including those issued offshore) are pulled fully inside the licensing perimeter. The effect is to privilege the domestic-currency instrument for retail use without a numeric ceiling.", "requirement_structured": {"cap_type": "qualitative (distribution restriction), not quantitative", "non_domestic_currency_retail": "restricted (professional investors only for non-HKD FRS)"}, "status": "in_force", "effective_date": "2025-08-01", "source": {"primary": "Stablecoins Ordinance (Cap. 656) — HKD-referencing perimeter + non-HKD FRS professional-investor restriction", "pinpoint": "Offshore HKD-referencing issuance licensable; non-HKD FRS offering limited to professional investors"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.5 (Comparison Table — Non-domestic currency caps) and p.22"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3. This is the HK instance of Constraint 7 (monetary sovereignty / reserve-currency asymmetry); contrast EU Art. 23 (quantitative cap) and PRC (total non-RMB prohibition).", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["apac", "focus", "from_matrix_v0.9.3", "new_dimension"]}, {"id": "hk-frs-permitted_activity_yield-001", "jurisdiction": "HK", "authority": "HKMA", "instrument_type": "fiat_referenced_stablecoin", "instrument_label_local": "specified stablecoin", "dimension": "permitted_activity_yield", "constraint_ref": "C3", "requirement_summary": "The Stablecoins Ordinance Schedule 2 Section 15 (Non-interest bearing) provides that the licensee must not pay any interest on issued stablecoins. Direct payments from issuer to holder are reached by the prohibition.", "requirement_structured": {"passive_yield_to_holder": "prohibited (issuer-to-holder interest)", "activity_based_rewards": "not addressed by the Ordinance text; perimeter open"}, "status": "in_force", "effective_date": "2025-08-01", "source": {"primary": "Stablecoins Ordinance (Cap. 656), Schedule 2, s.15 (Non-interest bearing)", "pinpoint": "Sch. 2 s.15 — licensee must not pay any interest on issued stablecoins"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.22 (Hong Kong — Yield and Interest Treatment)"}], "interpretation_note": "Provenance: exact pinpoint (Sch. 2 s.15) transcribed from author's verified Compliance Matrix v0.9.3 — this supplies the exact section that the seed record had left as a placeholder. Compare against the US §404 / GENIUS §4(a)(11) 'solely in connection with holding' structure: the HK text is a flat issuer-to-holder prohibition and does not itself draw the bona-fide-activity line.", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["seed", "apac", "focus", "spine", "from_matrix_v0.9.3"]}, {"id": "hk-frs-redemption-001", "jurisdiction": "HK", "authority": "HKMA", "instrument_type": "fiat_referenced_stablecoin", "instrument_label_local": "specified stablecoin", "dimension": "redemption", "requirement_summary": "Redemption at par value within 1 business day of a valid request. Redemption obligations are a continuing licence condition.", "status": "in_force", "effective_date": "2025-08-01", "source": {"primary": "Stablecoins Ordinance (Cap. 656), redemption requirements", "pinpoint": "Par redemption within 1 business day; continuing licence condition"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.22 (Hong Kong — Redemption Mechanics)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3.", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["apac", "focus", "from_matrix_v0.9.3"]}, {"id": "hk-frs-regulatory_authority-001", "jurisdiction": "HK", "authority": "HKMA (primary); SFC (VATPs / Type 1 distribution)", "instrument_type": "fiat_referenced_stablecoin", "instrument_label_local": "specified stablecoin (fiat-referenced stablecoin, FRS)", "dimension": "regulatory_authority", "requirement_summary": "The Stablecoins Ordinance (Cap. 656), effective 1 August 2025, establishes the HKMA as primary regulator for FRS issuers, supported by HKMA Explanatory Notes (Licensing; Transitional Provisions), the Guideline on Supervision of Licensed Stablecoin Issuers, and the AML/CFT Guideline. The SFC regulates virtual asset trading platforms (VATPs) and Type 1 corporations authorised to offer stablecoins.", "status": "in_force", "effective_date": "2025-08-01", "source": {"primary": "Stablecoins Ordinance (Cap. 656), in force 1 Aug 2025", "pinpoint": "Long title; HKMA as designated authority; supporting HKMA guidelines"}, "secondary": [{"citation": "Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.3 (18 May 2026), p.21 (Hong Kong — Statutory Framework / Regulators)"}], "interpretation_note": "Provenance: primary pinpoint transcribed from the author's own verified Compliance Matrix v0.9.3; remains subject to the standing human-verification rule (METHODOLOGY.md).", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["seed", "apac", "focus", "from_matrix_v0.9.3"]}, {"id": "hk-frs-reserve_backing-001", "jurisdiction": "HK", "authority": "HKMA", "instrument_type": "fiat_referenced_stablecoin", "instrument_label_local": "specified stablecoin", "dimension": "reserve_backing", "constraint_ref": "C2", "requirement_summary": "100% backing at all times; the market value of reserve assets must equal or exceed the par value of circulating stablecoins, with HKMA expecting overcollateralisation. Acceptable assets: cash, bank deposits (term <= 3 months), government and central-bank securities (residual maturity <= 1 year), and tokenised forms of the foregoing. Reserves must be strictly segregated from the issuer's other assets and protected against creditor claims via statutory trust.", "requirement_structured": {"backing_ratio": "100% (overcollateralisation expected)", "eligible_assets": ["cash", "bank deposits <=3mo", "govt/central-bank securities <=1yr", "tokenised forms thereof"], "segregation": "statutory trust; creditor-remote"}, "status": "in_force", "effective_date": "2025-08-01", "source": {"primary": "Stablecoins Ordinance (Cap. 656), reserve / backing requirements", "pinpoint": "100% backing; eligible-asset list; segregation / statutory trust"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.21 (Hong Kong — Reserve and Backing Requirements)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3. Note this dimension is the split-out reserve half of the former reserve_capital; the capital half is hk-frs-capital_requirements-001.", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["apac", "focus", "from_matrix_v0.9.3", "dimension_split"]}, {"id": "sg-scs-permitted_activity_yield-001", "jurisdiction": "SG", "authority": "MAS", "instrument_type": "fiat_referenced_stablecoin", "instrument_label_local": "single-currency stablecoin (SCS)", "dimension": "permitted_activity_yield", "constraint_ref": "C3", "requirement_summary": "Yield is not directly prohibited, but the MAS-regulated SCS label is restricted to SGD or G10-pegged tokens issued from Singapore-incorporated entities, and SCS issuers are forbidden from engaging in lending or staking. The activity prohibition (no lend/stake) is the operative yield-adjacent constraint rather than a flat interest ban.", "requirement_structured": {"direct_yield_ban": "not explicit", "issuer_lending_or_staking": "prohibited", "label_scope": "SGD or G10-pegged, Singapore-incorporated issuer"}, "status": "in_force", "effective_date": null, "source": {"primary": "MAS Single-Currency Stablecoin framework (Aug 2023) — issuer activity restrictions", "pinpoint": "No lending/staking by SCS issuers; SGD/G10 label scope"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.2 / p.5 (SG — Yield)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3. Singapore shows that the yield dimension and the activity-restriction dimension can collapse into one another — useful contrast for the C3 spine.", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["sg", "focus", "apac", "spine", "from_matrix_v0.9.3"]}, {"id": "sg-scs-regulatory_authority-001", "jurisdiction": "SG", "authority": "MAS", "instrument_type": "fiat_referenced_stablecoin", "instrument_label_local": "single-currency stablecoin (SCS)", "dimension": "regulatory_authority", "requirement_summary": "The MAS Single-Currency Stablecoin (SCS) framework, finalised August 2023, sits alongside the Payment Services Act 2019; a separate Digital Token Service Provider (DTSP) licensing regime operates under FSMA Part 9. MAS is the sole regulator.", "status": "in_force", "effective_date": null, "source": {"primary": "MAS Single-Currency Stablecoin framework (Aug 2023); Payment Services Act 2019; FSMA Part 9 (DTSP)", "pinpoint": "MAS SCS framework; PSA 2019; FSMA Part 9"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.2 (Executive Summary) / p.5 / SG detailed entry"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3.", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["sg", "focus", "apac", "from_matrix_v0.9.3"]}, {"id": "uk-frs-issuer_pathway-001", "jurisdiction": "UK", "authority": "FCA, HM Treasury", "instrument_type": "fiat_referenced_stablecoin", "instrument_label_local": "qualifying stablecoin", "dimension": "issuer_pathway", "constraint_ref": "C1", "requirement_summary": "Issuers must be UK-incorporated. HM Treasury's policy note describes the regulated perimeter as triggered by any one of three lifecycle limbs (offering, redemption, backing-asset management) in the UK. However, Article 9M(2) of SI 2026/102, together with the corresponding amendment to FSMA s.418, requires all three limbs to be in the UK. This single-limb vs. all-three-limbs divergence is an open interpretive question.", "status": "in_force", "effective_date": "2026-02-01", "source": {"primary": "SI 2026/102, Art. 9M(2); FSMA s.418 (as amended); HM Treasury policy note", "pinpoint": "Art. 9M(2) (all three limbs in UK) vs. HMT policy note (any one limb)"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), UK detailed entry / Comparison Table flag"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3.", "interpretive_flag": {"tension": "Whether the UK regulated perimeter is triggered by any one lifecycle limb (HMT policy note) or requires all three limbs in the UK (SI 2026/102 Art. 9M(2) / FSMA s.418).", "resolution_channel": "FCA summer 2026 policy statement."}, "confidence": "medium", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["uk", "focus", "from_matrix_v0.9.3"]}, {"id": "uk-frs-permitted_activity_yield-001", "jurisdiction": "UK", "authority": "FCA, Bank of England", "instrument_type": "fiat_referenced_stablecoin", "instrument_label_local": "qualifying stablecoin", "dimension": "permitted_activity_yield", "constraint_ref": "C3", "requirement_summary": "Yield is not expressly addressed in SI 2026/102. The Bank of England's November 2025 materials describe a 60/40 backing split and constrain pass-through of returns to holders. The detailed treatment is expected in the FCA's summer 2026 rules.", "status": "consultation", "effective_date": null, "source": {"primary": "SI 2026/102 (silent on yield); Bank of England Nov 2025 materials (60/40 backing; pass-through constrained)", "pinpoint": "BoE Nov 2025 backing-split / pass-through position; FCA rules pending"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.5 (Comparison Table — Yield to holders)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3. UK is the least-settled of the six on yield; carried as consultation/low confidence pending FCA rules.", "interpretive_flag": {"tension": "Whether and how returns may be passed through to holders is not fixed in the SI; BoE signals constraint but the FCA rule is pending.", "resolution_channel": "FCA summer 2026 policy statement."}, "confidence": "low", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["uk", "focus", "spine", "from_matrix_v0.9.3"]}, {"id": "uk-frs-regulatory_authority-001", "jurisdiction": "UK", "authority": "FCA, Bank of England, HM Treasury", "instrument_type": "fiat_referenced_stablecoin", "instrument_label_local": "qualifying stablecoin", "dimension": "regulatory_authority", "requirement_summary": "The Financial Services and Markets Act 2000 (Cryptoassets) Regulations 2026, SI 2026/102, in force from February 2026, make issuing a qualifying stablecoin in the UK a regulated activity under FSMA. The FCA (conduct), Bank of England (systemic), and HM Treasury (perimeter) share authority; FCA rules are pending, with a policy statement expected summer 2026.", "status": "in_force", "effective_date": "2026-02-01", "source": {"primary": "Financial Services and Markets Act 2000 (Cryptoassets) Regulations 2026, SI 2026/102", "pinpoint": "SI 2026/102; amendment to FSMA s.418 (regulated-activity perimeter)"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.2 (Executive Summary) / p.5 / UK detailed entry"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3.", "confidence": "high", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["uk", "focus", "from_matrix_v0.9.3"]}, {"id": "us-pss-bank_nonbank_routing-001", "jurisdiction": "US", "authority": "OCC/FDIC (bank issuers); SEC/CFTC (intermediaries under CLARITY §404)", "instrument_type": "payment_stablecoin", "instrument_label_local": "payment stablecoin / covered party", "dimension": "bank_nonbank_routing", "constraint_ref": "C5", "requirement_summary": "The regime separates roles along a routing chain. A bank operating as a Layer 1 issuer under the GENIUS Act operates under bank supervision; non-bank permitted issuers operate under the OCC/FDIC payment-stablecoin charter. CLARITY §404 adds an intermediary layer: 'covered parties' (digital-asset service providers and affiliates) may not pay yield on held balances, but may facilitate user-initiated activity. The author synthesises a generalisable three-layer routing architecture: (1) a compliant issuer layer (GENIUS-compliant payment stablecoin), (2) an authorised routing layer (the wallet/intermediary that executes the user's signed instruction), and (3) a yield-bearing tokenised cash-management layer (registered tokenised MMF). The binding question is which entity in the chain holds which authorisation, and whether the routing layer's action is a permitted facilitation or a prohibited yield/brokerage activity.", "requirement_structured": {"layers": ["L1 compliant issuer (bank or non-bank PPSI)", "L2 authorised routing layer (wallet/intermediary)", "L3 yield-bearing tokenised cash management (registered MMF)"], "binding_question": "authorisation held at each layer; facilitation vs. prohibited activity at L2"}, "status": "proposed", "effective_date": null, "source": {"primary": "GENIUS Act (issuer charters); CLARITY Act §404 'covered parties' (pending)", "pinpoint": "Covered-party definition (digital-asset service providers + affiliates); bank vs. non-bank issuer pathways"}, "secondary": [{"citation": "Fan, Cross-Border Stablecoin Architecture (Working Paper, May 2026), §4 (three-layer routing architecture) and §2.5 (Constraint 5)"}, {"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), Pattern 1 (issuer/intermediary split) and Pattern 3"}], "interpretation_note": "New dimension in v0.2.0-dev. Home for the §4 three-layer routing architecture and Constraint 5. Composes with securities_classification (the L2->L3 step is where C4 and C5 meet) and permitted_activity_yield (whether L2 facilitation is 'bona fide activity').", "confidence": "medium", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["anchor", "us", "routing", "architecture", "new_dimension", "from_portfolio"]}, {"id": "us-pss-capital_requirements-001", "jurisdiction": "US", "authority": "OCC, FDIC", "instrument_type": "payment_stablecoin", "instrument_label_local": "payment stablecoin", "dimension": "capital_requirements", "constraint_ref": "C2", "requirement_summary": "De novo PPSIs must hold minimum capital of the greater of $5 million or the chartering-condition amount, for 36 months. An operational backstop of 12 months of operating expenses must be held in cash, FDIC-insured deposits, or short-dated Treasuries (<=93 days). Two consecutive quarter-ends below the capital or backstop requirement trigger mandatory liquidation.", "status": "proposed", "effective_date": null, "source": {"primary": "GENIUS Act capital provisions; OCC/FDIC NPRM (de novo capital; operational backstop; liquidation trigger)", "pinpoint": "min capital = greater of $5m or chartering amount (36 mo); 12-mo opex backstop; 2-quarter breach -> liquidation"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.8 (US — Capital Requirements)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3. Capital half of the split reserve_capital dimension.", "confidence": "medium", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["us", "anchor", "from_matrix_v0.9.3", "dimension_split"]}, {"id": "us-pss-permitted_activity_yield-001", "jurisdiction": "US", "authority": "OCC, FDIC, Fed, Treasury (GENIUS); SEC/CFTC/Treasury joint rulemaking (CLARITY §404, pending)", "instrument_type": "payment_stablecoin", "instrument_label_local": "payment stablecoin", "dimension": "permitted_activity_yield", "constraint_ref": "C3", "requirement_summary": "GENIUS Act §4(a)(11) prohibits permitted/foreign payment stablecoin issuers from paying any form of interest or yield (cash, tokens, or other consideration) to a holder 'solely in connection with the holding, use, or retention' of a payment stablecoin. The word 'solely' is the textual hinge: it reaches payments tied to the act of holding, not payments produced by some other operative event (user-initiated routing, market-making, transfers). OCC NPRM §15.10(c)(4) and FDIC NPRM §350.3(b)(4) add a rebuttable presumption that affiliate / related-third-party arrangements (including white-label) violate the prohibition, rebuttable by written non-evasion showing; the anti-evasion rule (proposed §15.10(c)(6)) treats any sidestep arrangement as a violation. Permitted: merchant-funded discounts; issuer profit-sharing with non-affiliated white-label partners without yield pass-through. The intermediary layer is the pending CLARITY Act §404, extending the prohibition to 'covered parties' (digital-asset service providers and affiliates) under prongs (A) 'solely in connection with holding' and (B) 'economically or functionally equivalent' to bank-deposit interest.", "requirement_structured": {"passive_yield_to_holder": "prohibited (GENIUS §4(a)(11))", "textual_hinge": "'solely' (issuer layer) / 'economically or functionally equivalent' (CLARITY §404(c)(1)(B))", "activity_based_rewards": "permitted in principle; scope TBD by joint SEC/CFTC/Treasury rulemaking", "rulemaking_window": "within 12 months of CLARITY enactment", "civil_penalty": "up to $5,000,000 per violation (Treasury-assessed)"}, "status": "proposed", "effective_date": null, "source": {"primary": "GENIUS Act §4(a)(11); OCC NPRM §15.10(c)(4) / anti-evasion §15.10(c)(6); FDIC NPRM §350.3(b)(4); CLARITY Act (H.R. 3633) §404(c)(1) (Tillis-Alsobrooks text, 1 May 2026; affirmed final 5 May 2026)", "pinpoint": "GENIUS §4(a)(11) 'solely in connection with the holding, use, or retention'; CLARITY §404(c)(1)(A)/(B)"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.8 (US — Yield and Interest Treatment)"}, {"citation": "Fan, Narrowing the Section 404 Prohibition (Independent Policy Brief, 6 May 2026; SSRN), §VI six-factor test"}], "interpretation_note": "ANCHOR / LIVE WINDOW. CLARITY §404 passed Senate Banking 15-9 on 14 May 2026 and awaits floor passage. The bona-fide-activity boundary is the open question; the author's position is that user-initiated routing into 1940-Act registered tokenised MMFs falls outside the prohibition because the operative step is the user's signed authorisation, not the holding (see securities_classification + bank_nonbank_routing records).", "interpretive_flag": {"tension": "'bona fide activity' is undefined in the statute; the issuer-layer 'solely' and intermediary-layer 'economically or functionally equivalent' comparators leave the routing/market-making carve-out unsettled.", "resolution_channel": "Post-enactment joint SEC/CFTC/Treasury NPRM (12-month window); Senate Banking Committee Report as upstream legislative history; SEC Crypto Task Force written-input channel (open now)."}, "confidence": "medium", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["anchor", "us", "spine", "live-window", "section-404", "from_matrix_v0.9.3"]}, {"id": "us-pss-reserve_backing-001", "jurisdiction": "US", "authority": "OCC, FDIC", "instrument_type": "payment_stablecoin", "instrument_label_local": "payment stablecoin", "dimension": "reserve_backing", "constraint_ref": "C2", "requirement_summary": "1:1 backing of outstanding payment stablecoins at fair value. Permissible reserve assets (proposed 12 CFR §15.11(b)): US currency; demand deposits at IDIs; short-term Treasury bills (<=93 days); certain reverse repos (incl. intraday); registered government MMFs (underlying Treasuries <=93 days); and tokenised forms thereof. Stablecoins and other crypto-assets are excluded. Reserves must be segregated, identifiable, held directly by the issuer or custodied at an eligible institution, and cannot be pledged, rehypothecated, or reused (narrow margin/custodial exceptions). PPSIs with issuance >= $25 billion must hold 0.5% of reserves (capped at $500m) in insured deposits/shares.", "status": "proposed", "effective_date": null, "source": {"primary": "GENIUS Act reserve provisions; proposed 12 CFR §15.11(b) (permissible reserve assets)", "pinpoint": "12 CFR §15.11(b); 1:1 fair-value backing; >=$25bn -> 0.5%/$500m insured"}, "secondary": [{"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.8 (US — Reserve and Backing Requirements)"}], "interpretation_note": "Provenance: transcribed from author's Compliance Matrix v0.9.3. Reserve half of the split reserve_capital dimension.", "confidence": "medium", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["us", "anchor", "from_matrix_v0.9.3", "dimension_split"]}, {"id": "us-pss-securities_classification-001", "jurisdiction": "US", "authority": "SEC (Reves/Howey); SEC/CFTC market-structure boundary under CLARITY", "instrument_type": "payment_stablecoin", "instrument_label_local": "payment stablecoin", "dimension": "securities_classification", "constraint_ref": "C4", "requirement_summary": "A payment stablecoin structured to comply with the GENIUS Act (1:1 backing, no issuer yield, par redemption) is positioned as a non-security: under the Reves family-resemblance test the instrument resembles a payment/exchange medium rather than an investment note, and the absence of yield removes the principal Howey 'expectation of profit' hook. The contested boundary is not the stablecoin itself but the adjacent routing step: whether a wallet/intermediary that routes a user's payment-stablecoin balance into 1940-Act registered tokenised money market fund shares is thereby distributing securities and acting as a broker. The author's analysis (Reves' fourth factor — the presence of an alternative regulatory regime) argues registered-fund shares are already comprehensively regulated, weighing against re-characterising the routing as an unregistered securities activity.", "requirement_structured": {"stablecoin_itself": "non-security (GENIUS-compliant, non-yielding)", "contested_step": "routing payment-stablecoin balance -> registered tokenised MMF shares (a security)", "governing_tests": ["Reves family-resemblance (esp. 4th factor)", "Howey", "broker definition under Exchange Act"]}, "status": "proposed", "effective_date": null, "source": {"primary": "Reves v. Ernst & Young, 494 U.S. 56 (1990); SEC v. W.J. Howey Co., 328 U.S. 293 (1946); Investment Company Act of 1940 (registered MMFs); CLARITY Act market-structure provisions (pending)", "pinpoint": "Reves four-factor family-resemblance test, fourth factor (alternative regulatory regime); Howey investment-contract prongs"}, "secondary": [{"citation": "Fan, When Wallets Become Brokers: The Reves Fourth Factor and the Section 404 Boundary (SSRN, May 2026)"}, {"citation": "Fan, Reves' Fourth Factor and Stablecoin Routing Across Six Jurisdictions (submitted to Columbia, May 2026)"}, {"citation": "Fan, Compliance Matrix v0.9.3 (18 May 2026), Pattern 3 (registered-investment-product parallel track)"}], "interpretation_note": "SECOND SPINE. This dimension is new in v0.2.0-dev and is the home for the author's largest body of work after yield. It composes directly with permitted_activity_yield (C3 x C4): the §404 yield carve-out and the securities/brokerage line are the same boundary viewed from two doctrines. Without this dimension the two Reves papers and §4 of the Architecture paper had no slot in the register.", "interpretive_flag": {"tension": "Whether user-initiated routing into registered tokenised MMFs is (a) a permitted bona-fide activity outside §404 and (b) outside broker-dealer / securities-distribution characterisation, or instead disguised yield + unregistered securities activity.", "resolution_channel": "SEC Crypto Task Force; joint §404 rulemaking; potential Reves/Howey litigation; Committee Report language (author's §VIII proposal)."}, "confidence": "medium", "last_reviewed": "2026-06-17", "version_added": "0.2.0", "tags": ["anchor", "us", "spine", "securities", "reves", "new_dimension", "from_portfolio"]}], "corridors": [{"corridor_id": "hk-br-usd-stablecoin-settlement-001", "name": "HK to Brazil — USD stablecoin B2B settlement", "legs": ["HK", "BR"], "flow": "USD-referenced stablecoin used for B2B cross-border settlement, originating HK side, terminating Brazil side", "boundary_analysis": [{"leg": "HK", "gate": "<VERIFY: HK perimeter — FRS regime (Cap. 656) where issuance/distribution touches; SFC tokenisation/STO perimeter where settlement touches tokenised funds>", "clears": "<VERIFY>", "breaks": "<VERIFY>"}, {"leg": "BR", "gate": "Brazil FX perimeter. Two diverging rails: (i) eFX rail — BCB Resolution 561 prohibits eFX providers from using stablecoins/crypto to settle with overseas counterparties (effective Oct 1, 2026); (ii) VASP rail — BCB Resolution 521 permits authorised VASPs to use stablecoins for international payments inside the FX market.", "clears": "Authorised-VASP-in-FX channel (Res 521), subject to per-transaction limits (USD 100k pure VASP / USD 500k FX-authorised FI), monthly FX reporting (Annex II-A), custody segregation (Res 520: MPC/HSM, proof-of-reserves, biennial audit).", "breaks": "eFX back-end stablecoin settlement rail (Res 561) — closing. Algorithmic / non-auditable-reserve stablecoins prohibited."}], "key_constraint": "A single USD-stablecoin instrument cannot serve both HK and Brazil as one uniform rail: the Brazil side forces the flow through the authorised-VASP-in-FX channel, not the closing eFX rail. This is the binding 'regulatory geography' constraint the corridor must be architected around.", "us_doctrinal_link": "Same underlying question as US Sec. 404 bona-fide-activity carve-out: what activity is permitted on the regulated stablecoin rail. US = the anchor instance; see data/us-pss-permitted_activity_yield-001.yaml.", "sources": ["BCB Resolution 521/2025; BCB Resolution 561 (Apr 30, 2026); BCB Resolution 520/2025 (custody)", "<VERIFY: HK primary sources for the HK leg>"], "confidence": "medium", "last_reviewed": "2026-06-17", "version_added": "0.1.0"}]}</script>
+<script>
+(function(){
+  "use strict";
+  // 15-dimension spec (order + short code + full name + spine flag) — matches the schema.
+  var DIMS=[
+    {k:"regulatory_authority",s:"AUTH",f:"Regulatory authority"},
+    {k:"issuer_pathway",s:"ISSU",f:"Issuer pathway"},
+    {k:"reserve_backing",s:"RESV",f:"Reserve backing"},
+    {k:"capital_requirements",s:"CAP",f:"Capital requirements"},
+    {k:"permitted_activity_yield",s:"YIELD",f:"Permitted activity / yield",spine:true},
+    {k:"securities_classification",s:"SEC",f:"Securities classification",spine:true},
+    {k:"bank_nonbank_routing",s:"ROUT",f:"Bank / non-bank routing"},
+    {k:"redemption",s:"REDM",f:"Redemption"},
+    {k:"custody",s:"CUST",f:"Custody"},
+    {k:"aml_kyc",s:"AML",f:"AML / KYC"},
+    {k:"cross_border_data",s:"XBD",f:"Cross-border data"},
+    {k:"monetary_sovereignty",s:"MSOV",f:"Monetary sovereignty"},
+    {k:"disclosure_reporting",s:"DISC",f:"Disclosure / reporting"},
+    {k:"distribution",s:"DIST",f:"Distribution"},
+    {k:"implementation_status",s:"IMPL",f:"Implementation status"}
+  ];
+  var JURS=[
+    {c:"US",f:"United States"},{c:"HK",f:"Hong Kong"},{c:"EU",f:"European Union"},
+    {c:"UK",f:"United Kingdom"},{c:"SG",f:"Singapore"},{c:"CN",f:"Mainland China"}
+  ];
+  var JFULL={}; JURS.forEach(function(j){JFULL[j.c]=j.f;});
+  var DMAP={}; DIMS.forEach(function(d){DMAP[d.k]=d;});
+
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+
+  function render(data){
+    var records=(data&&data.records)||[];
+    var byCell={}; records.forEach(function(r){byCell[r.jurisdiction+"__"+r.dimension]=r;});
+
+    // ---- matrix head ----
+    var thead=document.querySelector("#matrix thead");
+    var tr="<tr><th class='corner'>Jurisdiction</th>";
+    DIMS.forEach(function(d){
+      tr+="<th class='dimhead"+(d.spine?" spine":"")+"' data-dim='"+d.k+"' title='"+esc(d.f)+(d.spine?" — spine dimension":"")+"' tabindex='0' role='button'>"+d.s+(d.spine?"<span class='star'>★</span>":"")+"</th>";
+    });
+    thead.innerHTML=tr+"</tr>";
+
+    // ---- matrix body ----
+    var tb=document.querySelector("#matrix tbody"),html="";
+    JURS.forEach(function(j){
+      html+="<tr>";
+      html+="<td class='jurcell'><button class='jurbtn' data-jur='"+j.c+"'><span class='code'>"+j.c+"</span><span class='full'>"+esc(j.f)+"</span></button></td>";
+      DIMS.forEach(function(d){
+        var rec=byCell[j.c+"__"+d.k];
+        var spineCls=d.spine?" spinecol":"";
+        if(rec){
+          html+="<td class='cell"+spineCls+"'><button class='dot v' data-id='"+esc(rec.id)+"' title='"+esc(j.c+" · "+d.f+" — verified")+"'><span class='mk'></span></button></td>";
+        }else{
+          html+="<td class='cell"+spineCls+"'><span class='dot p' title='"+esc(j.c+" · "+d.f+" — planned")+"'><span class='mk'></span></span></td>";
+        }
+      });
+      html+="</tr>";
+    });
+    tb.innerHTML=html;
+
+    // ---- interactions ----
+    var insp=document.getElementById("inspector");
+    tb.addEventListener("click",function(e){
+      var b=e.target.closest(".dot.v"); if(b){selectRecord(b.getAttribute("data-id"));return;}
+      var jb=e.target.closest(".jurbtn"); if(jb){compareJur(jb.getAttribute("data-jur"));}
+    });
+    thead.addEventListener("click",function(e){var h=e.target.closest(".dimhead");if(h)compareDim(h.getAttribute("data-dim"));});
+    thead.addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("dimhead")){e.preventDefault();compareDim(e.target.getAttribute("data-dim"));}});
+
+    function badge(conf){conf=conf||"low";return "<span class='badge "+conf+"'>conf: "+conf+"</span>";}
+
+    function selectRecord(id){
+      var r=null; for(var i=0;i<records.length;i++){if(records[i].id===id){r=records[i];break;}}
+      if(!r)return;
+      var d=DMAP[r.dimension]||{f:r.dimension,s:r.dimension};
+      var sec=(r.secondary&&r.secondary[0]&&r.secondary[0].citation)||"—";
+      var struct=r.requirement_structured?JSON.stringify(r.requirement_structured,null,2):null;
+      var h="";
+      h+="<div class='insp-head'>";
+      h+="<span class='insp-jd'>"+esc(r.jurisdiction)+"<span class='arr'>›</span>"+esc(d.s)+"</span>";
+      h+="<span class='insp-dimfull'>"+esc(d.f)+"</span>";
+      if(d.spine)h+="<span class='badge spineb'>spine</span>";
+      if(r.constraint_ref)h+="<span class='badge cref'>"+esc(r.constraint_ref)+"</span>";
+      h+=badge(r.confidence);
+      h+="<span class='insp-id'>"+esc(r.id)+"</span>";
+      h+="</div><div class='insp-body'>";
+      h+="<p class='insp-summary'>"+esc(r.requirement_summary)+"</p>";
+      h+="<div class='prov'>";
+      h+="<div class='prov-row'><div class='prov-k'>Source</div><div class='prov-v'>"+esc(r.source&&r.source.primary)+"</div></div>";
+      h+="<div class='prov-row'><div class='prov-k'>Pinpoint</div><div class='prov-v'><span class='em'>"+esc(r.source&&r.source.pinpoint)+"</span></div></div>";
+      h+="<div class='prov-row'><div class='prov-k'>Authority</div><div class='prov-v'>"+esc(r.authority)+"</div></div>";
+      h+="<div class='prov-row'><div class='prov-k'>Instrument</div><div class='prov-v'>"+esc(r.instrument_label_local)+"</div></div>";
+      h+="<div class='prov-row'><div class='prov-k'>Secondary</div><div class='prov-v'>"+esc(sec)+"</div></div>";
+      h+="</div>";
+      h+="<div class='metaline'>";
+      h+="<div><span class='mk2'>Jurisdiction</span><span class='mv'>"+esc(r.jurisdiction)+" · "+esc(JFULL[r.jurisdiction]||"")+"</span></div>";
+      h+="<div><span class='mk2'>Effective</span><span class='mv'>"+esc(r.effective_date||"n/a")+"</span></div>";
+      h+="<div><span class='mk2'>Reviewed</span><span class='mv'>"+esc(r.last_reviewed||"—")+"</span></div>";
+      h+="<div><span class='mk2'>Version</span><span class='mv'>v"+esc(r.version_added||"—")+"</span></div>";
+      h+="<div><span class='mk2'>Status</span><span class='mv'>"+esc(r.status||"—")+"</span></div>";
+      h+="</div>";
+      if(struct)h+="<details class='struct'><summary>Machine-readable obligation · requirement_structured</summary><pre>"+esc(struct)+"</pre></details>";
+      if(r.interpretation_note)h+="<p class='note'><b>Note.</b> "+esc(r.interpretation_note)+"</p>";
+      h+="</div>";
+      insp.innerHTML=h;
+      insp.scrollIntoView({behavior:"smooth",block:"nearest"});
+    }
+
+    function compareDim(dimKey){
+      var d=DMAP[dimKey]||{f:dimKey,s:dimKey};
+      var rs=records.filter(function(r){return r.dimension===dimKey;});
+      var h="<div class='insp-head'><span class='insp-jd'>Compare ›</span><span class='insp-dimfull'>"+esc(d.f)+(d.spine?" — spine dimension":"")+"</span><span class='insp-id'>"+rs.length+" jurisdiction"+(rs.length===1?"":"s")+"</span></div><div class='insp-body'>";
+      if(!rs.length){h+="<p class='note'>No verified records on this dimension yet — it is on the roadmap.</p>";}
+      else{
+        h+="<div class='cmp-list'>";
+        rs.forEach(function(r){
+          h+="<div class='cmp-item'><div class='ch'><span class='cj'>"+esc(r.jurisdiction)+" · "+esc(JFULL[r.jurisdiction]||"")+"</span><span class='badge "+(r.confidence||"low")+"'>conf: "+esc(r.confidence||"low")+"</span>"+(r.constraint_ref?"<span class='badge cref'>"+esc(r.constraint_ref)+"</span>":"")+"</div><p>"+esc(r.requirement_summary)+"</p><span class='src'>▸ "+esc(r.source&&r.source.primary)+" — "+esc(r.source&&r.source.pinpoint)+"</span></div>";
+        });
+        h+="</div>";
+      }
+      h+="</div>";
+      insp.innerHTML=h; insp.scrollIntoView({behavior:"smooth",block:"nearest"});
+    }
+
+    function compareJur(jc){
+      var rs=records.filter(function(r){return r.jurisdiction===jc;})
+                    .sort(function(a,b){return DIMS.findIndex(function(d){return d.k===a.dimension;})-DIMS.findIndex(function(d){return d.k===b.dimension;});});
+      var h="<div class='insp-head'><span class='insp-jd'>Profile ›</span><span class='insp-dimfull'>"+esc(JFULL[jc]||jc)+"</span><span class='insp-id'>"+rs.length+" records</span></div><div class='insp-body'><div class='cmp-list'>";
+      rs.forEach(function(r){
+        var d=DMAP[r.dimension]||{f:r.dimension};
+        h+="<div class='cmp-item'><div class='ch'><span class='cj'>"+esc(d.f)+"</span><span class='badge "+(r.confidence||"low")+"'>conf: "+esc(r.confidence||"low")+"</span>"+(r.constraint_ref?"<span class='badge cref'>"+esc(r.constraint_ref)+"</span>":"")+"</div><p>"+esc(r.requirement_summary)+"</p><span class='src'>▸ "+esc(r.source&&r.source.pinpoint)+"</span></div>";
+      });
+      h+="</div></div>";
+      insp.innerHTML=h; insp.scrollIntoView({behavior:"smooth",block:"nearest"});
+    }
+
+    // ---- search / filter ----
+    var q=document.getElementById("q"),mc=document.getElementById("matchcount");
+    function hay(r){return [r.jurisdiction,r.dimension,r.authority,r.requirement_summary,r.instrument_label_local,(r.source&&r.source.primary),(r.source&&r.source.pinpoint),(r.tags||[]).join(" "),r.constraint_ref].join(" ").toLowerCase();}
+    function applyFilter(){
+      var term=(q.value||"").trim().toLowerCase();
+      var dots=tb.querySelectorAll(".dot.v"),hits=0;
+      dots.forEach(function(dot){
+        var id=dot.getAttribute("data-id"),r=null;
+        for(var i=0;i<records.length;i++){if(records[i].id===id){r=records[i];break;}}
+        if(!term){dot.classList.remove("dim","hit");return;}
+        if(r&&hay(r).indexOf(term)>=0){dot.classList.add("hit");dot.classList.remove("dim");hits++;}
+        else{dot.classList.add("dim");dot.classList.remove("hit");}
+      });
+      mc.textContent=term?(hits+" record"+(hits===1?"":"s")+" match"):"";
+    }
+    if(q)q.addEventListener("input",applyFilter);
+
+    // default inspector content: the HK yield spine (project core), else first record
+    var def=null; for(var i=0;i<records.length;i++){if(records[i].id==="hk-frs-permitted_activity_yield-001"){def=records[i];break;}}
+    if(!def)def=records[0];
+    if(def)selectRecord(def.id);
+    else insp.innerHTML="<div class='insp-hint'>Dataset unavailable in this preview. Open the live site, or view <a href='./dataset.json'>dataset.json</a> directly.</div>";
+  }
+
+  // Render from the embedded snapshot immediately (instant + robust, works on file:// too),
+  // then upgrade to the live dataset.json when served over http(s) so the page stays in sync.
+  var rendered=false;
+  try{ render(JSON.parse(document.getElementById("embedded-data").textContent)); rendered=true; }
+  catch(e){ /* fall through to fetch */ }
+
+  var ctrl=("AbortController"in window)?new AbortController():null;
+  if(ctrl)setTimeout(function(){try{ctrl.abort();}catch(_){}} ,4000);
+  fetch("./dataset.json",{cache:"no-store",signal:ctrl?ctrl.signal:undefined})
+    .then(function(r){if(!r.ok)throw 0;return r.json();})
+    .then(function(d){ if(d&&d.records&&d.records.length) render(d); })
+    .catch(function(){
+      if(!rendered){
+        document.getElementById("inspector").innerHTML="<div class='insp-hint'>Dataset unavailable. View <a href='./dataset.json'>dataset.json</a> directly.</div>";
+      }
+    });
+})();
+</script>
+</body>
+</html>
