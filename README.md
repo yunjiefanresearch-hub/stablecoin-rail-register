@@ -1,6 +1,6 @@
 # Stablecoin Rail Register
 *(working title — see "Naming" below)*
-
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20730359.svg)](https://doi.org/10.5281/zenodo.20730359)
 An **open, versioned, machine-readable** register of how jurisdictions regulate the
 **permitted-activity / yield boundary on stablecoin payment rails**, with a
 **corridor-level interoperability layer**. Built from primary sources, citable by DOI.
