@@ -1,6 +1,6 @@
 # Cross-Border Stablecoin Register
 
-https://doi.org/10.5281/zenodo.20733274
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20730358.svg)](https://doi.org/10.5281/zenodo.20730358)
 
 An **open, versioned, machine-readable** register of how jurisdictions regulate stablecoins —
 mapped clause by clause across **fifteen dimensions** and **two doctrinal spines** (the

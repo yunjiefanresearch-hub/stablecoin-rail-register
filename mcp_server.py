@@ -87,7 +87,7 @@ def about() -> dict:
         "generated": DATA.get("generated"),
         "record_count": DATA.get("record_count"),
         "corridor_count": len(CORRIDORS),
-        "doi": "10.5281/zenodo.20730359",
+        "doi": "10.5281/zenodo.20730358",
         "license": {"data": "CC-BY-4.0", "code": "Apache-2.0"},
         "spines": ["permitted_activity_yield", "securities_classification"],
         "verification_rule": (

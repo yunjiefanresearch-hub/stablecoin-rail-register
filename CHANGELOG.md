@@ -3,9 +3,13 @@
 All notable changes to the **Cross-Border Stablecoin Register** are recorded here. The register
 doubles as a regulatory-diff log: each version states what changed. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/).
-Each tagged release is archived to Zenodo for a citable DOI.
+Each tagged release is archived to Zenodo for a citable DOI; the **concept DOI
+[10.5281/zenodo.20730358](https://doi.org/10.5281/zenodo.20730358)** always resolves to the latest
+version, while each release below carries its own version DOI.
 
 ## [0.3.0] — 2026-06-17
+Archived to Zenodo — **DOI [10.5281/zenodo.20733274](https://doi.org/10.5281/zenodo.20733274)**.
+
 ### Added
 - **Singapore, the United Kingdom and Mainland China deepened** to 11 / 11 / 9 dimensions
   (from 2 / 3 / 5) — **51 records total, 14 of 15 dimensions populated**. Transcribed from the

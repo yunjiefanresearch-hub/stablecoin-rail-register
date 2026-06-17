@@ -280,7 +280,7 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
         <span class="reg-tag">Open Register · v__VERSION__</span>
       </div>
       <nav class="mast-links">
-        <a class="mlink" href="https://doi.org/10.5281/zenodo.20730359">DOI <b>10.5281/zenodo.20730359</b></a>
+        <a class="mlink" href="https://doi.org/10.5281/zenodo.20730358">DOI <b>10.5281/zenodo.20730358</b></a>
         <a class="mlink" href="https://github.com/yunjiefanresearch-hub/stablecoin-rail-register">GitHub</a>
         <a class="mlink" href="./dataset.json"><b>dataset.json</b></a>
       </nav>
@@ -292,7 +292,7 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
       <div class="stat"><span class="n">__NREC__</span><span class="l">Verified records</span></div>
       <div class="stat"><span class="n">__NCOR__</span><span class="l">Corridor</span></div>
       <div class="stat"><span class="n">2</span><span class="l">Doctrinal spines</span></div>
-      <div class="stat doi"><span class="n"><a href="https://doi.org/10.5281/zenodo.20730359">CC-BY-4.0</a></span><span class="l">Data license</span></div>
+      <div class="stat doi"><span class="n"><a href="https://doi.org/10.5281/zenodo.20730358">CC-BY-4.0</a></span><span class="l">Data license</span></div>
     </div>
   </div>
 </header>
@@ -373,9 +373,9 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
       </div>
       <div class="card">
         <span class="ct">Cite</span>
-        <h3>DOI 10.5281/zenodo.20730359</h3>
+        <h3>DOI 10.5281/zenodo.20730358</h3>
         <p>Each tagged release is archived to Zenodo with a DOI. Citation metadata in <code>CITATION.cff</code>.</p>
-        <span class="go"><a href="https://doi.org/10.5281/zenodo.20730359">Resolve DOI →</a></span>
+        <span class="go"><a href="https://doi.org/10.5281/zenodo.20730358">Resolve DOI →</a></span>
       </div>
       <div class="card">
         <span class="ct">Source</span>
@@ -459,7 +459,7 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
     </div>
     <div class="cite">
       <span class="ck">Cite this version</span>
-      Fan, Yunjie. <i>Cross-Border Stablecoin Register</i> (v__VERSION__). Zenodo. https://doi.org/10.5281/zenodo.20730359 — licensed CC-BY-4.0.
+      Fan, Yunjie. <i>Cross-Border Stablecoin Register</i> (v__VERSION__). Zenodo. https://doi.org/10.5281/zenodo.20730358 — licensed CC-BY-4.0.
     </div>
   </div>
 </footer>
