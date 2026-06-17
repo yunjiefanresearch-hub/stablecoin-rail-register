@@ -1,6 +1,10 @@
 # Cross-Border Stablecoin Register
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20730359.svg)](https://doi.org/10.5281/zenodo.20730359)
+cd path/to/stablecoin-rail-register
+cp -R path/to/register/. .
+git add -A
+git commit -m "Update DOI to 10.5281/zenodo.20733274 (v0.3.0 Zenodo release)"
+git push
 
 An **open, versioned, machine-readable** register of how jurisdictions regulate stablecoins —
 mapped clause by clause across **fifteen dimensions** and **two doctrinal spines** (the
