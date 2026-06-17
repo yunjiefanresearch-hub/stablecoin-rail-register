@@ -1,0 +1,35 @@
+id: cn-prc-reserve_backing-001
+jurisdiction: CN
+authority: PBOC; SAFE; CSRC
+instrument_type: other
+instrument_label_local: 无境内发行 (no domestic issuance); indirect HK pathway
+dimension: reserve_backing
+constraint_ref: C2
+requirement_summary: Reserve requirements are not applicable to domestic issuance, which is prohibited.
+  On the indirect pathway through Hong Kong, HKMA reserve requirements apply to the HK-licensed entity;
+  the PRC-connected parent holds no reserve obligation directly under PRC law but faces consolidation
+  treatment under A-share listing rules.
+requirement_structured:
+  domestic: not applicable (issuance prohibited)
+  indirect_hk: HKMA reserve rules apply to HK entity
+  prc_parent: no direct reserve obligation; A-share consolidation treatment
+status: in_force
+source:
+  primary: PRC prohibition on domestic issuance; HKMA reserve rules apply to HK-licensed entity (indirect
+    pathway)
+  pinpoint: Reserve — N/A domestically; indirect HK pathway + A-share consolidation
+  url: ''
+secondary:
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.25 (Mainland China — Reserve and Backing Requirements)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
+  verification. Recorded because the ''N/A domestically + indirect HK consolidation'' structure is itself
+  the analytically relevant fact for PRC-connected groups.'
+confidence: medium
+last_reviewed: '2026-06-17'
+version_added: 0.3.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.3
+- v0.3.0_backfill
+- indirect_pathway

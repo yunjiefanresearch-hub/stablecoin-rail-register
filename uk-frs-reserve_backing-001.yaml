@@ -1,0 +1,36 @@
+id: uk-frs-reserve_backing-001
+jurisdiction: UK
+authority: FCA
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: UK qualifying stablecoin (UKQS)
+dimension: reserve_backing
+constraint_ref: C2
+requirement_summary: SI 2026/102 requires 1:1 backing by a backing-asset pool with annual independent
+  review. Backing assets are carved out from the collective-investment-scheme (CIS) and alternative-investment-fund
+  (AIF) definitions, with the carve-out activated early ahead of full regime commencement; specific backing-asset
+  composition rules are pending final FCA rules.
+requirement_structured:
+  backing: 1:1 by backing-asset pool
+  review: annual independent review
+  cis_aif_carveout: backing assets carved out of CIS/AIF definitions (activated early)
+  composition: pending final FCA rules
+status: transitional
+effective_date: '2026-02-01'
+source:
+  primary: Financial Services and Markets Act 2000 (Cryptoassets) Regulations 2026, SI 2026/102
+  pinpoint: 1:1 backing; CIS/AIF carve-out for backing assets
+  url: ''
+secondary:
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), pp.14-15 (United Kingdom — Reserve and Backing
+    Requirements)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
+  verification. The early CIS/AIF carve-out is the closest structural mirror among the six jurisdictions
+  to US 1940-Act treatment of tokenised MMFs (enables 1940-Act-equivalent routing).'
+confidence: medium
+last_reviewed: '2026-06-17'
+version_added: 0.3.0
+tags:
+- europe
+- focus
+- from_matrix_v0.9.3
+- v0.3.0_backfill

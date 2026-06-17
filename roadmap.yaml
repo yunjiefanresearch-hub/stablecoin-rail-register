@@ -1,37 +1,38 @@
-# Planned coverage. The build script renders these as planned (white) cells in COVERAGE.md
-# wherever no record yet exists. Reoriented (v0.2.0-dev) to the jurisdictions for which a
-# verified written substrate exists (Compliance Matrix v0.9.3): US, EU, UK, SG, HK, CN.
+# Planned coverage. build.py renders these as planned (⬜vX.Y) cells in COVERAGE.md
+# wherever no record yet exists, for focus_jurisdictions + backfill_jurisdictions.
+# v0.3.0 state: HK / UK / SG at 11/15; only `disclosure_reporting` is empty across the
+# focus set. Brazil and Taiwan are forthcoming (shown as windows on the landing page).
 focus_jurisdictions: [US, HK, EU, UK, SG, CN]
 backfill_jurisdictions: [BR, TW]
 planned:
   # jurisdiction: { dimension: version-scheduled }
+  # `disclosure_reporting` is the one dimension still empty across the whole focus set
   US:
-    securities_classification: "0.2.0"
-    bank_nonbank_routing: "0.2.0"
-    disclosure_reporting: "0.3.0"
-    custody: "0.3.0"
+    disclosure_reporting: "0.3.x"
   HK:
-    monetary_sovereignty: "0.2.0"
-    securities_classification: "0.3.0"
-    disclosure_reporting: "0.3.0"
-    custody: "0.3.0"
+    securities_classification: "0.3.x"
+    disclosure_reporting: "0.3.x"
   EU:
-    securities_classification: "0.3.0"
-    disclosure_reporting: "0.3.0"
-    custody: "0.3.0"
+    securities_classification: "0.3.x"
+    disclosure_reporting: "0.3.x"
   UK:
-    capital_requirements: "0.2.0"
-    reserve_backing: "0.2.0"
-    redemption: "0.2.0"
-    disclosure_reporting: "0.3.0"
+    disclosure_reporting: "0.3.x"
   SG:
-    reserve_backing: "0.2.0"
-    capital_requirements: "0.2.0"
-    redemption: "0.2.0"
-    monetary_sovereignty: "0.3.0"
+    monetary_sovereignty: "0.3.x"
+    disclosure_reporting: "0.3.x"
   CN:
-    disclosure_reporting: "0.2.0"
-    bank_nonbank_routing: "0.3.0"
+    disclosure_reporting: "0.3.x"
+  # Brazil — promote from corridor-only to a full jurisdiction (v0.3.x), built from
+  # primary sources (BCB virtual-assets framework, Drex, LGPD) via corridor fieldwork.
   BR:
-    custody: "0.2.0"          # corridor substrate (BCB Res 520) — needs per-jurisdiction verify
-    monetary_sovereignty: "0.2.0"
+    regulatory_authority: "0.3.x"
+    issuer_pathway: "0.3.x"
+    cross_border_data: "0.3.x"
+    monetary_sovereignty: "0.3.x"
+    aml_kyc: "0.3.x"
+  # Taiwan — add as an infrastructure jurisdiction (v0.4.0).
+  TW:
+    regulatory_authority: "0.4.0"
+    issuer_pathway: "0.4.0"
+    securities_classification: "0.4.0"
+    aml_kyc: "0.4.0"

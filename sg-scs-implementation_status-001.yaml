@@ -1,0 +1,32 @@
+id: sg-scs-implementation_status-001
+jurisdiction: SG
+authority: MAS
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: single-currency stablecoin (SCS)
+dimension: implementation_status
+requirement_summary: The Payment Services Act came into force in January 2020; the SCS framework was finalised
+  on 15 August 2023; the FSMA Part 9 DTSP regime took effect 30 June 2025 with no transitional arrangement;
+  full SCS-framework implementation is targeted for mid-2026.
+requirement_structured:
+  psa_in_force: Jan 2020
+  scs_finalised: 15 Aug 2023
+  dtsp_effective: 30 Jun 2025 (no transition)
+  full_scs_target: mid-2026
+status: transitional
+effective_date: '2023-08-15'
+source:
+  primary: Payment Services Act 2019; MAS SCS framework; FSMA Part 9
+  pinpoint: Implementation timeline — PSA 2020; SCS Aug 2023; DTSP Jun 2025; full SCS mid-2026
+  url: ''
+secondary:
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.20 (Singapore — Implementation Timeline)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
+  verification.'
+confidence: high
+last_reviewed: '2026-06-17'
+version_added: 0.3.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.3
+- v0.3.0_backfill

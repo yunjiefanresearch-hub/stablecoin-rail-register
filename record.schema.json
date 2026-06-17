@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.org/stablecoin-rail-register/schema/record.schema.json",
-  "title": "Stablecoin Rail Register — obligation record",
+  "title": "Cross-Border Stablecoin Register — obligation record",
   "description": "One verified (jurisdiction x instrument x dimension) regulatory fact, versioned and sourced. v0.2.0-dev: dimension set expanded to align with the author's eight-constraint framework (Cross-Border Stablecoin Architecture, May 2026) and the ten-dimension Compliance Matrix v0.9.3.",
   "type": "object",
   "additionalProperties": false,

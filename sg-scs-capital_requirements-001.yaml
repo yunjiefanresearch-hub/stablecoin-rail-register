@@ -1,0 +1,33 @@
+id: sg-scs-capital_requirements-001
+jurisdiction: SG
+authority: MAS
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: single-currency stablecoin (SCS)
+dimension: capital_requirements
+constraint_ref: C2
+requirement_summary: An SCS issuer must hold base capital of at least S$1 million or 50% of annual operating
+  expenses, whichever is higher, plus liquid assets sufficient for an orderly wind-down. DTSP licensees
+  (where granted) face a separate S$250,000 base-capital requirement, a S$10,000 annual licence fee, a
+  Singapore-based compliance officer, and annual penetration testing.
+requirement_structured:
+  base_capital: max(S$1,000,000 ; 50% of annual operating expenses)
+  wind_down: liquid assets sufficient for orderly wind-down
+  dtsp_base_capital: S$250,000 + S$10,000 annual fee + SG compliance officer + annual pen-test
+status: transitional
+effective_date: '2023-08-15'
+source:
+  primary: MAS Single-Currency Stablecoin Regulatory Framework (15 Aug 2023); FSMA Part 9 (DTSP)
+  pinpoint: Capital requirements — base capital S$1m or 50% opex; DTSP S$250k
+  url: ''
+secondary:
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.19 (Singapore — Capital Requirements)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
+  verification.'
+confidence: medium
+last_reviewed: '2026-06-17'
+version_added: 0.3.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.3
+- v0.3.0_backfill

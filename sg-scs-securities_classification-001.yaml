@@ -1,0 +1,38 @@
+id: sg-scs-securities_classification-001
+jurisdiction: SG
+authority: MAS
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: single-currency stablecoin (SCS)
+dimension: securities_classification
+constraint_ref: C4
+requirement_summary: 'Token classification follows MAS''s substance-over-form test: a token with capital-markets-product
+  characteristics is regulated under the Securities and Futures Act (SFA), not the Payment Services Act,
+  and falls outside the SCS framework entirely. Tokens marketed as offering yield or as investments would
+  likely be classified as securities under the SFA. The destination-product classification analysis governs
+  whether a routing architecture that converts SCS holdings into SFA-regulated capital-markets-product
+  shares is permissible.'
+requirement_structured:
+  test: MAS substance-over-form
+  securities_regulator_statute: Securities and Futures Act (SFA)
+  yield_marketed_tokens: likely securities under SFA, outside SCS
+  routing_question: turns on SFA classification of destination product
+status: in_force
+source:
+  primary: Securities and Futures Act (SFA); MAS substance-over-form classification
+  pinpoint: SFA classification — capital-markets-product characteristics regulated under SFA, not PSA
+  url: ''
+secondary:
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), pp.18-19 (Singapore — Issuer Pathways; Yield
+    and Interest Treatment)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
+  verification. This is the SG instance of the securities-classification spine (C4): the SFA boundary
+  is what removes yield-bearing or investment-marketed tokens from SCS scope.'
+confidence: medium
+last_reviewed: '2026-06-17'
+version_added: 0.3.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.3
+- v0.3.0_backfill
+- new_dimension

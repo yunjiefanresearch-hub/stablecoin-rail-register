@@ -1,0 +1,32 @@
+id: sg-scs-aml_kyc-001
+jurisdiction: SG
+authority: MAS
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: single-currency stablecoin (SCS)
+dimension: aml_kyc
+requirement_summary: AML/CFT obligations apply under MAS Notice PSN02 (payment services) and Notice PSN03
+  (digital payment tokens), including the FATF travel rule for digital-payment-token transfers, FATF-aligned
+  KYC, transaction monitoring, and suspicious-transaction reporting.
+requirement_structured:
+  notices:
+  - MAS Notice PSN02 (payment services)
+  - MAS Notice PSN03 (digital payment tokens)
+  travel_rule: applies to DPT transfers
+  standard: FATF-aligned KYC, monitoring, STR
+status: in_force
+source:
+  primary: MAS Notice PSN02; MAS Notice PSN03
+  pinpoint: AML/CFT — PSN02/PSN03; travel rule for DPT transfers
+  url: ''
+secondary:
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.19 (Singapore — AML / KYC Framework)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
+  verification.'
+confidence: medium
+last_reviewed: '2026-06-17'
+version_added: 0.3.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.3
+- v0.3.0_backfill

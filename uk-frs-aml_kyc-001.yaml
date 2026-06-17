@@ -1,0 +1,31 @@
+id: uk-frs-aml_kyc-001
+jurisdiction: UK
+authority: FCA
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: UK qualifying stablecoin (UKQS)
+dimension: aml_kyc
+requirement_summary: The cryptoassets regime supersedes the previous Money Laundering Regulations registration
+  regime by bringing cryptoasset activities into full FSMA scope, including AML/KYC obligations; the existing
+  Money Laundering Regulations 2017 continue to apply alongside.
+requirement_structured:
+  change: cryptoassets brought into full FSMA scope (AML/KYC)
+  supersedes: previous MLR money-laundering registration regime
+  alongside: Money Laundering Regulations 2017 still apply
+status: transitional
+effective_date: '2026-02-01'
+source:
+  primary: FSMA 2000 (Cryptoassets) Regulations 2026, SI 2026/102; Money Laundering Regulations 2017
+  pinpoint: AML/KYC — full FSMA scope; MLR registration regime superseded
+  url: ''
+secondary:
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.15 (United Kingdom — AML / KYC Framework)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
+  verification.'
+confidence: medium
+last_reviewed: '2026-06-17'
+version_added: 0.3.0
+tags:
+- europe
+- focus
+- from_matrix_v0.9.3
+- v0.3.0_backfill

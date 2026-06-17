@@ -16,7 +16,7 @@ ROOT = pathlib.Path(__file__).resolve().parent
 
 # Single source of truth for the dataset/release version. Bump this when tagging
 # a release; keep it in step with README, CITATION.cff, and the schema $id.
-REGISTER_VERSION = "0.2.0"
+REGISTER_VERSION = "0.3.0"
 
 def find(name):
     hits = list(ROOT.rglob(name))
@@ -125,7 +125,7 @@ def main():
         sys.exit(1)
     cov = coverage(recs)
     dataset = {
-        "name": "Stablecoin Rail Register", "version": REGISTER_VERSION,
+        "name": "Cross-Border Stablecoin Register", "version": REGISTER_VERSION,
         "generated": str(datetime.date.today()), "record_count": len(recs),
         "records": [{k: v for k, v in r.items() if k != "_draft"} for r in recs],
         "corridors": corridors,

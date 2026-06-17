@@ -1,0 +1,35 @@
+id: sg-scs-distribution-001
+jurisdiction: SG
+authority: MAS
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: single-currency stablecoin (SCS)
+dimension: distribution
+constraint_ref: C8
+requirement_summary: The 'MAS-regulated stablecoin' label is restricted to SCS-framework-compliant issuers;
+  misrepresenting a token as MAS-regulated carries financial penalties or imprisonment and placement on
+  the MAS Investor Alert List. Retail consumer protections prohibit high-risk activities such as lending
+  or staking using stablecoins, and foreign-issued stablecoins remain DPTs under the general regime.
+requirement_structured:
+  label_restriction: '''MAS-regulated stablecoin'' label limited to SCS-compliant issuers'
+  misrepresentation: financial penalty / imprisonment; MAS Investor Alert List
+  retail_protection: no lending or staking using stablecoins
+  foreign_tokens: remain DPTs under general regime
+status: in_force
+source:
+  primary: Payment Services Act 2019 / MAS Single-Currency Stablecoin Regulatory Framework
+  pinpoint: Distribution and offering — label restriction; misrepresentation penalties; retail lending/staking
+    prohibition
+  url: ''
+secondary:
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), pp.19-20 (Singapore — Distribution and Offering
+    Restrictions)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
+  verification.'
+confidence: medium
+last_reviewed: '2026-06-17'
+version_added: 0.3.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.3
+- v0.3.0_backfill

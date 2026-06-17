@@ -1,0 +1,30 @@
+id: cn-prc-aml_kyc-001
+jurisdiction: CN
+authority: PBOC
+instrument_type: other
+instrument_label_local: 反洗钱 (AML)
+dimension: aml_kyc
+requirement_summary: The Anti-Money Laundering Law of the PRC and PBOC AML/CFT regulations apply to all
+  financial institutions, and cryptocurrency-related transactions are explicitly subject to AML scrutiny
+  under the 2017 ICO Notice (94 公告) and supporting circulars.
+requirement_structured:
+  statute: Anti-Money Laundering Law of the PRC
+  regulator_rules: PBOC AML/CFT regulations (all financial institutions)
+  crypto: explicit AML scrutiny under 94 公告 and supporting circulars
+status: in_force
+source:
+  primary: Anti-Money Laundering Law of the PRC; PBOC AML/CFT regulations; 2017 ICO Notice (94 公告)
+  pinpoint: AML — PRC AML Law; PBOC AML/CFT; crypto AML scrutiny under 94 公告
+  url: ''
+secondary:
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.26 (Mainland China — AML / KYC Framework)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
+  verification.'
+confidence: high
+last_reviewed: '2026-06-17'
+version_added: 0.3.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.3
+- v0.3.0_backfill

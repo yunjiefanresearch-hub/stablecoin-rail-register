@@ -1,0 +1,30 @@
+id: sg-scs-redemption-001
+jurisdiction: SG
+authority: MAS
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: single-currency stablecoin (SCS)
+dimension: redemption
+requirement_summary: SCS holders are entitled to redemption at par value within 5 business days of a valid
+  request, with no unreasonable fees or conditions, and customer assets are held under a statutory trust.
+requirement_structured:
+  par_redemption: at par within 5 business days of valid request
+  fees: no unreasonable fees or conditions
+  trust: statutory trust of customer assets
+status: transitional
+effective_date: '2023-08-15'
+source:
+  primary: MAS Single-Currency Stablecoin Regulatory Framework (15 Aug 2023)
+  pinpoint: Redemption mechanics — par redemption within 5 business days; statutory trust
+  url: ''
+secondary:
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.18 (Singapore — Redemption Mechanics)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
+  verification. Contrast HK''s 1-business-day par redemption.'
+confidence: medium
+last_reviewed: '2026-06-17'
+version_added: 0.3.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.3
+- v0.3.0_backfill

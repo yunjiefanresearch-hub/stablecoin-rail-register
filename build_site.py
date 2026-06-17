@@ -15,7 +15,7 @@ TEMPLATE = r"""<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Stablecoin Rail Register — regulatory intelligence infrastructure</title>
+<title>Cross-Border Stablecoin Register — regulatory intelligence infrastructure</title>
 <meta name="description" content="An open, versioned, machine-readable register of cross-jurisdictional stablecoin payment-rail regulation. Every fact sourced, dated, versioned, and confidence-rated.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -199,6 +199,10 @@ details.struct pre{margin:0;padding:12px 14px;border-top:1px solid var(--rule);o
 .rulebox b{color:#fff}
 
 /* ---------- roadmap ---------- */
+.jurbtn .jwin{font-family:var(--mono);font-size:9px;letter-spacing:.04em;color:var(--ink-2);background:var(--planned-bg);border:1px solid var(--planned-line);border-radius:10px;padding:1px 6px;margin-left:8px;vertical-align:middle;white-space:nowrap}
+.jlabel{cursor:default;background:none!important;display:inline-flex;align-items:center}
+tr.jrow-planned .jurcell .code,tr.jrow-planned .jurcell .full{opacity:.72}
+tr.jrow-planned{background:repeating-linear-gradient(135deg,transparent,transparent 9px,rgba(170,179,192,.05) 9px,rgba(170,179,192,.05) 18px)}
 .rm-note{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--draft);
   background:var(--draft-bg);border:1px solid var(--draft-line);border-radius:6px;padding:9px 13px;display:inline-block;margin-bottom:20px}
 .rm{display:grid;gap:0;border:1px solid var(--rule-2);border-radius:8px;overflow:hidden;background:var(--panel)}
@@ -223,6 +227,39 @@ footer .cite{font-family:var(--mono);font-size:11.5px;background:#0d2c4b;border:
   border-radius:6px;padding:12px 14px;color:#CFE0F0;max-width:420px;line-height:1.6}
 footer .cite .ck{color:#7FA0C2;display:block;margin-bottom:5px;letter-spacing:.12em;font-size:9.5px;text-transform:uppercase}
 
+/* ---------- view toggle + filterable table ---------- */
+.viewtoggle{display:inline-flex;border:1px solid var(--rule-2);border-radius:7px;overflow:hidden;margin-bottom:16px}
+.viewtoggle button{font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:7px 16px;
+  background:var(--panel);border:0;cursor:pointer;color:var(--ink-2);border-right:1px solid var(--rule-2)}
+.viewtoggle button:last-child{border-right:0}
+.viewtoggle button.on{background:var(--navy);color:#fff}
+.filterbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.filterbar select{font-family:var(--mono);font-size:12px;padding:7px 10px;border:1px solid var(--rule-2);
+  border-radius:6px;background:var(--panel);color:var(--ink);cursor:pointer}
+.filterbar .fbreset{font-family:var(--mono);font-size:11.5px;color:var(--accent);background:none;border:0;cursor:pointer}
+.tbl-scroll{overflow-x:auto;border:1px solid var(--rule-2);border-radius:8px;background:var(--panel)}
+table.rtbl{border-collapse:collapse;width:100%;font-size:12.5px}
+table.rtbl thead th{position:sticky;top:0;background:#F7F9FB;text-align:left;padding:10px 12px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2);
+  border-bottom:1px solid var(--rule-2);cursor:pointer;white-space:nowrap;user-select:none}
+table.rtbl thead th:hover{color:var(--accent)}
+table.rtbl thead th .sortarrow{opacity:.4;font-size:9px;margin-left:3px}
+table.rtbl tbody td{padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.45}
+table.rtbl tbody tr{cursor:pointer}
+table.rtbl tbody tr:hover{background:#F4F8FC}
+table.rtbl .tj{font-family:var(--mono);font-weight:600;color:var(--ink)}
+table.rtbl .td-dim{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);white-space:nowrap}
+table.rtbl .td-dim .spm{color:var(--spine)}
+table.rtbl .td-req{color:var(--ink-2);min-width:280px;max-width:440px}
+table.rtbl .td-pin{font-family:var(--mono);font-size:11px;color:var(--ink-3);min-width:180px;max-width:300px}
+table.rtbl .cf{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:20px;font-weight:600;white-space:nowrap}
+table.rtbl .cf.high{background:var(--verified-bg);color:var(--verified)}
+table.rtbl .cf.medium{background:var(--draft-bg);color:var(--draft)}
+table.rtbl .cf.low{background:var(--planned-bg);color:var(--ink-2)}
+table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
+.tblcount{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin:10px 2px 0}
+.hidden{display:none!important}
+
 @media (max-width:760px){
   .method{grid-template-columns:1fr}
   .thesis p{font-size:18px}
@@ -239,7 +276,7 @@ footer .cite .ck{color:#7FA0C2;display:block;margin-bottom:5px;letter-spacing:.1
   <div class="wrap">
     <div class="mast-top">
       <div class="brand">
-        <span class="wordmark">Stablecoin Rail Register</span>
+        <span class="wordmark">Cross-Border Stablecoin Register</span>
         <span class="reg-tag">Open Register · v__VERSION__</span>
       </div>
       <nav class="mast-links">
@@ -248,7 +285,7 @@ footer .cite .ck{color:#7FA0C2;display:block;margin-bottom:5px;letter-spacing:.1
         <a class="mlink" href="./dataset.json"><b>dataset.json</b></a>
       </nav>
     </div>
-    <p class="tagline">Regulatory intelligence infrastructure for the permitted-activity / yield boundary on cross-border stablecoin payment rails.</p>
+    <p class="tagline">An open, versioned register mapping how jurisdictions regulate stablecoins — clause by clause, across fifteen dimensions and two doctrinal spines (the yield boundary and securities classification).</p>
     <div class="statstrip">
       <div class="stat"><span class="n">__NJUR__</span><span class="l">Jurisdictions</span></div>
       <div class="stat"><span class="n">15</span><span class="l">Dimensions</span></div>
@@ -270,7 +307,7 @@ footer .cite .ck{color:#7FA0C2;display:block;margin-bottom:5px;letter-spacing:.1
 <section id="coverage">
   <div class="wrap">
     <p class="eyebrow">Coverage matrix</p>
-    <h2 class="sec">Six focus jurisdictions × fifteen dimensions</h2>
+    <h2 class="sec">Six jurisdictions mapped, two forthcoming &times; fifteen dimensions</h2>
     <p class="sec-sub">Each filled cell is a verified, sourced record. Select a cell to inspect it; a column header to compare all jurisdictions on that dimension; a jurisdiction to read its full profile. Empty cells are on the roadmap — this is an actively-built standard, not a finished table.</p>
     <div class="mtoolbar">
       <div class="searchbox">
@@ -284,8 +321,27 @@ footer .cite .ck{color:#7FA0C2;display:block;margin-bottom:5px;letter-spacing:.1
         <span><i class="lg s"></i>spine dimension</span>
       </div>
     </div>
-    <div class="matrix-scroll">
-      <table class="matrix" id="matrix"><thead></thead><tbody></tbody></table>
+    <div class="viewtoggle" id="viewtoggle">
+      <button data-view="matrix" class="on">Matrix</button>
+      <button data-view="table">Table</button>
+    </div>
+    <div id="view-matrix">
+      <div class="matrix-scroll">
+        <table class="matrix" id="matrix"><thead></thead><tbody></tbody></table>
+      </div>
+    </div>
+    <div id="view-table" class="hidden">
+      <div class="filterbar" id="filterbar">
+        <select id="f-jur" aria-label="Filter by jurisdiction"><option value="">All jurisdictions</option></select>
+        <select id="f-dim" aria-label="Filter by dimension"><option value="">All dimensions</option></select>
+        <select id="f-status" aria-label="Filter by status"><option value="">Any status</option></select>
+        <select id="f-conf" aria-label="Filter by confidence"><option value="">Any confidence</option></select>
+        <button class="fbreset" id="f-reset">reset</button>
+      </div>
+      <div class="tbl-scroll">
+        <table class="rtbl" id="rtbl"><thead></thead><tbody></tbody></table>
+      </div>
+      <p class="tblcount" id="tblcount"></p>
     </div>
     <div class="inspector" id="inspector"></div>
   </div>
@@ -335,7 +391,7 @@ footer .cite .ck{color:#7FA0C2;display:block;margin-bottom:5px;letter-spacing:.1
       </div>
     </div>
     <div class="agentnote">
-      <b>For agents.</b> The register is a single JSON document at <span class="gk">/dataset.json</span>, validated against a published JSON Schema, with a stable <span class="gk">id</span> per record and explicit <span class="gk">source.primary</span> · <span class="gk">source.pinpoint</span> · <span class="gk">confidence</span> · <span class="gk">version_added</span> fields. A queryable <span class="gk">MCP server</span> is on the roadmap (see below) — until then, fetch and filter the dataset directly.
+      <b>For agents.</b> The register is a single JSON document at <span class="gk">/dataset.json</span>, validated against a published JSON Schema, with a stable <span class="gk">id</span> per record and explicit <span class="gk">source.primary</span> · <span class="gk">source.pinpoint</span> · <span class="gk">confidence</span> · <span class="gk">version_added</span> fields. A queryable <span class="gk">MCP server</span> exposes typed query tools over this dataset (query, compare_dimension, jurisdiction_profile, search, coverage) — or fetch and filter the dataset directly.
     </div>
   </div>
 </section>
@@ -366,23 +422,23 @@ footer .cite .ck{color:#7FA0C2;display:block;margin-bottom:5px;letter-spacing:.1
     <span class="rm-note">▲ Items tagged PLANNED are on the roadmap and not yet available.</span>
     <div class="rm">
       <div class="rm-item">
-        <span class="rm-ver cur">v0.2.0</span>
-        <div class="rm-txt"><h4>15-dimension framework · six focus jurisdictions</h4><p>Two doctrinal spines (yield boundary + securities classification); 30 sourced records; corridor layer. <span class="feat">— current release</span></p></div>
+        <span class="rm-ver">v0.2.0</span>
+        <div class="rm-txt"><h4>15-dimension framework · DOI</h4><p>Two doctrinal spines (yield boundary + securities classification); six focus jurisdictions; corridor layer; archived to Zenodo for a citable DOI. <span class="feat">— last released version</span></p></div>
         <span class="tag shipped">Shipped</span>
       </div>
       <div class="rm-item">
-        <span class="rm-ver">v0.3.0</span>
-        <div class="rm-txt"><h4>Deepen the focus set</h4><p>Custody and disclosure cells across jurisdictions; securities classification applied comparatively beyond the US; a second corridor built from focus jurisdictions.</p></div>
-        <span class="tag planned">Planned</span>
+        <span class="rm-ver cur">v0.3.0-dev</span>
+        <div class="rm-txt"><h4>Depth + interfaces</h4><p>Hong Kong, Singapore and the UK deepened to 11 dimensions each (51 records, 14/15 dimensions); sortable multi-filter table view; queryable <b>MCP server</b> now available. <span class="feat">— current working tree</span></p></div>
+        <span class="tag shipped">Available</span>
+      </div>
+      <div class="rm-item">
+        <span class="rm-ver">v0.3.x</span>
+        <div class="rm-txt"><h4>Brazil → full jurisdiction · Hong Kong verification</h4><p>Promote <b>Brazil</b> from corridor-only to a full jurisdiction (the HK→BR settlement corridor anchors it); complete the primary-source verification pass (clause-level URLs) on the Hong Kong anchor cells.</p></div>
+        <span class="tag planned">In progress</span>
       </div>
       <div class="rm-item">
         <span class="rm-ver">v0.4.0</span>
-        <div class="rm-txt"><h4>Agent interface</h4><p class="feat">MCP server — agent-queryable obligation endpoints &nbsp;·&nbsp; semantic search &nbsp;·&nbsp; jurisdiction comparison / query API</p></div>
-        <span class="tag planned">Planned</span>
-      </div>
-      <div class="rm-item">
-        <span class="rm-ver">later</span>
-        <div class="rm-txt"><h4>Breadth, once the substrate exists</h4><p>Backfill additional jurisdictions and instruments from primary sources — depth before breadth, always.</p></div>
+        <div class="rm-txt"><h4>Taiwan + query API</h4><p>Add <b>Taiwan</b> as an infrastructure jurisdiction; semantic search and a jurisdiction comparison / query API over the MCP layer.</p></div>
         <span class="tag planned">Planned</span>
       </div>
     </div>
@@ -392,18 +448,18 @@ footer .cite .ck{color:#7FA0C2;display:block;margin-bottom:5px;letter-spacing:.1
 <footer>
   <div class="wrap fgrid">
     <div>
-      <div class="fb">Stablecoin Rail Register</div>
+      <div class="fb">Cross-Border Stablecoin Register</div>
       <div class="fm">
         Founder &amp; maintainer: Yunjie Fan<br>
         Data: CC-BY-4.0 · Code: Apache-2.0<br>
         Cadence: quarterly diffs + event patches<br>
         <a href="https://github.com/yunjiefanresearch-hub/stablecoin-rail-register">github.com/yunjiefanresearch-hub/stablecoin-rail-register</a><br>
-        <span style="color:#6E86A0">Working title · v__VERSION__ · generated __GENERATED__</span>
+        <span style="color:#6E86A0">v__VERSION__ · generated __GENERATED__</span>
       </div>
     </div>
     <div class="cite">
       <span class="ck">Cite this version</span>
-      Fan, Yunjie. <i>Stablecoin Rail Register</i> (v__VERSION__). Zenodo. https://doi.org/10.5281/zenodo.20730359 — licensed CC-BY-4.0.
+      Fan, Yunjie. <i>Cross-Border Stablecoin Register</i> (v__VERSION__). Zenodo. https://doi.org/10.5281/zenodo.20730359 — licensed CC-BY-4.0.
     </div>
   </div>
 </footer>
@@ -432,7 +488,8 @@ footer .cite .ck{color:#7FA0C2;display:block;margin-bottom:5px;letter-spacing:.1
   ];
   var JURS=[
     {c:"US",f:"United States"},{c:"HK",f:"Hong Kong"},{c:"EU",f:"European Union"},
-    {c:"UK",f:"United Kingdom"},{c:"SG",f:"Singapore"},{c:"CN",f:"Mainland China"}
+    {c:"UK",f:"United Kingdom"},{c:"SG",f:"Singapore"},{c:"CN",f:"Mainland China"},
+    {c:"BR",f:"Brazil",planned:"v0.3"},{c:"TW",f:"Taiwan",planned:"v0.4"}
   ];
   var JFULL={}; JURS.forEach(function(j){JFULL[j.c]=j.f;});
   var DMAP={}; DIMS.forEach(function(d){DMAP[d.k]=d;});
@@ -454,8 +511,12 @@ footer .cite .ck{color:#7FA0C2;display:block;margin-bottom:5px;letter-spacing:.1
     // ---- matrix body ----
     var tb=document.querySelector("#matrix tbody"),html="";
     JURS.forEach(function(j){
-      html+="<tr>";
-      html+="<td class='jurcell'><button class='jurbtn' data-jur='"+j.c+"'><span class='code'>"+j.c+"</span><span class='full'>"+esc(j.f)+"</span></button></td>";
+      html+="<tr"+(j.planned?" class='jrow-planned'":"")+">";
+      if(j.planned){
+        html+="<td class='jurcell'><span class='jurbtn jlabel'><span class='code'>"+j.c+"</span><span class='full'>"+esc(j.f)+"</span><span class='jwin'>"+j.planned+" \u25b8</span></span></td>";
+      }else{
+        html+="<td class='jurcell'><button class='jurbtn' data-jur='"+j.c+"'><span class='code'>"+j.c+"</span><span class='full'>"+esc(j.f)+"</span></button></td>";
+      }
       DIMS.forEach(function(d){
         var rec=byCell[j.c+"__"+d.k];
         var spineCls=d.spine?" spinecol":"";
@@ -545,9 +606,11 @@ footer .cite .ck{color:#7FA0C2;display:block;margin-bottom:5px;letter-spacing:.1
       insp.innerHTML=h; insp.scrollIntoView({behavior:"smooth",block:"nearest"});
     }
 
-    // ---- search / filter ----
+    // ---- shared keyword matcher ----
     var q=document.getElementById("q"),mc=document.getElementById("matchcount");
     function hay(r){return [r.jurisdiction,r.dimension,r.authority,r.requirement_summary,r.instrument_label_local,(r.source&&r.source.primary),(r.source&&r.source.pinpoint),(r.tags||[]).join(" "),r.constraint_ref].join(" ").toLowerCase();}
+
+    // ---- matrix keyword dimming ----
     function applyFilter(){
       var term=(q.value||"").trim().toLowerCase();
       var dots=tb.querySelectorAll(".dot.v"),hits=0;
@@ -560,7 +623,94 @@ footer .cite .ck{color:#7FA0C2;display:block;margin-bottom:5px;letter-spacing:.1
       });
       mc.textContent=term?(hits+" record"+(hits===1?"":"s")+" match"):"";
     }
-    if(q)q.addEventListener("input",applyFilter);
+
+    // ---- filterable / sortable table view ----
+    var fJur=document.getElementById("f-jur"),fDim=document.getElementById("f-dim"),
+        fStatus=document.getElementById("f-status"),fConf=document.getElementById("f-conf"),
+        rtblHead=document.querySelector("#rtbl thead"),rtblBody=document.querySelector("#rtbl tbody"),
+        tblcount=document.getElementById("tblcount");
+    var sortKey="jurisdiction",sortDir=1;
+    var CONF_RANK={high:3,medium:2,low:1};
+    var COLS=[
+      {k:"jurisdiction",label:"Jur",sortable:true},
+      {k:"dimension",label:"Dimension",sortable:true},
+      {k:"constraint_ref",label:"C-ref",sortable:true},
+      {k:"requirement_summary",label:"Requirement",sortable:false},
+      {k:"pinpoint",label:"Source pinpoint",sortable:false},
+      {k:"status",label:"Status",sortable:true},
+      {k:"confidence",label:"Conf",sortable:true},
+      {k:"version_added",label:"Ver",sortable:true}
+    ];
+    // populate dropdowns
+    JURS.forEach(function(j){ if(records.some(function(r){return r.jurisdiction===j.c;})){ var o=document.createElement("option");o.value=j.c;o.textContent=j.c+" — "+j.f;fJur.appendChild(o);} });
+    DIMS.forEach(function(d){ var o=document.createElement("option");o.value=d.k;o.textContent=d.f;fDim.appendChild(o); });
+    Array.from(new Set(records.map(function(r){return r.status;}))).sort().forEach(function(s){ var o=document.createElement("option");o.value=s;o.textContent=s;fStatus.appendChild(o); });
+    ["high","medium","low"].forEach(function(c){ if(records.some(function(r){return r.confidence===c;})){ var o=document.createElement("option");o.value=c;o.textContent=c;fConf.appendChild(o);} });
+
+    function sortVal(r,k){
+      if(k==="dimension"){var i=DIMS.findIndex(function(d){return d.k===r.dimension;});return i<0?99:i;}
+      if(k==="confidence")return CONF_RANK[r.confidence]||0;
+      if(k==="constraint_ref")return r.constraint_ref||"~";
+      return (r[k]||"").toString().toLowerCase();
+    }
+    function filteredRows(){
+      var term=(q.value||"").trim().toLowerCase();
+      return records.filter(function(r){
+        if(fJur.value&&r.jurisdiction!==fJur.value)return false;
+        if(fDim.value&&r.dimension!==fDim.value)return false;
+        if(fStatus.value&&r.status!==fStatus.value)return false;
+        if(fConf.value&&r.confidence!==fConf.value)return false;
+        if(term&&hay(r).indexOf(term)<0)return false;
+        return true;
+      }).sort(function(a,b){var va=sortVal(a,sortKey),vb=sortVal(b,sortKey);return (va<vb?-1:va>vb?1:0)*sortDir;});
+    }
+    function renderTableHead(){
+      var h="<tr>";
+      COLS.forEach(function(c){
+        var arr=c.sortable?(sortKey===c.k?(sortDir>0?" ▲":" ▼"):" ↕"):"";
+        h+="<th data-col='"+c.k+"' "+(c.sortable?"role='button' tabindex='0'":"")+">"+c.label+(c.sortable?"<span class='sortarrow'>"+arr+"</span>":"")+"</th>";
+      });
+      rtblHead.innerHTML=h+"</tr>";
+    }
+    function renderTable(){
+      renderTableHead();
+      var rows=filteredRows(),h="";
+      rows.forEach(function(r){
+        var d=DMAP[r.dimension]||{f:r.dimension,spine:false};
+        var pin=(r.source&&r.source.pinpoint)||"—";
+        h+="<tr data-id='"+esc(r.id)+"'>";
+        h+="<td class='tj'>"+esc(r.jurisdiction)+"</td>";
+        h+="<td class='td-dim'>"+esc(d.f)+(d.spine?" <span class='spm'>★</span>":"")+"</td>";
+        h+="<td><span class='tcref'>"+esc(r.constraint_ref||"—")+"</span></td>";
+        h+="<td class='td-req'>"+esc(r.requirement_summary)+"</td>";
+        h+="<td class='td-pin'>"+esc(pin)+"</td>";
+        h+="<td>"+esc(r.status||"—")+"</td>";
+        h+="<td><span class='cf "+(r.confidence||"low")+"'>"+esc(r.confidence||"low")+"</span></td>";
+        h+="<td>v"+esc(r.version_added||"—")+"</td>";
+        h+="</tr>";
+      });
+      rtblBody.innerHTML=h;
+      tblcount.textContent=rows.length+" of "+records.length+" records";
+    }
+    rtblHead.addEventListener("click",function(e){var th=e.target.closest("th[data-col]");if(!th)return;var k=th.getAttribute("data-col");if(!COLS.find(function(c){return c.k===k&&c.sortable;}))return;if(sortKey===k)sortDir*=-1;else{sortKey=k;sortDir=1;}renderTable();});
+    rtblBody.addEventListener("click",function(e){var tr=e.target.closest("tr[data-id]");if(tr){selectRecord(tr.getAttribute("data-id"));}});
+    [fJur,fDim,fStatus,fConf].forEach(function(sel){sel.addEventListener("change",renderTable);});
+    document.getElementById("f-reset").addEventListener("click",function(){fJur.value="";fDim.value="";fStatus.value="";fConf.value="";renderTable();});
+
+    // keyword drives both views
+    if(q)q.addEventListener("input",function(){applyFilter();renderTable();});
+
+    // ---- view toggle ----
+    var vMatrix=document.getElementById("view-matrix"),vTable=document.getElementById("view-table");
+    document.getElementById("viewtoggle").addEventListener("click",function(e){
+      var b=e.target.closest("button[data-view]");if(!b)return;
+      Array.prototype.forEach.call(this.querySelectorAll("button"),function(x){x.classList.remove("on");});
+      b.classList.add("on");
+      var v=b.getAttribute("data-view");
+      if(v==="table"){vMatrix.classList.add("hidden");vTable.classList.remove("hidden");renderTable();}
+      else{vTable.classList.add("hidden");vMatrix.classList.remove("hidden");}
+    });
+    renderTable(); // prime table so it's ready on first toggle
 
     // default inspector content: the HK yield spine (project core), else first record
     var def=null; for(var i=0;i<records.length;i++){if(records[i].id==="hk-frs-permitted_activity_yield-001"){def=records[i];break;}}

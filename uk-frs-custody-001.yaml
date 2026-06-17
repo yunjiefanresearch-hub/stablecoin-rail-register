@@ -1,0 +1,35 @@
+id: uk-frs-custody-001
+jurisdiction: UK
+authority: FCA
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: UK qualifying stablecoin (UKQS)
+dimension: custody
+constraint_ref: C2
+requirement_summary: Any firm holding client crypto-assets for more than 24 hours, or with the ability
+  to override client authority, is a regulated custodian requiring a safeguarding licence. This 24-hour
+  custody rule has significant operational implications for wallet operators with UK user exposure.
+requirement_structured:
+  trigger: holding client crypto-assets > 24 hours, or ability to override client authority
+  consequence: regulated custodian; safeguarding licence required
+  impact: wallet operators with UK user exposure
+status: transitional
+effective_date: '2026-02-01'
+source:
+  primary: FSMA 2000 (Cryptoassets) Regulations 2026, SI 2026/102; FCA CP25/14
+  pinpoint: Custody — 24-hour rule; safeguarding licence for regulated custodians
+  url: ''
+secondary:
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.15 (United Kingdom — Distribution and Offering
+    Restrictions; custody rule)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
+  verification. This is the first record on the custody dimension; the 24-hour test is the operative custody
+  trigger.'
+confidence: medium
+last_reviewed: '2026-06-17'
+version_added: 0.3.0
+tags:
+- europe
+- focus
+- from_matrix_v0.9.3
+- v0.3.0_backfill
+- new_dimension

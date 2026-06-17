@@ -1,0 +1,35 @@
+id: sg-scs-reserve_backing-001
+jurisdiction: SG
+authority: MAS
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: single-currency stablecoin (SCS)
+dimension: reserve_backing
+constraint_ref: C2
+requirement_summary: SCS reserves must be 100% backed in cash, cash equivalents, or short-term sovereign
+  debt securities denominated in the pegged currency, valued at daily mark-to-market, segregated from
+  the issuer's own assets, and held with MAS-approved custodians. Reserves are subject to monthly independent
+  attestation and annual external audit, with audit reports publicly disclosed.
+requirement_structured:
+  backing: 100% cash / cash equivalents / short-term sovereign debt in pegged currency
+  valuation: daily mark-to-market
+  segregation: segregated; MAS-approved custodians
+  assurance: monthly attestation + annual external audit, publicly disclosed
+status: transitional
+effective_date: '2023-08-15'
+source:
+  primary: MAS Single-Currency Stablecoin Regulatory Framework (15 Aug 2023)
+  pinpoint: Reserve and backing requirements — 100% backing; daily MTM; monthly attestation; annual audit
+  url: ''
+secondary:
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.18 (Singapore — Reserve and Backing Requirements)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
+  verification. Note the pegged-currency-denomination requirement on reserve assets, which ties reserve
+  composition to the SGD/G10 peg scope.'
+confidence: medium
+last_reviewed: '2026-06-17'
+version_added: 0.3.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.3
+- v0.3.0_backfill

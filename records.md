@@ -2,11 +2,15 @@
 
 | id | juris | dimension | status | confidence | state |
 |---|---|---|---|---|---|
+| `cn-prc-aml_kyc-001` | CN | aml_kyc | in_force | high | ✅ verified |
+| `cn-prc-capital_requirements-001` | CN | capital_requirements | in_force | medium | ✅ verified |
 | `cn-prc-cross_border_data-001` | CN | cross_border_data | in_force | high | ✅ verified |
 | `cn-prc-distribution-001` | CN | distribution | in_force | high | ✅ verified |
+| `cn-prc-implementation_status-001` | CN | implementation_status | in_force | high | ✅ verified |
 | `cn-prc-issuer_pathway-001` | CN | issuer_pathway | in_force | high | ✅ verified |
 | `cn-prc-monetary_sovereignty-001` | CN | monetary_sovereignty | in_force | high | ✅ verified |
 | `cn-prc-regulatory_authority-001` | CN | regulatory_authority | in_force | high | ✅ verified |
+| `cn-prc-reserve_backing-001` | CN | reserve_backing | in_force | medium | ✅ verified |
 | `eu-emt-monetary_sovereignty-001` | EU | monetary_sovereignty | in_force | high | ✅ verified |
 | `eu-emt-permitted_activity_yield-001` | EU | permitted_activity_yield | in_force | high | ✅ verified |
 | `eu-emt-regulatory_authority-001` | EU | regulatory_authority | in_force | high | ✅ verified |
@@ -22,11 +26,28 @@
 | `hk-frs-redemption-001` | HK | redemption | in_force | high | ✅ verified |
 | `hk-frs-regulatory_authority-001` | HK | regulatory_authority | in_force | high | ✅ verified |
 | `hk-frs-reserve_backing-001` | HK | reserve_backing | in_force | high | ✅ verified |
+| `sg-scs-aml_kyc-001` | SG | aml_kyc | in_force | medium | ✅ verified |
+| `sg-scs-capital_requirements-001` | SG | capital_requirements | transitional | medium | ✅ verified |
+| `sg-scs-cross_border_data-001` | SG | cross_border_data | in_force | medium | ✅ verified |
+| `sg-scs-distribution-001` | SG | distribution | in_force | medium | ✅ verified |
+| `sg-scs-implementation_status-001` | SG | implementation_status | transitional | high | ✅ verified |
+| `sg-scs-issuer_pathway-001` | SG | issuer_pathway | transitional | medium | ✅ verified |
 | `sg-scs-permitted_activity_yield-001` | SG | permitted_activity_yield | in_force | high | ✅ verified |
+| `sg-scs-redemption-001` | SG | redemption | transitional | medium | ✅ verified |
 | `sg-scs-regulatory_authority-001` | SG | regulatory_authority | in_force | high | ✅ verified |
+| `sg-scs-reserve_backing-001` | SG | reserve_backing | transitional | medium | ✅ verified |
+| `sg-scs-securities_classification-001` | SG | securities_classification | in_force | medium | ✅ verified |
+| `uk-frs-aml_kyc-001` | UK | aml_kyc | transitional | medium | ✅ verified |
+| `uk-frs-capital_requirements-001` | UK | capital_requirements | proposed | low | ✅ verified |
+| `uk-frs-cross_border_data-001` | UK | cross_border_data | in_force | medium | ✅ verified |
+| `uk-frs-custody-001` | UK | custody | transitional | medium | ✅ verified |
+| `uk-frs-distribution-001` | UK | distribution | proposed | medium | ✅ verified |
+| `uk-frs-implementation_status-001` | UK | implementation_status | transitional | high | ✅ verified |
 | `uk-frs-issuer_pathway-001` | UK | issuer_pathway | in_force | medium | ✅ verified |
 | `uk-frs-permitted_activity_yield-001` | UK | permitted_activity_yield | consultation | low | ✅ verified |
+| `uk-frs-redemption-001` | UK | redemption | proposed | low | ✅ verified |
 | `uk-frs-regulatory_authority-001` | UK | regulatory_authority | in_force | high | ✅ verified |
+| `uk-frs-reserve_backing-001` | UK | reserve_backing | transitional | medium | ✅ verified |
 | `us-pss-bank_nonbank_routing-001` | US | bank_nonbank_routing | proposed | medium | ✅ verified |
 | `us-pss-capital_requirements-001` | US | capital_requirements | proposed | medium | ✅ verified |
 | `us-pss-permitted_activity_yield-001` | US | permitted_activity_yield | proposed | medium | ✅ verified |
