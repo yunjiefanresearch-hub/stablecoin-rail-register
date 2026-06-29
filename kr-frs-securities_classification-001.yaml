@@ -1,0 +1,27 @@
+id: kr-frs-securities_classification-001
+jurisdiction: KR
+authority: Financial Services Commission (FSC)
+instrument_type: fiat_referenced_stablecoin
+dimension: securities_classification
+constraint_ref: C4
+requirement_summary: Under the draft Digital Asset Basic Act, the securities characterization of won-referenced
+  stablecoins is not yet fixed; there is no operative stablecoin securities pathway today.
+requirement_structured:
+  status: draft DABA
+  securities: unsettled
+status: proposed
+effective_date: null
+source:
+  primary: Draft Digital Asset Basic Act
+  pinpoint: Securities characterization — pending the enacted DABA
+interpretation_note: Authored in v0.9.2 to fill the KR.C4 constraint cell for the substrate sweep.
+confidence: low
+claim_class: tier1_legal
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- kr
+- securities_classification
+- binding_pending_proposal
+binding_status: pending_proposal

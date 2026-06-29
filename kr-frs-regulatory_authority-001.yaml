@@ -1,0 +1,47 @@
+id: kr-frs-regulatory_authority-001
+jurisdiction: KR
+authority: FSC (would administer); BOK (consultative)
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: won-referenced stablecoin (draft Digital Asset Basic Act)
+dimension: regulatory_authority
+requirement_summary: 'Two layers, only one in force. In force: the Virtual Asset User Protection Act (VAUPA), a
+  user-protection and market-abuse regime, not an issuance-licensing framework. Pending: the Digital Asset Basic
+  Act, which would create an issuance regime but remained an un-enacted bill as of late June 2026. Under the leading
+  drafts the FSC would administer the issuance regime; the Bank of Korea (BOK) seeks a binding consultative role
+  on monetary-sovereignty and foreign-exchange-stability grounds.'
+requirement_structured:
+  in_force_layer: Virtual Asset User Protection Act (user-protection/market-abuse only)
+  pending_layer: Digital Asset Basic Act (issuance regime; not enacted)
+  administrator: FSC (under leading drafts)
+  central_bank_role: BOK seeks binding consultative role
+status: in_force
+effective_date: '2024-07-19'
+source:
+  primary: Virtual Asset User Protection Act (in force 19 Jul 2024); draft Digital Asset Basic Act
+  pinpoint: Regulators — FSC would administer issuance; BOK consultative; VAUPA in force, DABA pending
+  url: https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=261099
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §South Korea (Statutory Framework
+    / Regulators)
+- citation: Official primary text is Korean (law.go.kr); there is no official English translation (FSC English materials
+    are summaries).
+- citation: 'FSC commencement notice for the Virtual Asset User Protection Act (19 Jul 2024): https://www.fsc.go.kr/no010101/82682.'
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; the core point is confirmed
+  against the official primary text in the v0.5.1 pass (source.url added); some operational detail remains pending
+  and the tier is ''mixed''. Only the VAUPA user-protection layer is operative; the issuance regime is a pending
+  bill. Analytically paired with Taiwan as pre-regime.'
+confidence: high
+claim_class: tier1_legal
+evidence_tier: mixed
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- v0.5.1_verification
+- mixed_partial_verified
+- v0.7.0_claim_class
+- binding_in_force_enacted
+binding_status: in_force_enacted

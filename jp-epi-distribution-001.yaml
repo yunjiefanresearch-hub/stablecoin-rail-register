@@ -1,0 +1,52 @@
+id: jp-epi-distribution-001
+jurisdiction: JP
+authority: FSA
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: Electronic Payment Instrument (EPI)
+dimension: distribution
+requirement_summary: Foreign-issued stablecoins may be handled by a registered EPIESP if it sets aside reserves
+  in Japan equal to customers' holdings and the foreign issuer does not itself issue, redeem, or solicit to Japanese
+  users. Intermediation and distribution therefore run through the registered EPIESP channel rather than the foreign
+  issuer directly.
+requirement_structured:
+  inbound_channel: registered EPIESP with JP reserves equal to customer holdings; foreign issuer not soliciting
+    JP users
+  distribution_locus: registered EPIESP (not the foreign issuer)
+status: in_force
+effective_date: '2023-06-01'
+source:
+  primary: Payment Services Act (Electronic Payment Instruments regime)
+  pinpoint: Distribution — foreign tokens handled via a registered EPIESP holding JP reserves equal to customer
+    holdings; foreign issuer may not issue/redeem/solicit to JP users
+  url: https://laws.e-gov.go.jp/
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §Japan (Distribution and Offering
+    Restrictions)
+- citation: Payment Services Act (Act No. 59 of 2009) — official English at Japanese Law Translation (japaneselawtranslation.go.jp).
+operational_notes:
+- note: USDC was admitted through SBI VC Trade (a registered EPIESP) as the first inbound foreign-stablecoin instance
+    — the working example of this channel. Regulatory approval 4 March 2025; launch 26 March 2025.
+  as_of: '2025-03-26'
+  source:
+    primary: FSA approval of USDC admission via SBI VC Trade (EPIESP)
+    url: https://www.sbigroup.co.jp/english/news/pdf/2025/0304_a_en.pdf
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; VERIFIED against the
+  official primary text in the v0.5.1 verification pass (source.url is the official instrument). The load-bearing
+  claim is the EPIESP inbound rule (a proposition of law); the USDC/SBI VC Trade admission is recorded as an operational
+  illustration in operational_notes (Tier-2), so it is not projected as citable law.'
+confidence: high
+claim_class: tier1_legal
+evidence_tier: resolution_text
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- v0.5.1_verification
+- resolution_text_verified
+- v0.7.0_claim_class
+- v0.7.1_claim_purity
+- binding_in_force_enacted
+binding_status: in_force_enacted

@@ -5,6 +5,14 @@ record's primary instrument + pinpoint is transcribed from the matrix text,
 which is cited as secondary provenance. source.url is left empty and each
 record joins the same primary-source verification queue as the v0.2.0 records.
 """
+# Portability: force UTF-8 for console output so non-ASCII (CJK, accents, §—·) prints on any
+# locale (e.g. Windows GBK/cp1252). File I/O already passes encoding="utf-8" explicitly.
+import sys as _sys
+try:
+    _sys.stdout.reconfigure(encoding="utf-8")
+    _sys.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 import pathlib, yaml
 
 ROOT = pathlib.Path(__file__).resolve().parent

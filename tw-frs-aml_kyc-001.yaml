@@ -1,0 +1,59 @@
+id: tw-frs-aml_kyc-001
+jurisdiction: TW
+authority: FSC
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: virtual asset / draft stablecoin (Virtual Asset Service Act)
+dimension: aml_kyc
+requirement_summary: 'IN FORCE: AML registration under the amended Money Laundering Control Act and the VASP Registration
+  Regulations (since 30 November 2024), requiring virtual-asset service providers to register and comply with AML/CFT
+  obligations; the FATF travel rule applies. This is the only operative layer of the Taiwan regime.'
+requirement_structured:
+  in_force: AML registration (amended Money Laundering Control Act + VASP Registration Regulations, 30 Nov 2024)
+  travel_rule: applies
+  note: the only operative layer of the Taiwan regime
+status: in_force
+effective_date: '2024-11-30'
+source:
+  primary: Money Laundering Control Act (as amended) + VASP Registration Regulations (in force 30 Nov 2024)
+  pinpoint: 'Money Laundering Control Act (洗錢防制法) Art. 6 (amended 31 Jul 2024); VASP registration regime in force
+    30 Nov 2024 (non-registration: up to 2 yr + NT$5m individuals / NT$50m entities); VASPs classified into 5 types'
+  url: https://law.moj.gov.tw/
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §Taiwan (AML / KYC Framework)
+- citation: Official primary text is Chinese (law.moj.gov.tw); there is no official English translation (FSC English
+    materials are summaries).
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; VERIFIED against the
+  official primary text in the v0.5.1 verification pass (source.url is the official instrument). This is the anchor
+  in-force record for Taiwan: AML registration is the only operative obligation pending enactment of the Virtual
+  Asset Service Act.
+
+
+  [v0.9.5 verification] NATIVE-LANGUAGE VERIFICATION (Chinese): confirmed against the official FSC text — the Money
+  Laundering Control Act Art. 6 amendment and the VASP registration regime (in force 30 Nov 2024) are enacted and
+  in force, so this cell is confirmed at resolution_text.'
+confidence: high
+claim_class: tier1_legal
+evidence_tier: resolution_text
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- v0.5.1_verification
+- resolution_text_verified
+- v0.7.0_claim_class
+- v0.9.5_verification
+- binding_in_force_enacted
+binding_status: in_force_enacted
+verification:
+  verified_by: external review (web retrieval against official sources)
+  verified_on: '2026-06-27'
+  method: official_text
+  against:
+    instrument: VASP AML registration (in force 30 Nov 2024); Virtual Asset Service Act (bill)
+    url: https://law.moj.gov.tw/
+    pinpoint: 'Money Laundering Control Act (洗錢防制法) Art. 6 (amended 31 Jul 2024); VASP registration regime in force
+      30 Nov 2024 (non-registration: up to 2 yr + NT$5m individuals / NT$50m entities); VASPs classified into 5
+      types'

@@ -1,0 +1,27 @@
+id: tw-frs-disclosure_reporting-001
+jurisdiction: TW
+authority: Financial Supervisory Commission (FSC)
+instrument_type: fiat_referenced_stablecoin
+dimension: disclosure_reporting
+constraint_ref: C8
+requirement_summary: Disclosure and supervisory-coordination obligations for stablecoin issuers await the enacted
+  VAS Act; current obligations are AML-registration-based.
+requirement_structured:
+  status: pre-regime
+  current: AML registration
+status: proposed
+effective_date: null
+source:
+  primary: Draft Virtual Asset Service Act; AML registration regime
+  pinpoint: Disclosure/supervision — pending enactment
+interpretation_note: Authored in v0.9.2 to fill the TW.C8 constraint cell for the substrate sweep.
+confidence: low
+claim_class: tier1_legal
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- tw
+- disclosure_reporting
+- binding_pending_proposal
+binding_status: pending_proposal

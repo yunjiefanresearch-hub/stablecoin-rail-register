@@ -1,0 +1,34 @@
+id: uk-frs-monetary_sovereignty-001
+jurisdiction: UK
+authority: FCA; Bank of England (systemic)
+instrument_type: fiat_referenced_stablecoin
+dimension: monetary_sovereignty
+constraint_ref: C7
+requirement_summary: There is no aggregate usage cap on private tokens; the inbound treatment of foreign tokens
+  is in transition pending the operation of the systemic regime, so the structural monetary-sovereignty pole is
+  not yet stable.
+requirement_structured:
+  usage_cap: null
+  inbound: in transition (systemic regime not yet operative)
+status: transitional
+effective_date: null
+source:
+  primary: FSMA 2026; Bank of England systemic stablecoin regime
+  pinpoint: Monetary-sovereignty treatment of foreign tokens — pending systemic-regime operation
+interpretation_note: 'Authored in v0.9.2 to fill the UK.C7 constraint cell for the substrate sweep.
+
+
+  [v0.9.5 verification] Monetary-sovereignty treatment under the FSMA 2026 perimeter; made-not-commenced (the time
+  engine owns the 2027-10-25 flip).'
+confidence: medium
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- uk
+- monetary_sovereignty
+- v0.9.5_verification
+- binding_made_not_commenced
+binding_status: made_not_commenced

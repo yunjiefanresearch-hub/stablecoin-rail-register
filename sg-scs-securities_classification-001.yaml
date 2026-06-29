@@ -6,28 +6,33 @@ instrument_label_local: single-currency stablecoin (SCS)
 dimension: securities_classification
 constraint_ref: C4
 requirement_summary: 'Token classification follows MAS''s substance-over-form test: a token with capital-markets-product
-  characteristics is regulated under the Securities and Futures Act (SFA), not the Payment Services Act,
-  and falls outside the SCS framework entirely. Tokens marketed as offering yield or as investments would
-  likely be classified as securities under the SFA. The destination-product classification analysis governs
-  whether a routing architecture that converts SCS holdings into SFA-regulated capital-markets-product
-  shares is permissible.'
+  characteristics is regulated under the Securities and Futures Act (SFA), not the Payment Services Act, and falls
+  outside the SCS framework entirely. Tokens marketed as offering yield or as investments would likely be classified
+  as securities under the SFA. The destination-product classification analysis governs whether a routing architecture
+  that converts SCS holdings into SFA-regulated capital-markets-product shares is permissible.'
 requirement_structured:
   test: MAS substance-over-form
   securities_regulator_statute: Securities and Futures Act (SFA)
   yield_marketed_tokens: likely securities under SFA, outside SCS
   routing_question: turns on SFA classification of destination product
-status: in_force
+status: transitional
 source:
   primary: Securities and Futures Act (SFA); MAS substance-over-form classification
-  pinpoint: SFA classification — capital-markets-product characteristics regulated under SFA, not PSA
-  url: ''
+  pinpoint: 'SCS framework: ''MAS-regulated stablecoin'' label vs DPT classification'
+  url: https://www.mas.gov.sg/news/media-releases/2023/mas-finalises-stablecoin-regulatory-framework
 secondary:
-- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), pp.18-19 (Singapore — Issuer Pathways; Yield
-    and Interest Treatment)
-interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
-  verification. This is the SG instance of the securities-classification spine (C4): the SFA boundary
-  is what removes yield-bearing or investment-marketed tokens from SCS scope.'
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), pp.18-19 (Singapore — Issuer Pathways; Yield and Interest
+    Treatment)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source verification.
+  This is the SG instance of the securities-classification spine (C4): the SFA boundary is what removes yield-bearing
+  or investment-marketed tokens from SCS scope.
+
+
+  [v0.9.5 verification] HELD below resolution_text and status corrected to transitional: an SCS-FRAMEWORK requirement
+  (finalized MAS policy, 15 Aug 2023) whose implementing legislation is still being drafted (expected mid-2026)
+  — finalized policy, not enacted statute.'
 confidence: medium
+claim_class: tier1_legal
 last_reviewed: '2026-06-17'
 version_added: 0.3.0
 tags:
@@ -36,3 +41,18 @@ tags:
 - from_matrix_v0.9.3
 - v0.3.0_backfill
 - new_dimension
+- v0.7.0_claim_class
+- v0.9.5_verification
+- binding_finalized_policy_pending
+- verification_reviewed
+binding_status: finalized_policy_pending
+evidence_tier: firm_summary
+verification:
+  verified_by: external review (web retrieval against official sources)
+  verified_on: '2026-06-27'
+  method: practitioner_corroboration
+  against:
+    instrument: Payment Services Act 2019 (enacted) + MAS Single-Currency Stablecoin Framework (finalized policy,
+      pending legislation)
+    url: https://www.mas.gov.sg/news/media-releases/2023/mas-finalises-stablecoin-regulatory-framework
+    pinpoint: 'SCS framework: ''MAS-regulated stablecoin'' label vs DPT classification'

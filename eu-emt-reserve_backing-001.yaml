@@ -1,23 +1,49 @@
 id: eu-emt-reserve_backing-001
 jurisdiction: EU
-authority: "EBA, NCAs"
+authority: EBA, NCAs
 instrument_type: e_money_token
-instrument_label_local: "e-money token (EMT) / asset-referenced token (ART)"
+instrument_label_local: e-money token (EMT) / asset-referenced token (ART)
 dimension: reserve_backing
 constraint_ref: C2
-requirement_summary: "MiCA requires EMT reserves to hold at least 60% in bank deposits; ART reserves at least 30% in bank deposits. (Distinct from the US/HK same-currency short-dated-sovereign model.)"
+requirement_summary: MiCA requires EMT reserves to hold at least 60% in bank deposits; ART reserves at least 30%
+  in bank deposits. (Distinct from the US/HK same-currency short-dated-sovereign model.)
 requirement_structured:
-  emt_bank_deposit_floor: ">=60%"
-  art_bank_deposit_floor: ">=30%"
+  emt_bank_deposit_floor: '>=60%'
+  art_bank_deposit_floor: '>=30%'
 status: in_force
 effective_date: null
 source:
-  primary: "Regulation (EU) 2023/1114 (MiCA), reserve composition provisions"
-  pinpoint: "EMT >=60% bank deposits; ART >=30% bank deposits"
+  primary: Regulation (EU) 2023/1114 (MiCA), reserve composition provisions
+  pinpoint: reserve composition set in MiCA + Level-2 RTS; deposit-% pinpoint pending RTS line-read
+  url: https://eur-lex.europa.eu/eli/reg/2023/1114/oj/eng
 secondary:
-  - citation: "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.5 (Comparison Table — Reserve backing)"
-interpretation_note: "Provenance: transcribed from author's Compliance Matrix v0.9.3. Reserve half of the split dimension."
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.5 (Comparison Table — Reserve backing)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3. Reserve half of the split
+  dimension.
+
+
+  [v0.9.5 verification] HELD at firm_summary: MiCA is in force, but the deposit-percentage figures (EMT >=60% /
+  ART >=30% bank deposits) are set in the Level-2 RTS and were NOT line-verified against the article text in this
+  pass.'
 confidence: medium
-last_reviewed: "2026-06-17"
+claim_class: tier1_legal
+last_reviewed: '2026-06-17'
 version_added: 0.2.0
-tags: [eu, focus, from_matrix_v0.9.3, dimension_split]
+tags:
+- eu
+- focus
+- from_matrix_v0.9.3
+- dimension_split
+- v0.9.5_verification
+- binding_in_force_enacted
+- verification_reviewed
+binding_status: in_force_enacted
+evidence_tier: firm_summary
+verification:
+  verified_by: external review (web retrieval against official sources)
+  verified_on: '2026-06-27'
+  method: practitioner_corroboration
+  against:
+    instrument: MiCA — Regulation (EU) 2023/1114
+    url: https://eur-lex.europa.eu/eli/reg/2023/1114/oj/eng
+    pinpoint: reserve composition set in MiCA + Level-2 RTS; deposit-% pinpoint pending RTS line-read

@@ -1,0 +1,28 @@
+id: eu-emt-disclosure_reporting-001
+jurisdiction: EU
+authority: EBA/ESMA; national competent authorities
+instrument_type: e_money_token
+dimension: disclosure_reporting
+constraint_ref: C8
+requirement_summary: Issuers publish a crypto-asset white paper and are subject to ongoing disclosure; issuers of
+  significant EMTs report to and are supervised by the EBA, with ESMA coordination.
+requirement_structured:
+  disclosure: white paper + ongoing
+  significant_emt_supervisor: EBA
+status: in_force
+effective_date: null
+source:
+  primary: MiCA, Regulation (EU) 2023/1114
+  pinpoint: White-paper and ongoing disclosure; significant-EMT supervision and reporting
+interpretation_note: Authored in v0.9.2 to fill the EU.C8 constraint cell for the substrate sweep.
+confidence: high
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- eu
+- disclosure_reporting
+- binding_in_force_enacted
+binding_status: in_force_enacted

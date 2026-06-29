@@ -1,0 +1,28 @@
+id: jp-epi-disclosure_reporting-001
+jurisdiction: JP
+authority: Financial Services Agency (FSA)
+instrument_type: e_money_token
+dimension: disclosure_reporting
+constraint_ref: C8
+requirement_summary: EPI service providers register with the FSA and are subject to disclosure and reporting obligations,
+  with supervisory coordination available.
+requirement_structured:
+  registration: FSA (EPIESP)
+  disclosure: true
+status: in_force
+effective_date: null
+source:
+  primary: Payment Services Act (Electronic Payment Instruments regime)
+  pinpoint: EPIESP registration; disclosure and supervisory reporting
+interpretation_note: Authored in v0.9.2 to fill the JP.C8 constraint cell for the substrate sweep.
+confidence: medium
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- jp
+- disclosure_reporting
+- binding_in_force_enacted
+binding_status: in_force_enacted

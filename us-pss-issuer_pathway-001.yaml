@@ -1,0 +1,50 @@
+id: us-pss-issuer_pathway-001
+jurisdiction: US
+authority: OCC/FDIC; Federal Reserve; Treasury (foreign comparability)
+instrument_type: payment_stablecoin
+dimension: issuer_pathway
+constraint_ref: C1
+requirement_summary: 'Permitted payment stablecoin issuers are a defined set: subsidiaries of insured depository
+  institutions, federally qualified non-bank payment stablecoin issuers approved by the OCC, and state-qualified
+  issuers operating under an OCC-certified comparable state regime. An authorizable private token exists.'
+requirement_structured:
+  permitted_issuers:
+  - IDI subsidiary
+  - OCC-approved federal nonbank PPSI
+  - state-qualified issuer (comparable state regime)
+  exportable_token: true
+status: in_force
+effective_date: null
+source:
+  primary: Guiding and Establishing National Innovation for U.S. Stablecoins Act (GENIUS Act)
+  pinpoint: 'GENIUS Act Sec. 3-4 (permitted payment stablecoin issuers: IDI subsidiaries; OCC-qualified non-banks;
+    certified state regimes)'
+  url: https://www.congress.gov/bill/119th-congress/senate-bill/1582/text
+interpretation_note: 'Authored in v0.9.2 to fill the US.C1 constraint cell for the substrate sweep.
+
+
+  [v0.9.5 verification] CAVEAT: CLARITY Act Sec. 404 covered-party definition is a House-passed bill (H.R.3633),
+  NOT law; excluded from the citable proposition. Confirmed: GENIUS issuer eligibility (Sec. 3-4) is enacted. The
+  cell''s CLARITY Sec. 404 reference is a pending House bill, flagged out of the citable proposition.'
+confidence: high
+claim_class: tier1_legal
+evidence_tier: resolution_text
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- us
+- issuer_pathway
+- v0.9.5_verification
+- binding_in_force_enacted
+- resolution_text_verified
+binding_status: in_force_enacted
+verification:
+  verified_by: external review (web retrieval against official sources)
+  verified_on: '2026-06-27'
+  method: official_text
+  against:
+    instrument: GENIUS Act (Pub. L., signed 18 Jul 2025); OCC/FDIC NPRMs + CLARITY Act (H.R.3633) pending
+    url: https://www.congress.gov/bill/119th-congress/senate-bill/1582/text
+    pinpoint: 'GENIUS Act Sec. 3-4 (permitted payment stablecoin issuers: IDI subsidiaries; OCC-qualified non-banks;
+      certified state regimes)'

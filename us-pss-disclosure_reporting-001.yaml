@@ -1,0 +1,32 @@
+id: us-pss-disclosure_reporting-001
+jurisdiction: US
+authority: OCC/FDIC; Federal Reserve; Treasury (foreign comparability)
+instrument_type: payment_stablecoin
+dimension: disclosure_reporting
+constraint_ref: C8
+requirement_summary: Issuers must publish monthly reserve composition certified by an independent accountant and
+  are subject to federal and state supervisory reporting; supervisory coordination is available.
+requirement_structured:
+  reserve_disclosure: monthly, certified
+  supervision: federal + state
+status: in_force
+effective_date: null
+source:
+  primary: GENIUS Act
+  pinpoint: Monthly reserve certification and disclosure; supervisory reporting
+interpretation_note: 'Authored in v0.9.2 to fill the US.C8 constraint cell for the substrate sweep.
+
+
+  [v0.9.5 verification] GENIUS disclosure/reporting framework; binding status recorded; not separately line-verified.'
+confidence: high
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- us
+- disclosure_reporting
+- v0.9.5_verification
+- binding_in_force_enacted
+binding_status: in_force_enacted

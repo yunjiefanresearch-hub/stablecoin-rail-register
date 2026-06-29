@@ -1,0 +1,33 @@
+id: us-pss-cross_border_data-001
+jurisdiction: US
+authority: OCC/FDIC; Federal Reserve; Treasury (foreign comparability)
+instrument_type: payment_stablecoin
+dimension: cross_border_data
+constraint_ref: C6
+requirement_summary: Issuers are subject to the Bank Secrecy Act and OFAC sanctions administration; there is no
+  data-localization rule that bars supervisory information-sharing with foreign regulators.
+requirement_structured:
+  aml_sanctions: BSA + OFAC
+  data_localization: false
+  blocks_supervisory_sharing: false
+status: in_force
+effective_date: null
+source:
+  primary: GENIUS Act; Bank Secrecy Act; OFAC regulations
+  pinpoint: AML/sanctions perimeter; cross-border information-sharing
+interpretation_note: 'Authored in v0.9.2 to fill the US.C6 constraint cell for the substrate sweep.
+
+
+  [v0.9.5 verification] US data/AML framework in force; binding status recorded; not separately line-verified.'
+confidence: medium
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- us
+- cross_border_data
+- v0.9.5_verification
+- binding_in_force_enacted
+binding_status: in_force_enacted

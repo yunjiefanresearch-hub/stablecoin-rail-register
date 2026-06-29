@@ -1,20 +1,44 @@
 id: eu-emt-permitted_activity_yield-001
 jurisdiction: EU
-authority: "EBA, ESMA, NCAs"
+authority: EBA, ESMA, NCAs
 instrument_type: e_money_token
-instrument_label_local: "e-money token (EMT)"
+instrument_label_local: e-money token (EMT)
 dimension: permitted_activity_yield
 constraint_ref: C3
-requirement_summary: "MiCA Article 50 imposes a yield ban on EMT holders: holders may not receive interest. The prohibition attaches to the holding of the token, paralleling the US GENIUS §4(a)(11) structure but expressed as a flat ban rather than a 'solely'-qualified one."
+requirement_summary: 'MiCA Article 50 imposes a yield ban on EMT holders: holders may not receive interest. The
+  prohibition attaches to the holding of the token, paralleling the US GENIUS §4(a)(11) structure but expressed
+  as a flat ban rather than a ''solely''-qualified one.'
 status: in_force
 effective_date: null
 source:
-  primary: "Regulation (EU) 2023/1114 (MiCA), Article 50"
-  pinpoint: "Art. 50 — no interest to EMT holders"
+  primary: Regulation (EU) 2023/1114 (MiCA), Article 50
+  pinpoint: Art. 50 (no interest paid to EMT holders)
+  url: https://eur-lex.europa.eu/eli/reg/2023/1114/oj/eng
 secondary:
-  - citation: "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.5 / p.2 (Executive Summary) (EU — Yield)"
-interpretation_note: "Provenance: transcribed from author's Compliance Matrix v0.9.3."
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.5 / p.2 (Executive Summary) (EU — Yield)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3.
+
+
+  [v0.9.5 verification] Confirmed against the official MiCA text: Art. 50 prohibits interest to EMT holders.'
 confidence: high
-last_reviewed: "2026-06-17"
+claim_class: tier1_legal
+last_reviewed: '2026-06-27'
 version_added: 0.2.0
-tags: [eu, focus, spine, from_matrix_v0.9.3]
+tags:
+- eu
+- focus
+- spine
+- from_matrix_v0.9.3
+- v0.9.5_verification
+- binding_in_force_enacted
+- resolution_text_verified
+binding_status: in_force_enacted
+evidence_tier: resolution_text
+verification:
+  verified_by: external review (web retrieval against official sources)
+  verified_on: '2026-06-27'
+  method: official_text
+  against:
+    instrument: MiCA — Regulation (EU) 2023/1114
+    url: https://eur-lex.europa.eu/eli/reg/2023/1114/oj/eng
+    pinpoint: Art. 50 (no interest paid to EMT holders)

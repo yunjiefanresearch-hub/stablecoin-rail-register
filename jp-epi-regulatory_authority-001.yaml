@@ -1,0 +1,46 @@
+id: jp-epi-regulatory_authority-001
+jurisdiction: JP
+authority: FSA (Financial Services Agency)
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: Electronic Payment Instrument (EPI)
+dimension: regulatory_authority
+requirement_summary: Fiat-referenced, par-redeemable stablecoins are Electronic Payment Instruments under the Payment
+  Services Act. The 2022 amendment took effect 1 June 2023 and created the category; Act No. 66 of 2025 (in force
+  June 2025, with implementing cabinet orders to follow) relaxed the trust-type backing rule. The FSA is the single
+  supervisor of issuers and intermediaries; Local Finance Bureaus administer funds-transfer and intermediary registrations
+  under FSA delegation.
+requirement_structured:
+  category: Electronic Payment Instrument under the Payment Services Act
+  created: 2022 amendment, in force 1 Jun 2023
+  amended_by: Act No. 66 of 2025 (in force Jun 2025)
+  supervisor: FSA (single)
+  delegated_admin: Local Finance Bureaus
+status: in_force
+effective_date: '2023-06-01'
+source:
+  primary: Payment Services Act (Electronic Payment Instruments regime, in force 1 Jun 2023) as amended by Act No.
+    66 of 2025
+  pinpoint: Regulators — FSA single supervisor; Local Finance Bureaus by delegation
+  url: https://laws.e-gov.go.jp/
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §Japan (Statutory Framework
+    / Regulators)
+- citation: Payment Services Act (Act No. 59 of 2009) — official English at Japanese Law Translation (japaneselawtranslation.go.jp).
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; VERIFIED against the
+  official primary text in the v0.5.1 verification pass (source.url is the official instrument). Japan is a mature,
+  live regime: the FSA single-supervisor model and the EPI category are the structural anchors.'
+confidence: high
+claim_class: tier1_legal
+evidence_tier: resolution_text
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- v0.5.1_verification
+- resolution_text_verified
+- v0.7.0_claim_class
+- binding_in_force_enacted
+binding_status: in_force_enacted

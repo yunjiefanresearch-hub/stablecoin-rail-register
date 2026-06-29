@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yunjiefanresearch-hub.github.io/stablecoin-rail-register/corridor.schema.json",
+  "title": "CBSR Corridor (directed edge)",
+  "description": "A directed origin->destination corridor edge. Two validated shapes share a common core: 'corridor/v3-directed-edge' is the flat Atlas-derived edge (origin/destination/feasibility_class/compatibility_pair/interaction_sets); 'corridor/v2-rich' is the deeply-verified leg-by-leg analysis (legs/boundary_analysis/watch_list) used for the hk-br anchor. The `schema` discriminator selects the required-field set. The cross-layer relationship to the §5.14 compatibility matrix is enforced separately by build.py (category must match the linked pair; differing interaction_sets require a `divergence` field).",
+  "type": "object",
+  "required": ["corridor_id", "name", "schema", "version_added"],
+  "properties": {
+    "corridor_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]+$"},
+    "name": {"type": "string", "minLength": 4},
+    "schema": {"type": "string", "enum": ["corridor/v3-directed-edge", "corridor/v2-rich"]},
+    "origin": {"type": "string", "enum": ["HK", "TW", "BR", "US", "EU", "UK", "SG", "CN", "CH", "AE", "JP", "KR"]},
+    "destination": {"type": "string", "enum": ["HK", "TW", "BR", "US", "EU", "UK", "SG", "CN", "CH", "AE", "JP", "KR"]},
+    "direction": {"type": "string", "enum": ["directed"]},
+    "currencies": {"type": "string"},
+    "feasibility_class": {"type": "string"},
+    "compatibility_category": {"type": "string", "enum": ["I", "I/II", "II", "III"]},
+    "compatibility_pair": {"type": "string", "pattern": "^[A-Z]{2}-[A-Z]{2}$"},
+    "divergence": {
+      "type": "object",
+      "required": ["kind", "against_pair", "reason"],
+      "properties": {
+        "kind": {"type": "string"},
+        "against_pair": {"type": "string", "pattern": "^[A-Z]{2}-[A-Z]{2}$"},
+        "pair_interaction_sets": {"type": "array", "items": {"type": "string", "enum": ["A", "B", "C", "D", "E", "F"]}},
+        "edge_interaction_sets": {"type": "array", "items": {"type": "string", "enum": ["A", "B", "C", "D", "E", "F"]}},
+        "reason": {"type": "string", "minLength": 10}
+      }
+    },
+    "archetypes": {"type": "array", "items": {"type": "string", "enum": ["RC", "SC", "TC", "DC"]}},
+    "interaction_sets": {"type": "array", "items": {"type": "string", "enum": ["A", "B", "C", "D", "E", "F"]}},
+    "infrastructure_overlap": {"type": "string"},
+    "inbound_mechanism": {"type": "object"},
+    "origin_override": {"type": ["object", "null"]},
+    "note": {"type": "string"},
+    "source": {"type": "object"},
+    "valid_as_of": {"type": "string"},
+    "evidence_tier": {"type": "string", "enum": ["resolution_text", "firm_summary", "mixed"]},
+    "version_added": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "tags": {"type": "array", "items": {"type": "string"}},
+    "legs": {"type": "array", "items": {"type": "string"}},
+    "flow": {"type": "string"},
+    "boundary_analysis": {"type": "array"},
+    "key_constraint": {"type": "string"},
+    "us_doctrinal_link": {"type": "string"},
+    "watch_list": {"type": "array"},
+    "confidence": {"type": "string"},
+    "last_reviewed": {"type": "string"},
+    "phase_in_note": {"type": "string"},
+    "version_corrected": {"type": "string"},
+    "reviewed_against": {"type": "string"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"schema": {"const": "corridor/v3-directed-edge"}}},
+      "then": {"required": ["origin", "destination", "direction", "feasibility_class",
+                            "compatibility_category", "compatibility_pair", "interaction_sets",
+                            "source", "evidence_tier"]}
+    },
+    {
+      "if": {"properties": {"schema": {"const": "corridor/v2-rich"}}},
+      "then": {"required": ["origin", "destination", "legs", "boundary_analysis",
+                            "feasibility_class", "compatibility_category", "compatibility_pair",
+                            "confidence"]}
+    }
+  ]
+}

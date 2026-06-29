@@ -1,4 +1,4 @@
-Stablecoin Rail Register — DATA LICENSE
+Cross-Border Stablecoin Register (CBSR) — DATA LICENSE
 =======================================
 
 The DATA in this repository — all `*.yaml` records, the corridor file(s), the
@@ -26,7 +26,7 @@ HOW TO ATTRIBUTE
 -----------------------------------------------------------------------------
 Please cite the DOI of the version you used (see CITATION.cff). A suggested form:
 
-  Fan, Yunjie. "Stablecoin Rail Register" (version vX.Y.Z). DOI: 10.5281/zenodo.XXXXXXX.
+  Fan, Yunjie. "Cross-Border Stablecoin Register (CBSR)" (version vX.Y.Z). DOI: 10.5281/zenodo.XXXXXXX.
   Licensed under CC BY 4.0.
 
 -----------------------------------------------------------------------------

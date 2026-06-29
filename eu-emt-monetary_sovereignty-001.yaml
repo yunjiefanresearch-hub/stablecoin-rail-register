@@ -1,26 +1,61 @@
 id: eu-emt-monetary_sovereignty-001
 jurisdiction: EU
-authority: "EBA, ESMA, NCAs"
+authority: EBA, ESMA, NCAs
 instrument_type: e_money_token
-instrument_label_local: "non-EU-currency EMT"
+instrument_label_local: non-EU-currency EMT
 dimension: monetary_sovereignty
 constraint_ref: C7
-requirement_summary: "MiCA Article 23 caps the usage of non-EU-currency EMTs at EUR 200 million per day or 1 million transactions per day, measured on a quarterly-average basis. The cap applies only to use as a means of exchange within a single currency area, not to store-of-value use or to trading on crypto-asset venues. A separate reporting obligation triggers at EUR 100 million in issuance value globally. This is the canonical quantitative monetary-sovereignty cap and the clearest instance of Constraint 7."
+requirement_summary: For a non-EU-currency EMT, MiCA caps usage as a means of exchange at EUR 200 million per day
+  or 1 million transactions per day (the Article 23 thresholds, applied to significant EMTs via Article 58(3)),
+  measured on a quarterly-average basis. The cap applies only to use as a means of exchange within a single currency
+  area, not to store-of-value use or to trading on crypto-asset venues. A separate reporting obligation triggers
+  at EUR 100 million in issuance value globally. This is the canonical quantitative monetary-sovereignty cap and
+  the clearest instance of Constraint 7.
 requirement_structured:
-  cap_type: "quantitative"
-  thresholds: ["EUR 200,000,000 / day", "1,000,000 transactions / day"]
-  measurement: "quarterly average"
-  scope: "means of exchange within a single currency area only"
-  reporting_trigger: "EUR 100,000,000 global issuance value"
+  cap_type: quantitative
+  thresholds:
+  - EUR 200,000,000 / day
+  - 1,000,000 transactions / day
+  measurement: quarterly average
+  scope: means of exchange within a single currency area only
+  reporting_trigger: EUR 100,000,000 global issuance value
 status: in_force
 effective_date: null
 source:
-  primary: "Regulation (EU) 2023/1114 (MiCA), Article 23"
-  pinpoint: "Art. 23 — non-EU-currency EMT usage caps; means-of-exchange scope"
+  primary: Regulation (EU) 2023/1114 (MiCA), Art. 58(3) (applying the Art. 23 means-of-exchange thresholds to non-EU-currency
+    EMTs)
+  pinpoint: Art. 58(3) (applying Art. 23 mutatis mutandis to non-EU-currency EMTs)
+  url: https://eur-lex.europa.eu/eli/reg/2023/1114/oj/eng
 secondary:
-  - citation: "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.5 (Comparison Table — Non-domestic currency caps)"
-interpretation_note: "Provenance: transcribed from author's Compliance Matrix v0.9.3. The exemplar quantitative cap for the monetary_sovereignty dimension; contrast HK (qualitative, professional-investor restriction) and PRC (total prohibition)."
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.5 (Comparison Table — Non-domestic currency caps)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3. The exemplar quantitative
+  cap for the monetary_sovereignty dimension; contrast HK (qualitative, professional-investor restriction) and PRC
+  (total prohibition).
+
+
+  [v0.9.5 verification] LABEL RECONCILED: the operative pinpoint, the requirement summary, and source.primary now
+  all read Art. 58(3) (which applies the Art. 23 thresholds mutatis mutandis to non-EU-currency EMTs); the summary
+  and primary previously read bare ''Article 23''. SIGNALS and the corridor records already cite Art. 58(3), so
+  this reconciles the cell across all three fields.'
 confidence: high
-last_reviewed: "2026-06-17"
+claim_class: tier1_legal
+last_reviewed: '2026-06-27'
 version_added: 0.2.0
-tags: [eu, focus, new_dimension, from_matrix_v0.9.3]
+tags:
+- eu
+- focus
+- new_dimension
+- from_matrix_v0.9.3
+- v0.9.5_verification
+- binding_in_force_enacted
+- resolution_text_verified
+binding_status: in_force_enacted
+evidence_tier: resolution_text
+verification:
+  verified_by: external review (web retrieval against official sources)
+  verified_on: '2026-06-27'
+  method: official_text
+  against:
+    instrument: MiCA — Regulation (EU) 2023/1114
+    url: https://eur-lex.europa.eu/eli/reg/2023/1114/oj/eng
+    pinpoint: Art. 58(3) (applying Art. 23 mutatis mutandis to non-EU-currency EMTs)

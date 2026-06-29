@@ -1,20 +1,48 @@
 id: us-pss-reserve_backing-001
 jurisdiction: US
-authority: "OCC, FDIC"
+authority: OCC, FDIC
 instrument_type: payment_stablecoin
-instrument_label_local: "payment stablecoin"
+instrument_label_local: payment stablecoin
 dimension: reserve_backing
 constraint_ref: C2
-requirement_summary: "1:1 backing of outstanding payment stablecoins at fair value. Permissible reserve assets (proposed 12 CFR §15.11(b)): US currency; demand deposits at IDIs; short-term Treasury bills (<=93 days); certain reverse repos (incl. intraday); registered government MMFs (underlying Treasuries <=93 days); and tokenised forms thereof. Stablecoins and other crypto-assets are excluded. Reserves must be segregated, identifiable, held directly by the issuer or custodied at an eligible institution, and cannot be pledged, rehypothecated, or reused (narrow margin/custodial exceptions). PPSIs with issuance >= $25 billion must hold 0.5% of reserves (capped at $500m) in insured deposits/shares."
-status: proposed
+requirement_summary: 1:1 backing of outstanding payment stablecoins at fair value is required by the enacted GENIUS
+  Act (Sec. 4(a)(1)). The detailed list of PERMISSIBLE reserve assets is set by the OCC NPRM (proposed 12 CFR Sec.
+  15.11(b)) and is NOT yet final — that composition is a pending overlay, not part of the in-force statutory proposition.
+status: in_force
 effective_date: null
 source:
-  primary: "GENIUS Act reserve provisions; proposed 12 CFR §15.11(b) (permissible reserve assets)"
-  pinpoint: "12 CFR §15.11(b); 1:1 fair-value backing; >=$25bn -> 0.5%/$500m insured"
+  primary: GENIUS Act Sec. 4(a)(1) (1:1 fair-value reserve backing)
+  pinpoint: GENIUS Act Sec. 4(a)(1) (1:1 fair-value backing of outstanding payment stablecoins)
+  url: https://www.congress.gov/bill/119th-congress/senate-bill/1582/text
 secondary:
-  - citation: "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.8 (US — Reserve and Backing Requirements)"
-interpretation_note: "Provenance: transcribed from author's Compliance Matrix v0.9.3. Reserve half of the split reserve_capital dimension."
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.8 (US — Reserve and Backing Requirements)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3. Reserve half of the split
+  reserve_capital dimension.
+
+
+  [v0.9.5 verification] CAVEAT: Permissible-asset composition (proposed 12 CFR Sec. 15.11(b)) is an OCC NPRM (pending),
+  not final law. SPLIT per verification: the citable proposition is the enacted 1:1 backing (Sec. 4(a)(1)); the
+  12 CFR Sec. 15.11(b) permissible-asset detail is an OCC NPRM (proposed), moved out of the citation into a flagged
+  pending overlay. Status corrected proposed->in_force for the 1:1.'
 confidence: medium
-last_reviewed: "2026-06-17"
+claim_class: tier1_legal
+last_reviewed: '2026-06-27'
 version_added: 0.2.0
-tags: [us, anchor, from_matrix_v0.9.3, dimension_split]
+tags:
+- us
+- anchor
+- from_matrix_v0.9.3
+- dimension_split
+- v0.9.5_verification
+- binding_in_force_enacted
+- resolution_text_verified
+binding_status: in_force_enacted
+evidence_tier: resolution_text
+verification:
+  verified_by: external review (web retrieval against official sources)
+  verified_on: '2026-06-27'
+  method: official_text
+  against:
+    instrument: GENIUS Act (Pub. L., signed 18 Jul 2025); OCC/FDIC NPRMs + CLARITY Act (H.R.3633) pending
+    url: https://www.congress.gov/bill/119th-congress/senate-bill/1582/text
+    pinpoint: GENIUS Act Sec. 4(a)(1) (1:1 fair-value backing of outstanding payment stablecoins)

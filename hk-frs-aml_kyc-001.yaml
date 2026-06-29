@@ -2,18 +2,34 @@ id: hk-frs-aml_kyc-001
 jurisdiction: HK
 authority: HKMA
 instrument_type: fiat_referenced_stablecoin
-instrument_label_local: "specified stablecoin"
+instrument_label_local: specified stablecoin
 dimension: aml_kyc
-requirement_summary: "The HKMA AML/CFT Guideline for licensed stablecoin issuers applies: standard FATF KYC, transaction monitoring, and suspicious-transaction reporting, plus distribution-channel KYC obligations executed via licensed VATPs and SFC Type 1 corporations."
+requirement_summary: 'The HKMA AML/CFT Guideline for licensed stablecoin issuers applies: standard FATF KYC, transaction
+  monitoring, and suspicious-transaction reporting, plus distribution-channel KYC obligations executed via licensed
+  VATPs and SFC Type 1 corporations.'
 status: in_force
-effective_date: "2025-08-01"
+effective_date: '2025-08-01'
 source:
-  primary: "HKMA AML/CFT Guideline for licensed stablecoin issuers (under Cap. 656)"
-  pinpoint: "FATF KYC; transaction monitoring; STR; distribution-channel KYC"
+  primary: HKMA AML/CFT Guideline for licensed stablecoin issuers (under Cap. 656)
+  pinpoint: AMLO + Ordinance AML obligations on licensees
+  url: https://www.elegislation.gov.hk/hk/cap656
 secondary:
-  - citation: "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.22 (Hong Kong — AML/KYC Framework)"
-interpretation_note: "Provenance: transcribed from author's Compliance Matrix v0.9.3."
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.22 (Hong Kong — AML/KYC Framework)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3.
+
+
+  [v0.9.5 verification] PROMOTED to firm_summary: HK AML obligations rest on the AMLO + the Ordinance (in force);
+  not separately line-verified to the AML pinpoint in this pass.'
 confidence: high
-last_reviewed: "2026-06-17"
+claim_class: tier1_legal
+last_reviewed: '2026-06-17'
 version_added: 0.2.0
-tags: [apac, focus, from_matrix_v0.9.3]
+tags:
+- apac
+- focus
+- from_matrix_v0.9.3
+- v0.9.5_verification
+- binding_in_force_enacted
+- verification_reviewed
+binding_status: in_force_enacted
+evidence_tier: firm_summary

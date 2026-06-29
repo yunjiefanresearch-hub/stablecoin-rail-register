@@ -1,0 +1,34 @@
+id: jp-epi-cross_border_data-001
+jurisdiction: JP
+authority: PPC (APPI)
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: Electronic Payment Instrument (EPI)
+dimension: cross_border_data
+constraint_ref: C6
+requirement_summary: The Act on the Protection of Personal Information (APPI) governs personal data and cross-border
+  handling.
+requirement_structured:
+  statute: Act on the Protection of Personal Information (APPI)
+  scope: personal data + cross-border handling
+status: in_force
+source:
+  primary: Act on the Protection of Personal Information (APPI)
+  pinpoint: Cross-border data — APPI governs personal data and cross-border handling
+  url: ''
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §Japan (Cross-Border Data Treatment)
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; pending primary-source
+  verification.'
+confidence: medium
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- v0.7.0_claim_class
+- binding_in_force_enacted
+binding_status: in_force_enacted

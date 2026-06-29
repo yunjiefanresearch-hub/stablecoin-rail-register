@@ -1,0 +1,58 @@
+id: kr-frs-implementation_status-001
+jurisdiction: KR
+authority: FSC / BOK
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: won-referenced stablecoin (draft Digital Asset Basic Act)
+dimension: implementation_status
+requirement_summary: 'Phase-1 in force, Phase-2 pending. Milestones: Virtual Asset User Protection Act in force
+  (19 Jul 2024); a Digital Asset Basic Act plus three stablecoin-specific bills before the National Assembly Political
+  Affairs Committee (정무위) — as of late Apr 2026 they remained in the subcommittee (소위), with a full-committee session
+  around mid-May 2026; a second-half-2026 passage goal described as uncertain, delayed by the won-stablecoin issuer-eligibility
+  (51%) dispute (the Bank of Korea favouring a bank-majority consortium) and the June 2026 local elections / committee
+  reconstitution.'
+requirement_structured:
+  regime_stage: pre-regime (transition trigger on enactment)
+  milestones:
+  - VAUPA in force 19 Jul 2024
+  - DABA introduced Jun 2025; consolidated 2026
+  - consolidated bill off subcommittee agenda 12 May 2026
+  - H2 2026 passage goal (uncertain)
+status: in_force
+effective_date: '2024-07-19'
+source:
+  primary: Virtual Asset User Protection Act (in force 19 Jul 2024); draft Digital Asset Basic Act
+  pinpoint: Timeline — VAUPA in force 19 Jul 2024; DABA pending (off subcommittee 12 May 2026; H2 2026 goal, uncertain)
+  url: https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=261099
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §South Korea (Implementation
+    Timeline)
+- citation: Official primary text is Korean (law.go.kr); there is no official English translation (FSC English materials
+    are summaries).
+- citation: 'VAUPA commencement (19 Jul 2024): https://www.fsc.go.kr/no010101/82682. Digital Asset Basic Act bill
+    (No. 2210736), pending: https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2210736/detailRP.'
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; the core point is confirmed
+  against the official primary text in the v0.5.1 pass (source.url added); some operational detail remains pending
+  and the tier is ''mixed''. Status records the in-force VAUPA maturity stage; the issuance regime is a pending
+  bill. Re-verify the legislative timeline after the June elections.
+
+
+  [v0.9.5 verification] NATIVE-LANGUAGE VERIFICATION (Korean): the in-force VAUPA layer and the pending DABA bills
+  are accurately represented. The earlier ''off the subcommittee agenda (12 May 2026)'' wording is softened: sources
+  show the bills remained in the subcommittee in late Apr 2026, so the exact procedural status was not clearly borne
+  out. Overall characterisation (pending, H2 2026 goal, uncertain) is confirmed.'
+confidence: high
+claim_class: tier2_operational
+evidence_tier: mixed
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- v0.5.1_verification
+- mixed_partial_verified
+- v0.7.0_claim_class
+- v0.9.5_verification
+- binding_in_force_enacted
+binding_status: in_force_enacted

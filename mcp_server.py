@@ -16,6 +16,14 @@ Every record returned carries its source.primary, pinpoint, confidence, dates an
 version — the same provenance fields a human sees. No data is synthesised here;
 the server only filters and reshapes the published dataset.
 """
+# Portability: force UTF-8 for console output so non-ASCII (CJK, accents, §—·) prints on any
+# locale (e.g. Windows GBK/cp1252). File I/O already passes encoding="utf-8" explicitly.
+import sys as _sys
+try:
+    _sys.stdout.reconfigure(encoding="utf-8")
+    _sys.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 from __future__ import annotations
 import json
 import pathlib
@@ -54,7 +62,8 @@ DIMENSIONS: dict[str, str] = {
 JURISDICTIONS: dict[str, str] = {
     "US": "United States", "HK": "Hong Kong", "EU": "European Union",
     "UK": "United Kingdom", "SG": "Singapore", "CN": "Mainland China",
-    "BR": "Brazil", "TW": "Taiwan",
+    "BR": "Brazil", "CH": "Switzerland", "AE": "United Arab Emirates",
+    "TW": "Taiwan", "JP": "Japan", "KR": "South Korea",
 }
 
 mcp = FastMCP("cross-border-stablecoin-register")
@@ -73,6 +82,9 @@ def _summary(r: dict) -> dict:
         "status": r.get("status"),
         "effective_date": r.get("effective_date"),
         "confidence": r.get("confidence"),
+        "claim_class": r.get("claim_class"),
+        "evidence_tier": r.get("evidence_tier", "unset"),
+        "binding_status": r.get("binding_status"),
         "last_reviewed": r.get("last_reviewed"),
         "version_added": r.get("version_added"),
     }
@@ -87,9 +99,28 @@ def about() -> dict:
         "generated": DATA.get("generated"),
         "record_count": DATA.get("record_count"),
         "corridor_count": len(CORRIDORS),
+        "citable_count": DATA.get("citable_subset", {}).get("count", 0),
         "doi": "10.5281/zenodo.20730358",
         "license": {"data": "CC-BY-4.0", "code": "Apache-2.0"},
         "spines": ["permitted_activity_yield", "securities_classification"],
+        "evidence_model": {
+            "axes": {
+                "claim_class": "kind of claim — tier1_legal (proposition of law) vs tier2_operational (market/operational fact)",
+                "evidence_tier": "provenance strength — resolution_text vs mixed vs firm_summary",
+                "status": "force — in_force vs transitional/proposed/consultation",
+                "binding_status": "binding status of the cited instrument — in_force_enacted vs made_not_commenced / finalized_policy_pending / pending_proposal / prohibition / no_regime; caps citability (resolution_text requires in_force_enacted)",
+            },
+            "citable_subset": "tier1_legal AND in_force AND resolution_text — see the citable_law() tool",
+        },
+        "temporal": {
+            "date_aware_compose": "compose_corridor(origin, destination, as_of=ISO_DATE) evaluates as of a date",
+            "event_calendar": f"{len(EVENT_CALENDAR.get('events', []))} dated/contingent tier1_legal events — see event_calendar() and corridor_timeline()",
+        },
+        "substrate": {
+            "constraint_substrate": f"{COMPUTED_SUBSTRATE.get('coverage', {}).get('cells_populated', 0)}/96 C1-C8 poles populated — see constraint_substrate()",
+            "deep_compose": "compose_via_substrate(origin, destination) derives feasibility through the interaction-set rules; indeterminate where poles are unset",
+        },
+        "tool_count": 23,
         "verification_rule": (
             "A record is verified only when it has no open markers AND a human has checked "
             "every source.primary and pinpoint against the instrument itself. Citations are "
@@ -252,6 +283,600 @@ def coverage() -> dict:
                        for dim in DIMENSIONS}
     return {"jurisdictions": jur, "dimensions": list(DIMENSIONS.keys()),
             "verified_cells": len(present), "grid": grid}
+
+
+# ---------------------------------------------------------------------------
+# Analysis layer — the Cross-Border Stablecoin Architecture paper's payload,
+# encoded as queryable data (compatibility matrix, interaction sets, patterns,
+# open questions). Present in dataset.json from v0.5.0.
+# ---------------------------------------------------------------------------
+ANALYSIS: dict = DATA.get("analysis", {})
+
+
+@mcp.tool()
+def compatibility(jurisdiction: Optional[str] = None,
+                  other: Optional[str] = None,
+                  category: Optional[str] = None) -> dict:
+    """
+    Query the §5.14 pairwise compatibility matrix (all 66 jurisdiction pairs from the
+    Architecture working paper). Each pair carries a category (I dual-authorization /
+    I/II hybrid / II partnership / III composition-problem-unresolved), the operative
+    interaction sets (A-F), a Category-III axis where applicable (prohibition /
+    pre_regime / counterparty_conditional), and a binding-constraint note.
+
+    Args:
+        jurisdiction: filter to pairs involving this code (e.g., 'HK').
+        other: with `jurisdiction`, return the single pair (e.g., jurisdiction='HK', other='CN').
+        category: filter by 'I' | 'I/II' | 'II' | 'III'.
+    """
+    comp = ANALYSIS.get("compatibility")
+    if not comp:
+        return {"error": "analysis layer not present in dataset.json (run scripts/build_analysis.py then build.py)"}
+    pairs = comp.get("pairs", [])
+    j = jurisdiction.upper() if jurisdiction else None
+    o = other.upper() if other else None
+    if j and o:
+        key = "-".join(sorted([j, o]))
+        hit = next((p for p in pairs if p["pair"] == key), None)
+        return hit or {"error": f"no pair {key}"}
+    out = pairs
+    if j:
+        out = [p for p in out if j in p["jurisdictions"]]
+    if category:
+        out = [p for p in out if p["category"] == category]
+    return {"categories": comp.get("categories"), "category_iii_axes": comp.get("category_iii_axes"),
+            "summary_observation": comp.get("summary_observation"),
+            "count": len(out), "pairs": out}
+
+
+@mcp.tool()
+def interaction_sets() -> dict:
+    """
+    The six constraint-interaction sets (A-F) from Architecture §2.9 — the constraint pairs
+    through which joint binding generates composition problems, each with its mechanism and a
+    worked example. These are referenced per pair by compatibility().
+    """
+    return ANALYSIS.get("interaction_sets") or {"error": "analysis layer not present"}
+
+
+@mcp.tool()
+def architectural_patterns() -> dict:
+    """
+    The Architecture paper's architectural patterns: the PRC three-pattern typology (§3.3 —
+    direct subsidiary licensing / partnership distribution / separated-entity), the portable
+    three-layer routing architecture (§4/§6 — Layer 1 compliant issuer, Layer 2 user-directed
+    routing, Layer 3 yield-bearing fund), the §4.4 five-factor operational test, and the six
+    design principles.
+    """
+    return ANALYSIS.get("architectural_patterns") or {"error": "analysis layer not present"}
+
+
+@mcp.tool()
+def open_questions() -> dict:
+    """
+    The §7 open regulatory questions (7.1–7.5) whose resolution will determine which architectural
+    options become operationally viable, each preserved with its conditional-status flag.
+    """
+    return ANALYSIS.get("open_questions") or {"error": "analysis layer not present"}
+
+
+# ---------------------------------------------------------------------------
+# Computed layer (the compose() preview) + verification queue. Present from v0.6.0.
+# These are the first *computing* tools (not just retrieval): they derive a pair's
+# feasibility from the per-jurisdiction signal table and the Atlas algorithm, and
+# expose the computed-vs-authored diff.
+# ---------------------------------------------------------------------------
+COMPUTED: dict = ANALYSIS.get("computed", {})
+EVENT_CALENDAR: dict = ANALYSIS.get("event_calendar", {})
+COMPUTED_TIMELINE: dict = ANALYSIS.get("computed_timeline", {})
+SUBSTRATE: dict = ANALYSIS.get("constraint_substrate", {})
+COMPUTED_SUBSTRATE: dict = ANALYSIS.get("computed_substrate", {})
+VERIFICATION_WORKLIST: dict = ANALYSIS.get("verification_worklist", {})
+STAKEHOLDER_DB: dict = ANALYSIS.get("stakeholder_database", {})
+COMPUTED_STAKEHOLDER_PROFILES: dict = ANALYSIS.get("computed_stakeholder_profiles", {})
+COMPUTED_CORRIDOR_SKELETONS: dict = ANALYSIS.get("computed_corridor_skeletons", {})
+_SUB_SEVERITY = {"blocked": 4, "III": 3, "II": 2, "I": 1, "pre_regime": 0}
+_GATE_CLASS = {"open": "I", "open_capped": "I", "comparability": "II", "channel": "II",
+               "usage_channel": "II", "fx_counterparty": "II", "transition": "T",
+               "pre_regime": "pre_regime", "prohibition": "blocked"}
+
+
+def _signals_as_of(date_str: Optional[str]) -> dict:
+    """Copy the base signal table and apply every scheduled/in_force event effective on/before date_str.
+
+    Contingent events (no firm date) are never applied here. Mirrors scripts/compose.signals_as_of so
+    the MCP date-aware compose() matches the build artifact.
+    """
+    import copy
+    base = copy.deepcopy(COMPUTED.get("jurisdiction_signals", {}))
+    if not date_str:
+        return base
+    dated = [e for e in EVENT_CALENDAR.get("events", [])
+             if e.get("status") in ("scheduled", "in_force") and e.get("effective_date")]
+    for e in sorted(dated, key=lambda e: e["effective_date"]):
+        if e["effective_date"] <= date_str:
+            for eff in e.get("effect", []):
+                j, fld = e.get("jurisdiction"), eff.get("field")
+                if j in base and fld:
+                    base[j][fld] = eff.get("to")
+    return base
+
+
+def _compose_directed(origin: str, dest: str, signals: Optional[dict] = None) -> dict:
+    sig = signals if signals is not None else COMPUTED.get("jurisdiction_signals", {})
+    so, sd = sig.get(origin), sig.get(dest)
+    if not so or not sd:
+        return {"error": f"unknown jurisdiction(s): {origin}/{dest}"}
+    if not so.get("exportable_token", True):
+        axis = "prohibition" if so.get("regime_status") == "prohibition" else "pre_regime"
+        return {"class": "III", "rule": f"origin_drag:{axis}",
+                "explain": f"{origin} has no exportable, comprehensively authorizable private token "
+                           f"({so.get('basis')}); lawful options are partnership/coordination, not direct issuance.",
+                "origin_override": so.get("egress_override", False)}
+    cls = _GATE_CLASS.get(sd.get("inbound_gate"), "?")
+    return {"class": cls, "rule": f"destination_gate:{sd.get('inbound_gate')}",
+            "explain": f"At the destination, {dest} applies an inbound gate of type "
+                       f"'{sd.get('inbound_gate')}' ({sd.get('basis')}); origin {origin} has an exportable token.",
+            "origin_override": so.get("egress_override", False)}
+
+
+@mcp.tool()
+def compose_corridor(origin: str, destination: str, as_of: Optional[str] = None) -> dict:
+    """
+    COMPUTE the directed feasibility of an origin->destination corridor from the per-jurisdiction
+    signal table and the Corridor Atlas algorithm (origin drag, then destination-determined inbound
+    class) — not a lookup. Pass `as_of` (an ISO date, e.g. '2027-06-01') to evaluate the corridor as of
+    that date: every scheduled/in_force regulatory event effective by then is applied first, so the same
+    edge can read Category III/T today and Category I after a regime is operative. Returns the computed
+    class, the rule that fired, the operative §5.14 interaction sets, and (if an authored corridor
+    exists) the computed-vs-authored comparison.
+    """
+    o, d = origin.upper(), destination.upper()
+    if not COMPUTED:
+        return {"error": "computed layer not present (run scripts/compose.py then build.py)"}
+    signals = _signals_as_of(as_of) if as_of else None
+    res = _compose_directed(o, d, signals)
+    if "error" in res:
+        return res
+    # operative interaction sets from the undirected §5.14 pair
+    comp = ANALYSIS.get("compatibility", {})
+    row = next((p for p in comp.get("pairs", []) if p["pair"] == "-".join(sorted([o, d]))), {})
+    # authored directed corridor, if one exists
+    authored = next((e for e in COMPUTED.get("directed_edges", {}).get("edges", [])
+                     if e["edge"] == f"{o}->{d}"), None)
+    out = {"edge": f"{o}->{d}", "as_of": as_of or EVENT_CALENDAR.get("as_of_base", "base"),
+           "computed_class": res["class"], "rule": res["rule"],
+           "explanation": res["explain"], "origin_override": res["origin_override"],
+           "operative_interaction_sets": row.get("interaction_sets"),
+           "section_5_14_category": row.get("category"),
+           "authored_corridor": authored,
+           "note": "computed layer is a preview (Atlas §3.2 rule); not asserted authoritative — see findings_by_cause."}
+    if as_of:
+        base_res = _compose_directed(o, d)
+        out["base_class"] = base_res.get("class")
+        out["changed_from_base"] = base_res.get("class") != res["class"]
+    return out
+
+
+@mcp.tool()
+def explain_feasibility(origin: str, destination: str) -> dict:
+    """
+    Explain WHY a corridor falls in its feasibility class: the rule that fired (origin drag vs
+    destination gate), the justifying node-record basis for each side's signal, the operative
+    interaction sets, and whether the computed class agrees with the authored classification.
+    """
+    o, d = origin.upper(), destination.upper()
+    if not COMPUTED:
+        return {"error": "computed layer not present (run scripts/compose.py then build.py)"}
+    sig = COMPUTED.get("jurisdiction_signals", {})
+    res = _compose_directed(o, d)
+    if "error" in res:
+        return res
+    edge = next((e for e in COMPUTED.get("directed_edges", {}).get("edges", []) if e["edge"] == f"{o}->{d}"), None)
+    return {"edge": f"{o}->{d}", "computed_class": res["class"], "rule_fired": res["rule"],
+            "why": res["explain"],
+            "origin_signal": sig.get(o), "destination_signal": sig.get(d),
+            "computed_vs_authored": edge,
+            "reduction_note": "The directed class composes origin drag with the destination inbound gate; "
+                              "the undirected §5.14 category is a reduction of the two directed classes."}
+
+
+@mcp.tool()
+def verification_report() -> dict:
+    """
+    The verification queue: which records are confirmed against official primary text and which are
+    still pending. Buckets records by evidence_tier (resolution_text / mixed / firm_summary / unset),
+    flags the largest backlog (the legacy seven-jurisdiction records with no evidence_tier), and lists
+    records that lack a source.url. The view a maintainer uses to drive the next verification pass.
+    """
+    from collections import defaultdict
+    buckets = defaultdict(list)
+    no_url = []
+    for r in RECORDS:
+        tier = r.get("evidence_tier", "unset")
+        buckets[tier].append(r["id"])
+        if not (r.get("source") or {}).get("url"):
+            no_url.append(r["id"])
+    legacy = sorted(r["id"] for r in RECORDS
+                    if r.get("evidence_tier") is None or r.get("evidence_tier") == "unset")
+    return {
+        "totals": {k: len(v) for k, v in sorted(buckets.items())},
+        "records_with_source_url": len(RECORDS) - len(no_url),
+        "records_total": len(RECORDS),
+        "backlog_unset_legacy": {"count": len(legacy), "ids": legacy,
+                                 "note": "the seven-jurisdiction records that predate the evidence_tier field — the next verification pass"},
+        "pending_no_url": {"count": len(no_url), "ids": sorted(no_url)},
+        "by_tier": {k: sorted(v) for k, v in sorted(buckets.items())},
+        "legend": {"resolution_text": "confirmed against official primary text",
+                   "mixed": "core point confirmed; some operational detail pending",
+                   "firm_summary": "practitioner-corroborated, pending official-text check",
+                   "unset": "predates the evidence_tier field (legacy)"},
+    }
+
+
+@mcp.tool()
+def verification_worklist(jurisdiction: Optional[str] = None) -> dict:
+    """
+    The primary-source verification worklist: for every still-unverified cell, exactly what is missing
+    to reach the next evidence tier and the instrument/pinpoint to check against. This scopes the
+    verification pass that lights up the constraint substrate and retires the standing liability (every
+    compose()/substrate result rests on these unverified cells). Verification is external work and is
+    never fabricated; this is the checklist that drives it. Optional jurisdiction filter.
+    """
+    if not VERIFICATION_WORKLIST:
+        return {"error": "verification worklist not present (run scripts/build_worklist.py then build.py)"}
+    items = VERIFICATION_WORKLIST.get("items", [])
+    if jurisdiction:
+        j = jurisdiction.upper()
+        items = [it for it in items if it.get("jurisdiction") == j]
+    return {"headline": VERIFICATION_WORKLIST.get("headline"),
+            "tier_requirements": VERIFICATION_WORKLIST.get("tier_requirements"),
+            "count": len(items), "items": items,
+            "note": "evidence_tier is enforced by the build: a record may only claim a tier it has the evidence for."}
+
+
+@mcp.tool()
+def citable_law(jurisdiction: Optional[str] = None,
+                dimension: Optional[str] = None) -> dict:
+    """
+    The lawyer-citable subset: only records that are a proposition of law (claim_class=tier1_legal),
+    currently in force (status=in_force), AND confirmed against the official statutory/regulatory text
+    (evidence_tier=resolution_text). Each row returns the binding instrument, the pinpoint locator, and
+    the official URL — everything a citation needs.
+
+    This is the 'show me only what I could cite' view for lawyers and supervisors. Operational/market
+    facts (claim_class=tier2_operational) are excluded by KIND even when well-sourced (a confirmed
+    product launch is a true fact, not a proposition of law); draft provisions are excluded by status;
+    unverified legal points are excluded by tier. The same subset is published as `citable_subset` in
+    dataset.json and enforced by the build (a citable record must carry source.url + pinpoint).
+
+    Optional filters narrow to a jurisdiction (e.g. 'CH') and/or a dimension (e.g. 'reserve_backing').
+    """
+    j = jurisdiction.upper() if jurisdiction else None
+    sub = DATA.get("citable_subset", {})
+    rows = sub.get("records", [])
+    if j:
+        rows = [r for r in rows if r.get("jurisdiction") == j]
+    if dimension:
+        rows = [r for r in rows if r.get("dimension") == dimension]
+    return {
+        "filter": sub.get("filter", {}),
+        "count": len(rows),
+        "total_citable": sub.get("count", 0),
+        "records": rows,
+        "note": ("Each record is citable as current binding law: tier1_legal + in_force + "
+                 "resolution_text, with an official source.url and pinpoint. Use get_record(id) "
+                 "for the full object, including the secondary corroboration and interpretation note."),
+    }
+
+
+@mcp.tool()
+def event_calendar(jurisdiction: Optional[str] = None) -> dict:
+    """
+    The regulatory event calendar driving date-aware compose(): dated/contingent CHANGES IN LAW that
+    move a jurisdiction's signal. 'scheduled' events carry an effective_date (applied by
+    compose_corridor(as_of=...)); 'contingent' events are bills with no firm date (surfaced as pending
+    transitions, never applied by date); 'in_force' events are already effective. Every event is a
+    tier1_legal change backed by tier1_legal records — a market launch is never an event (those live in
+    a record's operational_notes). Optional jurisdiction filter.
+    """
+    if not EVENT_CALENDAR:
+        return {"error": "event calendar not present (run scripts/compose.py then build.py)"}
+    evs = EVENT_CALENDAR.get("events", [])
+    if jurisdiction:
+        j = jurisdiction.upper()
+        evs = [e for e in evs if e.get("jurisdiction") == j]
+    return {"as_of_base": EVENT_CALENDAR.get("as_of_base"), "count": len(evs), "events": evs,
+            "status_values": EVENT_CALENDAR.get("status_values"),
+            "provenance": COMPUTED_TIMELINE.get("event_provenance", {})}
+
+
+@mcp.tool()
+def corridor_timeline(origin: str, destination: str) -> dict:
+    """
+    The dated future of a directed corridor: today's class, the scheduled transitions that change it
+    (with their effective dates), and any contingent transitions (a bill that, if enacted, would change
+    the verdict — shown as 'class_if_enacted', never folded into the dated line). This is how the engine
+    answers "blocked/Category T today, Category I after the regime is operative." Computes the timeline
+    live for any pair, including pairs without an authored corridor.
+    """
+    o, d = origin.upper(), destination.upper()
+    sig0 = COMPUTED.get("jurisdiction_signals", {})
+    if not sig0 or o not in sig0 or d not in sig0:
+        return {"error": f"unknown jurisdiction(s) or computed layer absent: {o}/{d}"}
+    today = _compose_directed(o, d)
+    events = EVENT_CALENDAR.get("events", [])
+    affects = lambda e: e.get("jurisdiction") in (o, d) and e.get("effect")
+    # cumulative scheduled timeline
+    import copy
+    running = copy.deepcopy(sig0)
+    prev, transitions = today.get("class"), []
+    for e in sorted([e for e in events if e.get("status") in ("scheduled", "in_force")
+                     and e.get("effective_date") and affects(e)], key=lambda e: e["effective_date"]):
+        for eff in e.get("effect", []):
+            if e["jurisdiction"] in running and eff.get("field"):
+                running[e["jurisdiction"]][eff["field"]] = eff.get("to")
+        cls = _compose_directed(o, d, running).get("class")
+        transitions.append({"date": e["effective_date"], "precision": e.get("precision"),
+                            "status": e["status"], "event_id": e["id"], "title": e.get("title"),
+                            "class_before": prev, "class_after": cls, "changed": cls != prev})
+        prev = cls
+    pending = []
+    for e in [e for e in events if e.get("status") == "contingent" and affects(e)]:
+        hyp = copy.deepcopy(sig0)
+        for eff in e.get("effect", []):
+            if e["jurisdiction"] in hyp and eff.get("field"):
+                hyp[e["jurisdiction"]][eff["field"]] = eff.get("to")
+        cls = _compose_directed(o, d, hyp).get("class")
+        pending.append({"event_id": e["id"], "title": e.get("title"), "trigger": e.get("trigger"),
+                        "class_if_enacted": cls, "would_change": cls != today.get("class")})
+    return {"edge": f"{o}->{d}", "today_class": today.get("class"),
+            "scheduled_transitions": transitions, "pending_contingent": pending,
+            "next_scheduled_change": next((t for t in transitions if t["changed"]), None)}
+
+
+def _sub_cell(j, c):
+    return SUBSTRATE.get("cells", {}).get(j, {}).get(c)
+
+
+def _sub_attr(cell, key, default=None):
+    return (cell or {}).get("attributes", {}).get(key, default)
+
+
+@mcp.tool()
+def constraint_substrate(jurisdiction: Optional[str] = None, constraint: Optional[str] = None) -> dict:
+    """
+    The constraint substrate: each (jurisdiction × constraint C1–C8) as a structured POLE from a
+    controlled vocabulary, citing the tier1_legal record(s) it is transcribed from. This is the deeper
+    layer beneath the single inbound-gate signal — feasibility is composed through these poles via the
+    interaction-set rules (see compose_via_substrate). Poles exist only where a tier1_legal record backs
+    them; absent cells are unset (coverage is bounded by the verification/cell-authoring backlog).
+    Optional jurisdiction and/or constraint (e.g. 'C7') filters.
+    """
+    if not SUBSTRATE:
+        return {"error": "constraint substrate not present (run scripts/substrate.py then build.py)"}
+    cells = SUBSTRATE.get("cells", {})
+    if jurisdiction:
+        j = jurisdiction.upper()
+        sub = {j: cells.get(j, {})}
+    else:
+        sub = cells
+    if constraint:
+        c = constraint.upper()
+        sub = {j: {c: v[c]} for j, v in sub.items() if c in v}
+    return {"pole_vocabulary": SUBSTRATE.get("pole_vocabulary"),
+            "coverage": COMPUTED_SUBSTRATE.get("coverage"),
+            "provenance": COMPUTED_SUBSTRATE.get("substrate_provenance", {}).get("clean"),
+            "cells": sub}
+
+
+@mcp.tool()
+def compose_via_substrate(origin: str, destination: str) -> dict:
+    """
+    DERIVE a directed corridor's feasibility by composing the two jurisdictions' C1–C8 poles through the
+    interaction-set rules — the deeper engine behind compose_corridor's single inbound-gate. Returns the
+    derived class, the per-set verdicts, and (where definite) the cross-check against the signal-table
+    compose(). Returns 'indeterminate' (with the missing poles) where a load-bearing pole is unset — it
+    never guesses. This is the constraint-substrate thesis as a running function.
+    """
+    o, d = origin.upper(), destination.upper()
+    if not SUBSTRATE:
+        return {"error": "constraint substrate not present (run scripts/substrate.py then build.py)"}
+    o1, oC6, oC8 = _sub_cell(o, "C1"), _sub_cell(o, "C6"), _sub_cell(o, "C8")
+    d1, d7 = _sub_cell(d, "C1"), _sub_cell(d, "C7")
+    missing, verdicts, dclass = [], {}, None
+    if o1 is None:
+        missing.append(f"{o}.C1")
+    elif _sub_attr(o1, "exportable_token", None) is False:
+        sig = _compose_directed(o, d).get("class")
+        return {"edge": f"{o}->{d}", "substrate_class": "III", "rule": "origin_drag:no_exportable_token",
+                "set_verdicts": {"C": "origin_drag"}, "missing_poles": [], "signal_class": sig,
+                "agree_with_signal": sig == "III",
+                "explain": f"{o} has no exportable, authorizable private token (C1={o1.get('pole')})."}
+    if d1 is None:
+        missing.append(f"{d}.C1")
+    elif d1.get("pole") == "prohibition":
+        dclass, verdicts["C"] = "blocked", "dest C1=prohibition (issuance prohibited)"
+    elif d1.get("pole") == "no_pathway":
+        dclass, verdicts["C"] = "pre_regime", "dest C1=no_pathway (no operative issuance regime yet)"
+    elif d7 is not None and d7.get("pole") == "prohibition":
+        dclass, verdicts["D"] = "blocked", "dest C7=prohibition"
+    elif d7 is None:
+        missing.append(f"{d}.C7")
+    else:
+        p7 = d7.get("pole")
+        if p7 == "channelled":
+            dclass, verdicts["D"] = "II", "dest C7=channelled (channel determination required)"
+        elif p7 == "usage_capped":
+            dclass, verdicts["D"] = "I", "dest C7=usage_capped (dual authorization, scale-capped)"
+        elif p7 == "open":
+            dclass, verdicts["D"] = "I", "dest C7=open (dual authorization available)"
+            verdicts["C"] = f"dest C1={d1.get('pole')} (authorizable)"
+        else:
+            dclass = "I"
+    if missing:
+        return {"edge": f"{o}->{d}", "substrate_class": "indeterminate", "rule": "missing_load_bearing_poles",
+                "set_verdicts": verdicts, "missing_poles": sorted(set(missing)),
+                "explain": f"cannot derive from constraints: poles unset for {', '.join(sorted(set(missing)))}."}
+    if dclass != "blocked" and d1.get("pole") in ("licence_gated", "closed_set", "host_currency_first", "open"):
+        if _sub_attr(oC6, "blocks_supervisory_sharing", False) or (_sub_attr(oC8, "supervisory_sharing", True) is False):
+            verdicts["A"] = "origin data-sovereignty blocks supervisory sharing; dest eligibility unsatisfiable"
+            if _SUB_SEVERITY["III"] > _SUB_SEVERITY.get(dclass, 0):
+                dclass = "III"
+    sig = _compose_directed(o, d).get("class")
+    return {"edge": f"{o}->{d}", "substrate_class": dclass, "rule": "substrate_interaction_sets",
+            "set_verdicts": verdicts, "missing_poles": [], "signal_class": sig,
+            "agree_with_signal": dclass == sig,
+            "explain": f"derived from constraint poles via interaction sets {sorted(verdicts)}."}
+
+
+# ---------------------------------------------------------------------------
+# Atlas §8 — stakeholder projection. profile_for re-projects an already-derived
+# corridor (class + poles + inbound mechanism) through a persona's lens; it adds
+# no new legal facts and is preview, bounded by the verification status of the
+# cells it reads.
+# ---------------------------------------------------------------------------
+_SH_IMPLICATION = {
+    "C1": {"open": "issuance open", "licence_gated": "issuance is authorization-gated",
+           "closed_set": "issuance limited to a defined set of entities",
+           "host_currency_first": "host-currency issuance prioritized",
+           "no_pathway": "no operative issuance pathway yet", "prohibition": "issuance prohibited"},
+    "C2": {"prescribed_hqla": "reserve must be high-quality liquid assets",
+           "prescribed_flex": "reserve prescribed with some flexibility", "informational": "reserve disclosure only"},
+    "C3": {"permitted": "yield permitted", "prohibited_issuer": "issuer may not pay yield",
+           "prohibited_incl_agents": "issuer and agents may not pay yield", "silent": "yield treatment unsettled"},
+    "C4": {"payment_instrument": "treated as a payment instrument, not a security",
+           "contested_routing": "classification turns on the routing structure",
+           "security": "treated as a security / unauthorized offering"},
+    "C5": {"bank_only": "bank-only issuance", "bank_and_nonbank": "bank and non-bank issuers admitted",
+           "layered_separation": "roles separated by licensed function", "unset": "routing architecture unsettled"},
+    "C6": {"open": "no data-localization barrier to supervisory sharing", "transfer_gated": "cross-border transfer is gated",
+           "localized": "data localization applies", "restrictive": "data sharing restricted"},
+    "C7": {"open": "no usage cap; dual authorization available", "usage_capped": "scale / usage capped",
+           "channelled": "foreign tokens admitted only via a determination / channel", "prohibition": "foreign tokens prohibited"},
+    "C8": {"coordinated": "supervisory coordination available", "constrained": "supervisory coordination constrained"},
+}
+
+
+@mcp.tool()
+def stakeholder_database() -> dict:
+    """The Atlas §8 stakeholder catalogue: the actor personas (issuer, distributor, regulators, treasury,
+    holder, ...), each with its lens, the C1–C8 constraints that bear on it, and the corridor archetypes
+    (RC/SC/TC/DC) it engages. Pair with profile_for() to project a corridor onto a persona."""
+    if not STAKEHOLDER_DB:
+        return {"error": "stakeholder database not present (run scripts/stakeholders.py then build.py)"}
+    return {"archetype_legend": STAKEHOLDER_DB.get("archetype_legend"),
+            "stakeholders": STAKEHOLDER_DB.get("stakeholders"), "note": STAKEHOLDER_DB.get("note")}
+
+
+@mcp.tool()
+def profile_for(stakeholder: str, origin: str, destination: str) -> dict:
+    """PROJECT a directed corridor onto a stakeholder persona (Atlas §8). Returns the persona's lens, the
+    corridor's derived class, a per-constraint reading of the origin/dest poles the persona cares about
+    (each citing its backing record), the engaged archetypes and inbound mechanism, and a verification
+    caveat. Introduces NO new facts — every line is read from an existing record — so the profile is
+    preview, bounded by the verification status of the cells it reads."""
+    if not STAKEHOLDER_DB or not SUBSTRATE:
+        return {"error": "stakeholder database / substrate not present (run scripts/stakeholders.py + substrate.py then build.py)"}
+    s = STAKEHOLDER_DB.get("stakeholders", {}).get(stakeholder)
+    if s is None:
+        return {"error": f"unknown stakeholder '{stakeholder}'", "known": sorted(STAKEHOLDER_DB.get("stakeholders", {}))}
+    o, d = origin.upper(), destination.upper()
+    if o not in JURISDICTIONS or d not in JURISDICTIONS:
+        return {"error": f"unknown jurisdiction(s): {origin}/{destination}"}
+    derived = compose_via_substrate(o, d)
+    cls = derived.get("substrate_class")
+    id2tier = {r["id"]: r.get("evidence_tier") for r in RECORDS}
+    reading, cited = [], []
+    for side, j in (("origin", o), ("dest", d)):
+        for c in s.get("reads", {}).get(side, []):
+            cell = SUBSTRATE.get("cells", {}).get(j, {}).get(c)
+            if not cell:
+                reading.append({"side": side, "jurisdiction": j, "constraint": c, "pole": None,
+                                "implication": "pole unset — indeterminate at the substrate level"})
+                continue
+            pole = cell.get("pole"); rid = (cell.get("derived_from") or [None])[0]
+            reading.append({"side": side, "jurisdiction": j, "constraint": c, "pole": pole,
+                            "record": rid, "implication": _SH_IMPLICATION.get(c, {}).get(pole, pole)})
+            if rid:
+                cited.append(rid)
+    corr = next((c for c in CORRIDORS if c.get("origin") == o and c.get("destination") == d), None)
+    arche = sorted(set(s.get("archetypes", [])) & set(corr.get("archetypes", []))) if corr else s.get("archetypes")
+    cited = sorted(set(cited))
+    unver = [r for r in cited if id2tier.get(r) != "resolution_text"]
+    return {"edge": f"{o}->{d}", "stakeholder": stakeholder, "label": s.get("label"), "lens": s.get("lens"),
+            "corridor_class": cls, "archetypes_engaged": arche,
+            "inbound_mechanism": corr.get("inbound_mechanism") if corr else None,
+            "reading": reading, "provenance": {"records": cited},
+            "verification_status": (f"preview — rests on {len(cited)} cell(s), {len(unver)} not yet verified to "
+                                    f"resolution_text; not citable authority until those are verified")}
+
+
+@mcp.tool()
+def edge_coverage() -> dict:
+    """Edge-layer coverage: how many directed corridors carry a record. Distinguishes the hand-authored
+    RICH corridors (with infrastructure_overlap, bespoke inbound detail, curated archetypes, prose) from
+    the COMPUTED SKELETONS (derived fields + provenance) and the still-indeterminate edges (into the UK,
+    in transition)."""
+    if not COMPUTED_CORRIDOR_SKELETONS:
+        return {"error": "edge skeletons not present (run scripts/build_edge_skeletons.py then build.py)"}
+    cov = COMPUTED_CORRIDOR_SKELETONS.get("coverage", {})
+    return {**cov, "cross_check_clean": COMPUTED_CORRIDOR_SKELETONS.get("cross_check", {}).get("clean"),
+            "note": ("rich corridors are the enriched gold tier; skeletons carry only derived fields, with "
+                     "infrastructure_overlap and bespoke analysis left as a per-edge enrichment backlog.")}
+
+
+@mcp.tool()
+def corridor_skeleton(origin: str, destination: str) -> dict:
+    """Return the corridor record for a directed edge: the hand-authored RICH record if one exists,
+    otherwise the COMPUTED SKELETON (derived feasibility class, inbound mechanism test + administrator,
+    baseline archetypes, directed interaction sets, and provenance). Skeletons introduce no new facts and
+    leave empirical fields (infrastructure_overlap, bespoke detail) explicitly unset."""
+    o, d = origin.upper(), destination.upper()
+    if o not in JURISDICTIONS or d not in JURISDICTIONS:
+        return {"error": f"unknown jurisdiction(s): {origin}/{destination}"}
+    rich = next((c for c in CORRIDORS if c.get("origin") == o and c.get("destination") == d), None)
+    if rich:
+        return {"tier": "authored_rich", **rich}
+    for s in COMPUTED_CORRIDOR_SKELETONS.get("skeletons", []):
+        if s.get("origin") == o and s.get("destination") == d:
+            return s
+    return {"edge": f"{o}->{d}", "tier": "none",
+            "note": "no record — edge is indeterminate at the substrate level (likely into the UK, in transition)"}
+
+
+VERIFICATION_LEDGER = (DATA.get("analysis") or {}).get("verification_ledger", {})
+
+
+@mcp.tool()
+def verification_ledger(jurisdiction: Optional[str] = None) -> dict:
+    """The external primary-source verification pass (v0.9.5) audit trail.
+
+    Records, per cell, the binding status of the cited instrument, the official URL attached, and the
+    tier the disposition applied. The pass's discipline is that citability is capped by binding status,
+    NOT by whether the official text was located: resolution_text is applied only where binding_status is
+    in_force_enacted AND the proposition was confirmed against official text; made_not_commenced (e.g. UK
+    SI 2026/102), finalized_policy_pending (e.g. SG MAS SCS framework), and pending_proposal (e.g. US
+    CLARITY/NPRM, BR BCB) cells receive the URL + binding_status but are held at firm_summary; prohibition
+    cells (CN) stay unset. Filter by jurisdiction (e.g. 'EU', 'US', 'HK', 'UK', 'SG', 'CN', 'BR')."""
+    if not VERIFICATION_LEDGER:
+        return {"error": "verification ledger not present in dataset.json (run scripts/apply_verification.py then build.py)"}
+    entries = VERIFICATION_LEDGER.get("entries", [])
+    if jurisdiction:
+        j = jurisdiction.upper()
+        entries = [e for e in entries if e.get("jurisdiction") == j]
+    from collections import Counter
+    bs = Counter(e.get("binding_status") for e in entries)
+    promoted = [e["cell"] for e in entries if e.get("applied_tier") == "resolution_text"]
+    return {
+        "performed_by": VERIFICATION_LEDGER.get("performed_by"),
+        "discipline": VERIFICATION_LEDGER.get("discipline"),
+        "filter": jurisdiction.upper() if jurisdiction else "all",
+        "count": len(entries),
+        "binding_status_breakdown": dict(bs),
+        "promoted_to_resolution_text": promoted,
+        "entries": entries,
+    }
 
 
 if __name__ == "__main__":

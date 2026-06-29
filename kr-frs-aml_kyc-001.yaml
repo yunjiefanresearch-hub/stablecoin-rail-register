@@ -1,0 +1,42 @@
+id: kr-frs-aml_kyc-001
+jurisdiction: KR
+authority: FSC / KoFIU
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: won-referenced stablecoin (draft Digital Asset Basic Act)
+dimension: aml_kyc
+requirement_summary: 'IN FORCE: anti-money-laundering and Travel Rule obligations apply through the specified financial
+  transaction information framework. Entities converting stablecoins to fiat for third parties are treated as virtual-asset
+  service providers requiring FSC registration.'
+requirement_structured:
+  in_force: AML + Travel Rule via the specified financial transaction information framework
+  vasp_trigger: converting stablecoins to fiat for third parties = VASP requiring FSC registration
+status: in_force
+source:
+  primary: Act on Reporting and Use of Specific Financial Transaction Information; Virtual Asset User Protection
+    Act
+  pinpoint: AML — Travel Rule + VASP registration for stablecoin-to-fiat conversion for third parties
+  url: https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=261099
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §South Korea (AML / KYC Framework)
+- citation: Official primary text is Korean (law.go.kr); there is no official English translation (FSC English materials
+    are summaries).
+- citation: AML/Travel Rule under the Act on Reporting and Using Specified Financial Transaction Information (in
+    force since Mar 2021).
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; VERIFIED against the
+  official primary text in the v0.5.1 verification pass (source.url is the official instrument). This is an in-force
+  layer alongside VAUPA; the issuance regime remains a pending bill.'
+confidence: high
+claim_class: tier1_legal
+evidence_tier: resolution_text
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- v0.5.1_verification
+- resolution_text_verified
+- v0.7.0_claim_class
+- binding_in_force_enacted
+binding_status: in_force_enacted

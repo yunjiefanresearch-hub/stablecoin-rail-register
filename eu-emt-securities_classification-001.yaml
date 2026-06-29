@@ -1,0 +1,28 @@
+id: eu-emt-securities_classification-001
+jurisdiction: EU
+authority: EBA/ESMA; national competent authorities
+instrument_type: e_money_token
+dimension: securities_classification
+constraint_ref: C4
+requirement_summary: E-money tokens and asset-referenced tokens are crypto-assets governed by MiCA and are carved
+  out of the MiFID II financial-instrument (securities) perimeter; they are not treated as transferable securities.
+requirement_structured:
+  classification: crypto-asset under MiCA
+  securities_perimeter: false
+status: in_force
+effective_date: null
+source:
+  primary: MiCA, Regulation (EU) 2023/1114; MiFID II (Directive 2014/65/EU)
+  pinpoint: Scope — EMT/ART as crypto-assets outside the MiFID II financial-instrument definition
+interpretation_note: Authored in v0.9.2 to fill the EU.C4 constraint cell for the substrate sweep.
+confidence: high
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- eu
+- securities_classification
+- binding_in_force_enacted
+binding_status: in_force_enacted

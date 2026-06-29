@@ -5,10 +5,9 @@ instrument_type: fiat_referenced_stablecoin
 instrument_label_local: UK qualifying stablecoin (UKQS)
 dimension: capital_requirements
 constraint_ref: C2
-requirement_summary: The prudential regime for qualifying stablecoin issuers sits under FCA Consultation
-  Paper CP25/15, with final requirements pending. The Bank of England separately addresses prudential
-  standards for systemic sterling-denominated stablecoins, with revised proposals published 10 November
-  2025.
+requirement_summary: The prudential regime for qualifying stablecoin issuers sits under FCA Consultation Paper CP25/15,
+  with final requirements pending. The Bank of England separately addresses prudential standards for systemic sterling-denominated
+  stablecoins, with revised proposals published 10 November 2025.
 requirement_structured:
   non_systemic: FCA CP25/15 prudential regime — final rules pending
   systemic: Bank of England regime for systemic GBP stablecoins (revised proposals 10 Nov 2025)
@@ -19,10 +18,14 @@ source:
   url: ''
 secondary:
 - citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.14 (United Kingdom — Capital Requirements)
-interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
-  verification. Final FCA prudential requirements are not yet published — confidence is held low/medium
-  accordingly.'
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source verification.
+  Final FCA prudential requirements are not yet published — confidence is held low/medium accordingly.
+
+
+  [v0.9.5 verification] Prudential/capital detail rests on FCA CP25/14 / CP25/15 consultations (final rules expected
+  summer 2026); pending.'
 confidence: low
+claim_class: tier1_legal
 last_reviewed: '2026-06-17'
 version_added: 0.3.0
 tags:
@@ -30,3 +33,7 @@ tags:
 - focus
 - from_matrix_v0.9.3
 - v0.3.0_backfill
+- v0.7.0_claim_class
+- v0.9.5_verification
+- binding_pending_proposal
+binding_status: pending_proposal

@@ -1,0 +1,55 @@
+id: kr-frs-monetary_sovereignty-001
+jurisdiction: KR
+authority: BOK / FSC
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: won-referenced stablecoin (draft Digital Asset Basic Act)
+dimension: monetary_sovereignty
+constraint_ref: C7
+requirement_summary: 'No stablecoin-specific monetary-sovereignty regime is in force. DRAFT: cross-border won stablecoins
+  would be classified as a foreign-exchange means of payment under the Foreign Exchange Transactions Act, engaging
+  the capital-flow management regime. Won FX stability is the backdrop and the monetary-sovereignty contest (the
+  central-bank-approval question) is the defining open issue and the principal item stalling the bill.'
+requirement_structured:
+  in_force_cap: none
+  draft: cross-border won stablecoins classified as an FX means of payment (Foreign Exchange Transactions Act)
+  backdrop: won FX stability; BOK monetary-sovereignty concerns
+  comparator: structurally akin to Brazil's FX-reclassification of the cross-border leg
+status: proposed
+source:
+  primary: Draft Digital Asset Basic Act; Foreign Exchange Transactions Act
+  pinpoint: Monetary sovereignty (draft) — cross-border won stablecoins as FX means of payment; NOT in force
+  url: https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2210736/detailRP
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §South Korea (Distribution
+    and Offering Restrictions)
+- citation: Fan, Cross-Border Stablecoin Architecture v3 (Twelve Jurisdictions, June 2026), §5 (South Korea — monetary-sovereignty
+    contest)
+- citation: 'Draft Digital Asset Basic Act (bill No. 2210736): https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2210736/detailRP.
+    Official primary text is Korean (law.go.kr); there is no official English translation (FSC English materials
+    are summaries).'
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; an official URL for the
+  bill/announcement is provided (source.url), but this is a draft provision and is NOT operative law, so it is not
+  upgraded and remains firm_summary. STATUS proposed: no in-force C7 mechanism. The draft FX-means-of-payment classification
+  echoes Brazil''s câmbio reclassification (comparison by effect); the BOK/FSC sovereignty contest is what is stalling
+  enactment.'
+interpretive_flag:
+  tension: The monetary-sovereignty contest (won FX stability and the central-bank-approval question) is the defining
+    open issue and the principal item stalling the bill.
+  resolution_channel: Enactment of the Digital Asset Basic Act and resolution of the BOK/FSC eligibility-and-consent
+    question.
+confidence: medium
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- draft_provision
+- v0.5.1_verification
+- draft_url_added
+- v0.7.0_claim_class
+- binding_pending_proposal
+binding_status: pending_proposal

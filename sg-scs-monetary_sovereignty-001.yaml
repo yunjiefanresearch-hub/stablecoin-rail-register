@@ -1,0 +1,48 @@
+id: sg-scs-monetary_sovereignty-001
+jurisdiction: SG
+authority: Monetary Authority of Singapore (MAS)
+instrument_type: fiat_referenced_stablecoin
+dimension: monetary_sovereignty
+constraint_ref: C7
+requirement_summary: There is no aggregate usage cap; foreign-currency-pegged tokens simply are not 'MAS-regulated
+  stablecoins' and circulate as ordinary digital payment tokens, leaving market access open at the monetary-sovereignty
+  layer.
+requirement_structured:
+  usage_cap: null
+  foreign_tokens: DPT, not MAS-regulated SCS
+  market_access: open
+status: transitional
+effective_date: null
+source:
+  primary: MAS Stablecoin Regulatory Framework; Payment Services Act 2019
+  pinpoint: 'SCS framework: SGD/G10 label scope; foreign-pegged tokens treated as ordinary DPTs'
+  url: https://www.mas.gov.sg/news/media-releases/2023/mas-finalises-stablecoin-regulatory-framework
+interpretation_note: 'Authored in v0.9.2 to fill the SG.C7 constraint cell for the substrate sweep.
+
+
+  [v0.9.5 verification] CAVEAT: The no-aggregate-cap posture follows from in-force PS Act DPT treatment; the SCS
+  SGD/G10 LABEL scope is finalized-policy-pending. Status corrected to transitional: the SGD/G10 SCS-label scope
+  is part of the finalized-policy-pending SCS framework. The underlying ''foreign-pegged tokens circulate as ordinary
+  DPTs / no aggregate cap'' posture is PS-Act baseline (in force), noted in the flag.'
+confidence: high
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- sg
+- monetary_sovereignty
+- v0.9.5_verification
+- binding_finalized_policy_pending
+- verification_reviewed
+binding_status: finalized_policy_pending
+verification:
+  verified_by: external review (web retrieval against official sources)
+  verified_on: '2026-06-27'
+  method: practitioner_corroboration
+  against:
+    instrument: Payment Services Act 2019 (enacted) + MAS Single-Currency Stablecoin Framework (finalized policy,
+      pending legislation)
+    url: https://www.mas.gov.sg/news/media-releases/2023/mas-finalises-stablecoin-regulatory-framework
+    pinpoint: 'SCS framework: SGD/G10 label scope; foreign-pegged tokens treated as ordinary DPTs'

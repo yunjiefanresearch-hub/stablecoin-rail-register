@@ -1,0 +1,39 @@
+id: jp-epi-capital_requirements-001
+jurisdiction: JP
+authority: FSA
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: Electronic Payment Instrument (EPI)
+dimension: capital_requirements
+constraint_ref: C2
+requirement_summary: Capital requirements are set by entity type under the Payment Services Act and the FSA framework
+  (banking, funds-transfer, or trust licensing); there is no separate aggregate stablecoin capital cap.
+requirement_structured:
+  basis: by entity type (banking / funds-transfer / trust licensing)
+  aggregate_cap: none
+status: in_force
+effective_date: '2023-06-01'
+source:
+  primary: Payment Services Act; FSA framework (by entity type)
+  pinpoint: Capital — by entity type (banking / funds-transfer / trust); no separate aggregate cap
+  url: https://laws.e-gov.go.jp/
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §Japan (Capital Requirements)
+- citation: Payment Services Act (Act No. 59 of 2009) — official English at Japanese Law Translation (japaneselawtranslation.go.jp).
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; the core point is confirmed
+  against the official primary text in the v0.5.1 pass (source.url added); some operational detail remains pending
+  and the tier is ''mixed''.'
+confidence: medium
+claim_class: tier1_legal
+evidence_tier: mixed
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- v0.5.1_verification
+- mixed_partial_verified
+- v0.7.0_claim_class
+- binding_in_force_enacted
+binding_status: in_force_enacted

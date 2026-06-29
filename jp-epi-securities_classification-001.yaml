@@ -1,0 +1,29 @@
+id: jp-epi-securities_classification-001
+jurisdiction: JP
+authority: Financial Services Agency (FSA)
+instrument_type: e_money_token
+dimension: securities_classification
+constraint_ref: C4
+requirement_summary: Electronic payment instruments (the stablecoin category) are regulated under the Payment Services
+  Act and are distinct from securities regulated under the Financial Instruments and Exchange Act.
+requirement_structured:
+  regime: Payment Services Act (EPI)
+  securities_regime: FIEA
+  securities: false
+status: in_force
+effective_date: null
+source:
+  primary: Payment Services Act (Electronic Payment Instruments regime); Financial Instruments and Exchange Act
+  pinpoint: EPI perimeter under the PSA vs. the FIEA securities perimeter
+interpretation_note: Authored in v0.9.2 to fill the JP.C4 constraint cell for the substrate sweep.
+confidence: high
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- jp
+- securities_classification
+- binding_in_force_enacted
+binding_status: in_force_enacted

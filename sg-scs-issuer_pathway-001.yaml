@@ -5,13 +5,12 @@ instrument_type: fiat_referenced_stablecoin
 instrument_label_local: single-currency stablecoin (SCS)
 dimension: issuer_pathway
 constraint_ref: C1
-requirement_summary: The MAS Single-Currency Stablecoin (SCS) framework applies only to stablecoins pegged
-  to the Singapore Dollar or any G10 currency and issued in Singapore; tokens pegged to other assets or
-  issued offshore stay under the general Digital Payment Token regime and may not use the 'MAS-regulated
-  stablecoin' label. Non-bank SCS issuers with circulation above S$5 million must hold a Major Payment
-  Institution (MPI) licence; those below are exempt from the framework but cannot use the label. Banks
-  are exempt from the PSA licence requirement and may issue under their banking framework. Issuers must
-  be incorporated in Singapore.
+requirement_summary: The MAS Single-Currency Stablecoin (SCS) framework applies only to stablecoins pegged to the
+  Singapore Dollar or any G10 currency and issued in Singapore; tokens pegged to other assets or issued offshore
+  stay under the general Digital Payment Token regime and may not use the 'MAS-regulated stablecoin' label. Non-bank
+  SCS issuers with circulation above S$5 million must hold a Major Payment Institution (MPI) licence; those below
+  are exempt from the framework but cannot use the label. Banks are exempt from the PSA licence requirement and
+  may issue under their banking framework. Issuers must be incorporated in Singapore.
 requirement_structured:
   peg_scope: SGD or any G10 currency, issued in Singapore
   mpi_threshold: circulation > S$5,000,000 requires MPI licence
@@ -21,16 +20,21 @@ requirement_structured:
 status: transitional
 effective_date: '2023-08-15'
 source:
-  primary: Payment Services Act 2019 (PSA, amended 2022); MAS Single-Currency Stablecoin Regulatory Framework
-    (finalised 15 Aug 2023)
+  primary: Payment Services Act 2019 (PSA, amended 2022); MAS Single-Currency Stablecoin Regulatory Framework (finalised
+    15 Aug 2023)
   pinpoint: SCS framework — peg scope (SGD/G10, Singapore-issued); MPI licence > S$5m; Singapore incorporation
   url: ''
 secondary:
 - citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), pp.18-19 (Singapore — Issuer Pathways and Eligibility)
-interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
-  verification (source.url to be filled). The S$5m threshold creates an opt-in regime for small issuers;
-  the MPI + incorporation rules confine the framework to bank-led or institutional issuers in practice.'
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source verification
+  (source.url to be filled). The S$5m threshold creates an opt-in regime for small issuers; the MPI + incorporation
+  rules confine the framework to bank-led or institutional issuers in practice.
+
+
+  [v0.9.5 verification] The SCS issuer scope is finalized-policy-pending, BUT the operative DPT licensing pathway
+  under the PS Act 2019 is in force (status left transitional, NOT proposed — SG is a live regime, not pre-regime).'
 confidence: medium
+claim_class: tier1_legal
 last_reviewed: '2026-06-17'
 version_added: 0.3.0
 tags:
@@ -38,3 +42,7 @@ tags:
 - focus
 - from_matrix_v0.9.3
 - v0.3.0_backfill
+- v0.7.0_claim_class
+- v0.9.5_verification
+- binding_finalized_policy_pending
+binding_status: finalized_policy_pending

@@ -1,0 +1,58 @@
+id: jp-epi-monetary_sovereignty-001
+jurisdiction: JP
+authority: FSA
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: Electronic Payment Instrument (EPI)
+dimension: monetary_sovereignty
+constraint_ref: C7
+requirement_summary: 'There is no aggregate cap. Japan does not prohibit foreign-currency tokens; it admits them
+  through a registered Electronic Payment Instruments Exchange Service Provider (EPIESP) that holds reserves in
+  Japan equal to customers'' holdings, provided the foreign issuer does not itself issue, redeem, or solicit to
+  Japanese users. This is an open-but-channelled monetary-sovereignty posture: the currency-of-denomination is not
+  capped, but inbound foreign tokens are routed through a registered domestic intermediary holding local reserves.'
+requirement_structured:
+  aggregate_cap: none
+  foreign_tokens: admitted via registered EPIESP holding reserves in Japan
+  issuer_condition: foreign issuer must not issue/redeem/solicit to Japanese users directly
+  posture: open-but-channelled
+status: in_force
+effective_date: '2023-06-01'
+source:
+  primary: Payment Services Act (Electronic Payment Instruments regime)
+  pinpoint: Monetary sovereignty — no cap; foreign tokens admitted via registered EPIESP holding JP reserves
+  url: https://laws.e-gov.go.jp/
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §Japan (Distribution and Offering
+    Restrictions)
+- citation: Fan, Cross-Border Stablecoin Architecture v3 (Twelve Jurisdictions, June 2026), §5 (Japan — open-but-channelled
+    posture)
+- citation: Payment Services Act (Act No. 59 of 2009) — official English at Japanese Law Translation (japaneselawtranslation.go.jp).
+- citation: 'Working example — USDC via SBI VC Trade (registered EPIESP, 4 Mar 2025): https://www.sbigroup.co.jp/english/news/pdf/2025/0304_a_en.pdf.'
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; VERIFIED against the
+  official primary text in the v0.5.1 verification pass (source.url is the official instrument). Japan''s C7 posture
+  is the ''channelled-admission'' model: distinct from the EU cap, the UAE channel restriction, and the PRC prohibition
+  — it admits foreign tokens but only through a registered, locally-reserved intermediary.'
+confidence: high
+claim_class: tier1_legal
+evidence_tier: resolution_text
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- v0.5.1_verification
+- resolution_text_verified
+- v0.7.0_claim_class
+- v0.9.1_verification_block
+- binding_in_force_enacted
+verification:
+  verified_by: maintainer
+  verified_on: '2026-06-27'
+  method: official_text
+  against:
+    instrument: Payment Services Act (Electronic Payment Instruments regime)
+    url: https://laws.e-gov.go.jp/
+    pinpoint: Monetary sovereignty — no cap; foreign tokens admitted via registered EPIESP holding JP reserves
+binding_status: in_force_enacted

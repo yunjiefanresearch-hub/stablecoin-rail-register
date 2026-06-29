@@ -5,10 +5,18 @@ The page fetches ./dataset.json live when served (so it stays in sync), and
 falls back to an embedded snapshot when opened from file:// for local preview.
 Run after build.py:  python3 build_site.py
 """
+# Portability: force UTF-8 for console output so non-ASCII (CJK, accents, §—·) prints on any
+# locale (e.g. Windows GBK/cp1252). File I/O already passes encoding="utf-8" explicitly.
+import sys as _sys
+try:
+    _sys.stdout.reconfigure(encoding="utf-8")
+    _sys.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 import json, pathlib, datetime
 
 ROOT = pathlib.Path(__file__).resolve().parent
-data = json.loads((ROOT / "dataset.json").read_text())
+data = json.loads((ROOT / "dataset.json").read_text(encoding="utf-8"))
 
 TEMPLATE = r"""<!DOCTYPE html>
 <html lang="en">
@@ -100,6 +108,30 @@ h2.sec{font-family:var(--serif);font-weight:600;font-size:24px;letter-spacing:-.
 table.matrix{border-collapse:collapse;font-family:var(--mono);width:100%}
 table.matrix th,table.matrix td{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
 table.matrix thead th{position:sticky;top:0;background:#F7F9FB;z-index:2}
+/* ---- compatibility matrix (analysis layer) ---- */
+#compatibility{padding:64px 0;border-top:1px solid var(--rule)}
+.cmatrix-wrap{overflow-x:auto;margin-top:8px;border:1px solid var(--rule);border-radius:10px}
+table.cmatrix{border-collapse:collapse;font-family:var(--mono);font-size:11px;width:100%;min-width:560px}
+table.cmatrix th,table.cmatrix td{border:1px solid var(--rule);text-align:center;padding:0}
+table.cmatrix thead th,table.cmatrix tbody th{background:#F7F9FB;color:var(--ink-3);font-weight:600;
+  font-size:10px;padding:6px 7px;position:sticky}
+table.cmatrix thead th{top:0;z-index:2}table.cmatrix tbody th{left:0;z-index:1;text-align:right}
+.cm-cell{width:34px;height:30px;cursor:pointer;font-weight:600;color:#0c2233;transition:filter .12s,outline .12s}
+.cm-cell:hover{filter:brightness(.93);outline:2px solid var(--accent);outline-offset:-2px}
+.cm-cell.sel{outline:2px solid var(--ink);outline-offset:-2px}
+.cm-diag{background:repeating-linear-gradient(45deg,#EEF2F6,#EEF2F6 4px,#E4E9EF 4px,#E4E9EF 8px);cursor:default}
+.cm-I{background:#CDEAD6}.cm-III{background:#F4CFCF}.cm-hyb{background:#FBEAC4}.cm-II{background:#D9E4F5}
+.cmatrix-legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin:6px 0 4px;font-size:11.5px;color:var(--ink-2)}
+.cmatrix-legend .lg{display:inline-flex;align-items:center;gap:6px}
+.cmatrix-legend .sw{width:13px;height:13px;border:1px solid var(--rule);border-radius:3px;display:inline-block}
+.cmatrix-detail{margin-top:14px;padding:0}
+.cmd-card{border:1px solid var(--rule);border-left:3px solid var(--accent);border-radius:8px;padding:14px 16px;background:var(--panel)}
+.cmd-card h4{margin:0 0 4px;font-size:14px}
+.cmd-card .cmd-cat{display:inline-block;font-family:var(--mono);font-size:10.5px;padding:2px 8px;border-radius:20px;background:#EEF3F8;color:var(--accent);margin-left:8px;vertical-align:middle}
+.cmd-card .cmd-sets{margin:8px 0;font-size:12.5px;color:var(--ink-2)}
+.cmd-card .cmd-sets b{font-family:var(--mono);font-size:11px;color:var(--ink)}
+.cmd-card p{margin:6px 0 0;font-size:13px;line-height:1.55;color:var(--ink-2)}
+.cmd-empty{color:var(--ink-3);font-size:13px;font-style:italic;padding:6px 2px}
 .corner{text-align:left;padding:10px 12px;font-size:10px;letter-spacing:.1em;color:var(--ink-3);
   text-transform:uppercase;position:sticky;left:0;background:#F7F9FB;z-index:3;min-width:118px}
 .dimhead{padding:9px 6px;font-size:10.5px;font-weight:500;color:var(--ink-2);cursor:pointer;
@@ -237,6 +269,58 @@ footer .cite .ck{color:#7FA0C2;display:block;margin-bottom:5px;letter-spacing:.1
 .filterbar select{font-family:var(--mono);font-size:12px;padding:7px 10px;border:1px solid var(--rule-2);
   border-radius:6px;background:var(--panel);color:var(--ink);cursor:pointer}
 .filterbar .fbreset{font-family:var(--mono);font-size:11.5px;color:var(--accent);background:none;border:0;cursor:pointer}
+.filterbar .fbcite{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);display:inline-flex;align-items:center;gap:5px;cursor:pointer;user-select:none}
+.filterbar .fbcite input{cursor:pointer;accent-color:var(--navy)}
+.cc-badge{font-family:var(--mono);font-size:9.5px;letter-spacing:.03em;padding:1.5px 6px;border-radius:3px;white-space:nowrap}
+.cc-legal{background:#e6f0e9;color:#1f5135}
+.cc-oper{background:#eef0f3;color:#566}
+.cite-star{color:#1f7a44;font-weight:700;margin-left:4px}
+.citebanner{font-family:var(--mono);font-size:11.5px;color:#1f5135;background:#eef6f0;border:1px solid #cfe6d8;
+  border-radius:6px;padding:8px 12px;margin-bottom:12px;display:none}
+.citebanner.on{display:block}
+.opnotes{border:1px dashed #c9b89a;background:#fbf8f1;border-radius:6px;padding:10px 12px;margin-bottom:14px}
+.opnotes-h{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:#8a6d3b;margin-bottom:6px}
+.opnote{font-size:12.5px;color:var(--ink);margin:4px 0;line-height:1.5}
+.opnote-as{font-family:var(--mono);font-size:10.5px;color:var(--ink-3)}
+.tl-headline{border-left:3px solid var(--accent);background:var(--panel);padding:12px 16px;border-radius:0 7px 7px 0;font-size:14px;line-height:1.6;margin-bottom:20px;color:var(--ink)}
+.tl-edges{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:26px}
+.tl-edge{border:1px solid var(--rule-2);border-radius:8px;padding:12px 14px;background:var(--panel);min-width:230px;flex:1}
+.tl-edge .tle-h{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--navy);margin-bottom:8px}
+.tl-step{display:flex;align-items:center;gap:8px;font-size:12.5px;margin:5px 0}
+.tl-cls{font-family:var(--mono);font-weight:700;padding:1px 7px;border-radius:4px;font-size:11px}
+.tl-cls.c1{background:#e6f0e9;color:#1f5135}.tl-cls.c2{background:#fdf3e3;color:#8a5a16}
+.tl-cls.cT{background:#ede7f6;color:#5b3da8}.tl-cls.cIII,.tl-cls.cblocked{background:#f6e7e7;color:#8a2b2b}
+.tl-cls.cpre_regime{background:#eef0f3;color:#566}
+.tl-when{font-family:var(--mono);font-size:10.5px;color:var(--ink-3)}
+.tl-arrow{color:var(--ink-3)}
+.tl-h3{font-size:15px;margin:8px 0 12px;color:var(--ink)}
+.tl-events{display:flex;flex-direction:column;gap:8px}
+.tl-ev{display:flex;gap:12px;align-items:baseline;border:1px solid var(--rule-2);border-radius:7px;padding:9px 12px;background:var(--panel)}
+.tl-ev .tlev-date{font-family:var(--mono);font-size:11px;color:var(--navy);min-width:96px;font-weight:600}
+.tl-ev .tlev-st{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;padding:1px 6px;border-radius:3px}
+.tl-ev .st-scheduled{background:#e6f0e9;color:#1f5135}.tl-ev .st-contingent{background:#fdf3e3;color:#8a5a16}.tl-ev .st-in_force{background:#eef0f3;color:#566}
+.tl-ev .tlev-body{font-size:12.5px;color:var(--ink)}
+.tl-ev .tlev-body .tlev-basis{color:var(--ink-3);font-size:11.5px}
+.sub-cov{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:24px}
+.sub-cov .scov{border:1px solid var(--rule-2);border-radius:8px;padding:12px 16px;background:var(--panel);min-width:150px}
+.sub-cov .scov-n{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--navy)}
+.sub-cov .scov-l{font-size:11.5px;color:var(--ink-3);margin-top:3px}
+.sub-tri{display:flex;flex-direction:column;gap:7px}
+.sub-row{display:grid;grid-template-columns:96px 70px 70px 1fr;gap:10px;align-items:center;border:1px solid var(--rule-2);border-radius:7px;padding:8px 12px;background:var(--panel);font-size:12.5px}
+.sub-row .sr-edge{font-family:var(--mono);font-weight:600;color:var(--navy)}
+.sub-row .sr-sets{font-family:var(--mono);font-size:11px;color:var(--ink-2)}
+.sub-row .sr-ok{font-family:var(--mono);font-size:10.5px;color:#1f5135}
+.sub-head{display:grid;grid-template-columns:96px 70px 70px 1fr;gap:10px;padding:0 12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.sh-select{font-family:var(--mono);font-size:13px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);margin-bottom:18px}
+.sh-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.sh-card{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:var(--paper)}
+.sh-card .sh-label{font-weight:600;font-size:13.5px;color:var(--ink)}
+.sh-card .sh-arche{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;color:var(--ink-3);float:right;border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+.sh-card .sh-lens{font-size:11.5px;color:var(--ink-3);font-style:italic;margin:4px 0 8px}
+.sh-card .sh-head{font-size:12.5px;color:var(--ink);line-height:1.5;margin-bottom:8px}
+.sh-card .sh-read{font-family:var(--mono);font-size:10px;color:var(--ink-2);line-height:1.7;border-top:1px dashed var(--line);padding-top:8px}
+.sh-card .sh-cls{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:600;padding:1px 7px;border-radius:5px;background:var(--wash);color:var(--ink)}
+.sh-card .sh-ver{font-size:9.5px;color:var(--ink-3);margin-top:8px}
 .tbl-scroll{overflow-x:auto;border:1px solid var(--rule-2);border-radius:8px;background:var(--panel)}
 table.rtbl{border-collapse:collapse;width:100%;font-size:12.5px}
 table.rtbl thead th{position:sticky;top:0;background:#F7F9FB;text-align:left;padding:10px 12px;
@@ -307,7 +391,7 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
 <section id="coverage">
   <div class="wrap">
     <p class="eyebrow">Coverage matrix</p>
-    <h2 class="sec">Six jurisdictions mapped, two forthcoming &times; fifteen dimensions</h2>
+    <h2 class="sec">Twelve jurisdictions mapped &times; fifteen dimensions</h2>
     <p class="sec-sub">Each filled cell is a verified, sourced record. Select a cell to inspect it; a column header to compare all jurisdictions on that dimension; a jurisdiction to read its full profile. Empty cells are on the roadmap — this is an actively-built standard, not a finished table.</p>
     <div class="mtoolbar">
       <div class="searchbox">
@@ -335,15 +419,67 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
         <select id="f-jur" aria-label="Filter by jurisdiction"><option value="">All jurisdictions</option></select>
         <select id="f-dim" aria-label="Filter by dimension"><option value="">All dimensions</option></select>
         <select id="f-status" aria-label="Filter by status"><option value="">Any status</option></select>
+        <select id="f-class" aria-label="Filter by claim class"><option value="">Any claim class</option><option value="tier1_legal">tier1_legal</option><option value="tier2_operational">tier2_operational</option></select>
         <select id="f-conf" aria-label="Filter by confidence"><option value="">Any confidence</option></select>
+        <label class="fbcite"><input type="checkbox" id="f-citable"> citable law only</label>
         <button class="fbreset" id="f-reset">reset</button>
       </div>
+      <div class="citebanner" id="citebanner">Showing only the <b>lawyer-citable subset</b>: <code>claim_class = tier1_legal</code> + <code>status = in_force</code> + <code>evidence_tier = resolution_text</code>. These records state a proposition of binding law, in force now, confirmed against the official text (each carries an official <code>source.url</code> + pinpoint, enforced by the build). Operational/market facts and draft provisions are excluded by design.</div>
       <div class="tbl-scroll">
         <table class="rtbl" id="rtbl"><thead></thead><tbody></tbody></table>
       </div>
       <p class="tblcount" id="tblcount"></p>
     </div>
     <div class="inspector" id="inspector"></div>
+  </div>
+</section>
+
+<section id="compatibility">
+  <div class="wrap">
+    <p class="eyebrow">Analysis layer</p>
+    <h2 class="sec">Pairwise compatibility &times; twelve jurisdictions</h2>
+    <p class="sec-sub">The §5.14 instrument from the Architecture working paper, now queryable data: for every pair of jurisdictions, can an operation compliant with both be configured under a single architectural pattern? Each cell is one of the 66 unordered pairs. Select a cell for the category, the operative interaction sets, and the binding constraint. This is the composition-problem analysis itself — not node facts, but how the nodes compose.</p>
+    <div class="cmatrix-legend" id="cmatrix-legend"></div>
+    <div class="cmatrix-wrap"><table class="cmatrix" id="cmatrix"><thead></thead><tbody></tbody></table></div>
+    <div class="cmatrix-detail" id="cmatrix-detail"></div>
+    <p class="sec-sub" style="margin-top:18px">The same layer encodes the six constraint-interaction sets (§2.9), the three-pattern PRC typology and three-layer routing architecture (§3, §4, §6), and the four open questions (§7). All of it ships inside <code>dataset.json</code> under <code>analysis</code>, and is exposed by the MCP tools <code>compatibility</code>, <code>interaction_sets</code>, <code>architectural_patterns</code>, and <code>open_questions</code>.</p>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="wrap">
+    <p class="eyebrow">Time engine · v0.8.0</p>
+    <h2 class="sec">Feasibility over time</h2>
+    <p class="sec-sub">Corridor feasibility is dated. <code>compose(origin, destination, as_of)</code> applies every scheduled change in law effective by a date, then re-runs the Atlas algorithm — so an edge can read one class today and another once a regime is operative. Events are <b>changes in law</b> (a commencement or enactment), each backed by <code>tier1_legal</code> records and enforced as such; a market launch is never an event. Contingent events (a bill with no firm date) are shown as "if enacted", never folded into a dated verdict.</p>
+    <div id="timeline-headline" class="tl-headline"></div>
+    <div id="timeline-edges" class="tl-edges"></div>
+    <h3 class="tl-h3">Event calendar</h3>
+    <div id="timeline-events" class="tl-events"></div>
+    <p class="sec-sub" style="margin-top:18px">The calendar and the per-edge timelines ship inside <code>dataset.json</code> under <code>analysis.event_calendar</code> and <code>analysis.computed_timeline</code>, and are exposed by the MCP tools <code>compose_corridor(as_of=…)</code>, <code>corridor_timeline</code>, and <code>event_calendar</code>.</p>
+  </div>
+</section>
+
+<section id="substrate">
+  <div class="wrap">
+    <p class="eyebrow">Constraint substrate · v0.9.0</p>
+    <h2 class="sec">Feasibility, composed from constraints</h2>
+    <p class="sec-sub">The deepest layer: each jurisdiction's stance on the eight constraints (C1–C8) as a structured <b>pole</b>, and a <code>compose()</code> that derives a corridor's class by composing two jurisdictions' poles through the six interaction-set rules — not by reading a single inbound gate. Every pole cites the <code>tier1_legal</code> record it is transcribed from; a pole exists only where a record backs it, and the engine returns <b>indeterminate</b> (never a guess) where a load-bearing pole is unset. Its coverage is therefore bounded by — and reports — the verification backlog.</p>
+    <div id="substrate-coverage" class="sub-cov"></div>
+    <h3 class="tl-h3">Worked derivations — the {HK, CN, JP} triangle and newly-unblocked cross-region edges</h3>
+    <p class="sec-sub" style="margin-top:-8px">With the constraint cells authored across all twelve jurisdictions (v0.9.2), the substrate now derives <b>124 of 132</b> directed edges and <b>all nine</b> authored corridors, each cross-checked against the signal-table <code>compose()</code>. <b>HK→JP</b> resolves to Category II through Japan's <i>channelled</i> pole; <b>JP→HK</b> to Category I through Hong Kong's <i>open</i> pole; <b>US→EU</b> to Category I (EU's capped pole), <b>EU→US</b> to Category II (US's comparability channel) — all derived, not looked up. The eight remaining indeterminate edges are those <i>into the UK</i>, whose inbound gate is in transition: the time engine, not the substrate, owns that.</p>
+    <div id="substrate-triangle" class="sub-tri"></div>
+    <p class="sec-sub" style="margin-top:18px">The substrate ships under <code>analysis.constraint_substrate</code> and <code>analysis.computed_substrate</code> in <code>dataset.json</code>, exposed by the MCP tools <code>constraint_substrate</code> and <code>compose_via_substrate</code>. Populating the remaining cells and the primary-source verification pass — which lights the rest of the substrate up — is the v0.9.x backlog.</p>
+  </div>
+</section>
+
+<section id="stakeholders">
+  <div class="wrap">
+    <div class="kicker">Atlas §8 · stakeholder projection</div>
+    <h2 class="sec-h2">The same corridor, seen by each actor</h2>
+    <p class="sec-sub">Each persona reads a different slice of C1–C8. <code>profile_for(stakeholder, edge)</code> re-projects the <i>already-derived</i> corridor class and the substrate poles through that lens — it introduces no new legal facts, cites the backing record for every line, and stays preview, bounded by the verification status of the cells it reads. Pick a corridor:</p>
+    <select id="sh-edge" class="sh-select"></select>
+    <div id="sh-profiles" class="sh-grid"></div>
+    <p class="sec-sub" style="margin-top:16px">The persona catalogue ships under <code>analysis.stakeholder_database</code> and the worked projections under <code>analysis.computed_stakeholder_profiles</code>, exposed by the MCP tools <code>stakeholder_database</code> and <code>profile_for</code>. Archetypes: <b>RC</b> Regulatory · <b>SC</b> Stablecoin-Settlement · <b>TC</b> Tokenized-Asset · <b>DC</b> Digital-Financial.</p>
   </div>
 </section>
 
@@ -391,7 +527,7 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
       </div>
     </div>
     <div class="agentnote">
-      <b>For agents.</b> The register is a single JSON document at <span class="gk">/dataset.json</span>, validated against a published JSON Schema, with a stable <span class="gk">id</span> per record and explicit <span class="gk">source.primary</span> · <span class="gk">source.pinpoint</span> · <span class="gk">confidence</span> · <span class="gk">version_added</span> fields. A queryable <span class="gk">MCP server</span> exposes typed query tools over this dataset (query, compare_dimension, jurisdiction_profile, search, coverage) — or fetch and filter the dataset directly.
+      <b>For agents.</b> The register is a single JSON document at <span class="gk">/dataset.json</span>, validated against a published JSON Schema, with a stable <span class="gk">id</span> per record and explicit <span class="gk">source.primary</span> · <span class="gk">source.pinpoint</span> · <span class="gk">claim_class</span> · <span class="gk">evidence_tier</span> · <span class="gk">confidence</span> · <span class="gk">version_added</span> fields. The lawyer-citable subset (<span class="gk">tier1_legal</span> + <span class="gk">in_force</span> + <span class="gk">resolution_text</span>) is precomputed as <span class="gk">citable_subset</span> in the dataset and exposed by the MCP <span class="gk">citable_law()</span> tool. A queryable <span class="gk">MCP server</span> exposes 18 typed tools over this dataset (query, compare_dimension, jurisdiction_profile, citable_law, compatibility, compose_corridor, explain_feasibility, verification_report, …) — or fetch and filter the dataset directly.
     </div>
   </div>
 </section>
@@ -405,7 +541,7 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
         <li><span class="ix">01</span><span class="tx"><b>One fact, one source.</b> Every record cites a primary instrument (statute, regulation, or bill) with a clause-level pinpoint — not a secondary summary.</span></li>
         <li><span class="ix">02</span><span class="tx"><b>Dated and versioned.</b> Each record carries an effective date, a last-reviewed date, and the register version it entered, so staleness is visible.</span></li>
         <li><span class="ix">03</span><span class="tx"><b>Confidence is explicit.</b> Every record states a confidence level; interpretive tensions are flagged rather than smoothed over.</span></li>
-        <li><span class="ix">04</span><span class="tx"><b>Verified means checked.</b> A record is verified only when it has no open markers and a human has checked every source and pinpoint against the instrument itself.</span></li>
+        <li><span class="ix">04</span><span class="tx"><b>Two orthogonal evidence axes.</b> Every record carries <code>claim_class</code> — the <em>kind</em> of claim: <code>tier1_legal</code> (a proposition of law a lawyer could cite to the instrument) vs <code>tier2_operational</code> (a market/operational fact — a launch, a registration, a banking rail — read as-of-dated) — and <code>evidence_tier</code> — <em>how well-sourced</em> it is: <code>resolution_text</code> (confirmed against the official text) / <code>mixed</code> / <code>firm_summary</code>. They are independent: a confirmed product launch is well-sourced but is <em>not</em> law. The <b>lawyer-citable subset</b> is the intersection <code>tier1_legal</code> + <code>in_force</code> + <code>resolution_text</code> — and the build refuses to ship a citable record that lacks an official <code>source.url</code> + pinpoint. Use the <em>citable law only</em> toggle in the table, the MCP <code>citable_law()</code> tool, or <code>citable_subset</code> in <code>dataset.json</code>. This follows the Corridor Atlas §7 split between primary-source legal constraints and market-reported operability, which it warns must not be read at the same confidence; see the two-axis matrix in <code>COVERAGE.md</code>.</span></li>
       </ul>
       <div class="rulebox">
         <div class="rk">Citation firewall</div>
@@ -422,24 +558,44 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
     <span class="rm-note">▲ Items tagged PLANNED are on the roadmap and not yet available.</span>
     <div class="rm">
       <div class="rm-item">
-        <span class="rm-ver">v0.2.0</span>
-        <div class="rm-txt"><h4>15-dimension framework · DOI</h4><p>Two doctrinal spines (yield boundary + securities classification); six focus jurisdictions; corridor layer; archived to Zenodo for a citable DOI. <span class="feat">— last released version</span></p></div>
+        <span class="rm-ver">v0.2.0 – v0.6.0</span>
+        <div class="rm-txt"><h4>Nodes, analysis, corridors, computable graph</h4><p>Twelve jurisdictions × fifteen dimensions (117 records); the §5.14 compatibility matrix, interaction sets, patterns and open questions as queryable data; the corridor layer (1 → 9 directed edges) with enforced cross-layer integrity; a <code>compose()</code> engine reproducing 9/9 corridors and 64/66 §5.14 categories; CI; and a primary-source verification pass. <span class="feat">— prior releases, archived to Zenodo for a DOI</span></p></div>
         <span class="tag shipped">Shipped</span>
       </div>
       <div class="rm-item">
-        <span class="rm-ver cur">v0.3.0-dev</span>
-        <div class="rm-txt"><h4>Depth + interfaces</h4><p>Hong Kong, Singapore and the UK deepened to 11 dimensions each (51 records, 14/15 dimensions); sortable multi-filter table view; queryable <b>MCP server</b> now available. <span class="feat">— current working tree</span></p></div>
+        <span class="rm-ver">v0.7.0</span>
+        <div class="rm-txt"><h4>Two-axis evidence model + lawyer-citable subset</h4><p>Required <code>claim_class</code> (<code>tier1_legal</code> vs <code>tier2_operational</code>), orthogonal to <code>evidence_tier</code> and <code>status</code>; all 117 records tagged. The <b>lawyer-citable subset</b> (<code>tier1_legal</code> + <code>in_force</code> + <code>resolution_text</code>, <b>21 records</b>) precomputed in <code>dataset.json</code>, exposed by <code>citable_law()</code> and a "citable law only" toggle, and enforced by the build. <code>compose()</code> now rests only on <code>tier1_legal</code> facts. <span class="feat">— shipped</span></p></div>
+        <span class="tag shipped">Shipped</span>
+      </div>
+      <div class="rm-item">
+        <span class="rm-ver cur">v0.7.1</span>
+        <div class="rm-txt"><h4>Claim-purity fix for the citable subset</h4><p>New <code>operational_notes</code> field (Tier-2 illustration attached to a record, omitted from the citable projection). The two contaminated citable records were cleaned so their load-bearing fields and citable instrument strings are purely legal — the USDC/SBI VC Trade admission moved to <code>operational_notes</code>. New build gate <code>check_citable_purity</code> forbids a product/market event or named commercial counterparty in any citable record's <code>source.primary</code>/<code>pinpoint</code>. <span class="feat">— current working tree</span></p></div>
         <span class="tag shipped">Available</span>
       </div>
       <div class="rm-item">
-        <span class="rm-ver">v0.3.x</span>
-        <div class="rm-txt"><h4>Brazil → full jurisdiction · Hong Kong verification</h4><p>Promote <b>Brazil</b> from corridor-only to a full jurisdiction (the HK→BR settlement corridor anchors it); complete the primary-source verification pass (clause-level URLs) on the Hong Kong anchor cells.</p></div>
-        <span class="tag planned">In progress</span>
+        <span class="rm-ver">v0.8.0</span>
+        <div class="rm-txt"><h4>Time / event engine (date-aware <code>compose()</code>)</h4><p>Add <code>as_of</code> dates and an event calendar (UK-2027, the Taiwan VAS Act, the Korea DABA, the Japan Cabinet orders) so <code>compose(origin, destination, as_of)</code> can answer "blocked today, Category I after 2027-10-25," recomputing edges when a node fact flips. Sequenced <b>ahead of the substrate on purpose</b>: the substrate's prerequisites (the evidence split + signal-provenance gate) are exactly what v0.6.0–v0.7.1 delivered, so the date engine is the now-unblocked, highest-applicability, lowest-risk move.</p></div>
+        <span class="tag planned">Planned</span>
       </div>
       <div class="rm-item">
-        <span class="rm-ver">v0.4.0</span>
-        <div class="rm-txt"><h4>Taiwan + query API</h4><p>Add <b>Taiwan</b> as an infrastructure jurisdiction; semantic search and a jurisdiction comparison / query API over the MCP layer.</p></div>
+        <span class="rm-ver">v0.9.0</span>
+        <div class="rm-txt"><h4>Constraint substrate + full corridor matrix + verification pass</h4><p>Make C1–C8 the computational substrate (structured predicates per cell; <code>operational_notes</code> becomes per-predicate tier), with binding poles requiring <code>tier1_legal</code> backing; extend toward the Atlas's full <b>132-edge</b> matrix; and run the primary-source verification pass on the <b>47 still-<code>unset</code> <code>tier1_legal</code> cells</b> — load-bearing, because every <code>compose()</code> "64/66" result rests on the still-unverified cells beneath the signal table, and only the verification pass retires that.</p></div>
         <span class="tag planned">Planned</span>
+      </div>
+      <div class="rm-row">
+        <span class="rm-v">v0.9.5</span>
+        <div class="rm-txt"><h4>External verification landed + <code>binding_status</code> axis</h4><p>An external primary-source pass (web retrieval against official sources) was applied with discipline via a <code>verification_ledger</code> audit trail. New orthogonal <code>binding_status</code> axis (in_force_enacted / made_not_commenced / finalized_policy_pending / pending_proposal / prohibition) <b>caps citability</b>: resolution_text requires <code>in_force_enacted</code>, enforced by the build. The EU MiCA, US GENIUS (statutory parts) and HK Cap. 656 cells were promoted to <code>resolution_text</code> (the <b>citable subset rose 21 → 36</b>) while the UK SI 2026/102 (made-not-commenced, operative 2027-10-25), SG MAS SCS (finalized policy) and US CLARITY/NPRM cells are correctly held below it. The UK time-engine date was corrected to the gazetted day 2027-10-25, and the EU C7 pinpoint to Art. 58(3). <span class="feat">— shipped</span></p></div>
+        <span class="tag shipped">Shipped</span>
+      </div>
+      <div class="rm-row">
+        <span class="rm-v">v0.9.6</span>
+        <div class="rm-txt"><h4>Time-engine forward events + verification follow-through</h4><p>Wired the two regimes the verification surfaced as closest-to-flipping into the event calendar as contingent "if enacted" branches: the <b>US CLARITY Act</b> (Senate Calendar No. 423, reported 1 Jun 2026) and <b>Singapore's SCS implementing legislation</b> (expected mid-2026). Both are contingent (no fixed date), so no <code>compose(as_of)</code> horizon moves yet; they are the standing machinery so a dependent cell's <code>binding_status</code> flips automatically once a commencement date is fixed. Reconciled the <b>EU C7</b> summary and instrument label with the corrected <b>Art. 58(3)</b> pinpoint, and recorded the live <b>Senate Banking CLARITY substitute</b> yield compromise (yield-for-holding prohibited, activity-linked rewards allowed) in the US C3 cell, verified against current primary sources. Time engine 4 → 6 events. <span class="feat">— shipped</span></p></div>
+        <span class="tag shipped">Shipped</span>
+      </div>
+      <div class="rm-row">
+        <span class="rm-v">v0.9.7</span>
+        <div class="rm-txt"><h4>Native-language official-text verification (CN / KR / TW / BR)</h4><p>Applied the original-language pass that closes the residual flagged earlier. <b>Brazil</b>: the in-force BCB regime (Res 519/520/521, in force 2 Feb 2026) is confirmed against the official Portuguese text, and <b>10 BR cells are promoted to <code>resolution_text</code></b> against the official BCB normativo URLs (citable subset <b>36 → 46</b>); the C3 yield cell leaves <code>pending_proposal</code> for <code>in_force_enacted</code> with a "pass-through unsettled" note. <b>China</b> (material currency fix): the cited 2021 Notice was repealed by 银发〔2026〕42号 (in force 6 Feb 2026); the RMB-pegged-stablecoin overseas-issuance ban is now <b>written, in-force law</b>, not verbal guidance; CN stays the prohibition pole. <b>Korea</b>: softened the over-precise "off the subcommittee" wording and added the won-stablecoin 51% issuer-eligibility dispute. <b>Taiwan</b>: confirmed current (Finance Committee 初審 3 Jun 2026, to plenary), procedurally more advanced than KR. <span class="feat">— shipped</span></p></div>
+        <span class="tag shipped">Shipped</span>
       </div>
     </div>
   </div>
@@ -489,7 +645,8 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
   var JURS=[
     {c:"US",f:"United States"},{c:"HK",f:"Hong Kong"},{c:"EU",f:"European Union"},
     {c:"UK",f:"United Kingdom"},{c:"SG",f:"Singapore"},{c:"CN",f:"Mainland China"},
-    {c:"BR",f:"Brazil",planned:"v0.3"},{c:"TW",f:"Taiwan",planned:"v0.4"}
+    {c:"BR",f:"Brazil"},{c:"CH",f:"Switzerland"},{c:"AE",f:"United Arab Emirates"},
+    {c:"TW",f:"Taiwan"},{c:"JP",f:"Japan"},{c:"KR",f:"South Korea"}
   ];
   var JFULL={}; JURS.forEach(function(j){JFULL[j.c]=j.f;});
   var DMAP={}; DIMS.forEach(function(d){DMAP[d.k]=d;});
@@ -553,6 +710,9 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
       h+="<span class='insp-dimfull'>"+esc(d.f)+"</span>";
       if(d.spine)h+="<span class='badge spineb'>spine</span>";
       if(r.constraint_ref)h+="<span class='badge cref'>"+esc(r.constraint_ref)+"</span>";
+      h+="<span class='badge "+(r.claim_class==="tier1_legal"?"spineb":"cref")+"' title='claim kind'>"+(r.claim_class==="tier1_legal"?"legal":"operational")+"</span>";
+      if(r.evidence_tier&&r.evidence_tier!=="unset")h+="<span class='badge cref' title='provenance'>"+esc(r.evidence_tier)+"</span>";
+      if(isCitable(r))h+="<span class='badge spineb' title='citable as binding law'>§ citable</span>";
       h+=badge(r.confidence);
       h+="<span class='insp-id'>"+esc(r.id)+"</span>";
       h+="</div><div class='insp-body'>";
@@ -563,6 +723,8 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
       h+="<div class='prov-row'><div class='prov-k'>Authority</div><div class='prov-v'>"+esc(r.authority)+"</div></div>";
       h+="<div class='prov-row'><div class='prov-k'>Instrument</div><div class='prov-v'>"+esc(r.instrument_label_local)+"</div></div>";
       h+="<div class='prov-row'><div class='prov-k'>Secondary</div><div class='prov-v'>"+esc(sec)+"</div></div>";
+      h+="<div class='prov-row'><div class='prov-k'>Evidence</div><div class='prov-v'>claim_class: <b>"+esc(r.claim_class||"—")+"</b> · evidence_tier: <b>"+esc(r.evidence_tier||"unset")+"</b>"+(r.binding_status?" · binding: <b>"+esc(r.binding_status)+"</b>":"")+(isCitable(r)?" · <span class='em'>citable as binding law</span>":"")+"</div></div>";
+      if(r.source&&r.source.url)h+="<div class='prov-row'><div class='prov-k'>Official</div><div class='prov-v'><a href='"+esc(r.source.url)+"' target='_blank' rel='noopener'>"+esc(r.source.url)+"</a></div></div>";
       h+="</div>";
       h+="<div class='metaline'>";
       h+="<div><span class='mk2'>Jurisdiction</span><span class='mv'>"+esc(r.jurisdiction)+" · "+esc(JFULL[r.jurisdiction]||"")+"</span></div>";
@@ -572,6 +734,15 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
       h+="<div><span class='mk2'>Status</span><span class='mv'>"+esc(r.status||"—")+"</span></div>";
       h+="</div>";
       if(struct)h+="<details class='struct'><summary>Machine-readable obligation · requirement_structured</summary><pre>"+esc(struct)+"</pre></details>";
+      if(r.operational_notes&&r.operational_notes.length){
+        h+="<div class='opnotes'><div class='opnotes-h'>Operational notes · Tier-2 · not citable as law</div>";
+        r.operational_notes.forEach(function(o){
+          h+="<div class='opnote'>"+esc(o.note)+(o.as_of?" <span class='opnote-as'>as of "+esc(o.as_of)+"</span>":"");
+          if(o.source&&o.source.url)h+=" <a href='"+esc(o.source.url)+"' target='_blank' rel='noopener'>source ↗</a>";
+          h+="</div>";
+        });
+        h+="</div>";
+      }
       if(r.interpretation_note)h+="<p class='note'><b>Note.</b> "+esc(r.interpretation_note)+"</p>";
       h+="</div>";
       insp.innerHTML=h;
@@ -627,6 +798,7 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
     // ---- filterable / sortable table view ----
     var fJur=document.getElementById("f-jur"),fDim=document.getElementById("f-dim"),
         fStatus=document.getElementById("f-status"),fConf=document.getElementById("f-conf"),
+        fClass=document.getElementById("f-class"),fCitable=document.getElementById("f-citable"),
         rtblHead=document.querySelector("#rtbl thead"),rtblBody=document.querySelector("#rtbl tbody"),
         tblcount=document.getElementById("tblcount");
     var sortKey="jurisdiction",sortDir=1;
@@ -638,9 +810,16 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
       {k:"requirement_summary",label:"Requirement",sortable:false},
       {k:"pinpoint",label:"Source pinpoint",sortable:false},
       {k:"status",label:"Status",sortable:true},
+      {k:"claim_class",label:"Claim",sortable:true},
       {k:"confidence",label:"Conf",sortable:true},
       {k:"version_added",label:"Ver",sortable:true}
     ];
+    function isCitable(r){return r.claim_class==="tier1_legal"&&r.status==="in_force"&&r.evidence_tier==="resolution_text";}
+    function ccBadge(r){
+      if(r.claim_class==="tier1_legal")return "<span class='cc-badge cc-legal'>legal</span>";
+      if(r.claim_class==="tier2_operational")return "<span class='cc-badge cc-oper'>oper</span>";
+      return "<span class='cc-badge cc-oper'>—</span>";
+    }
     // populate dropdowns
     JURS.forEach(function(j){ if(records.some(function(r){return r.jurisdiction===j.c;})){ var o=document.createElement("option");o.value=j.c;o.textContent=j.c+" — "+j.f;fJur.appendChild(o);} });
     DIMS.forEach(function(d){ var o=document.createElement("option");o.value=d.k;o.textContent=d.f;fDim.appendChild(o); });
@@ -651,6 +830,7 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
       if(k==="dimension"){var i=DIMS.findIndex(function(d){return d.k===r.dimension;});return i<0?99:i;}
       if(k==="confidence")return CONF_RANK[r.confidence]||0;
       if(k==="constraint_ref")return r.constraint_ref||"~";
+      if(k==="claim_class")return r.claim_class||"~";
       return (r[k]||"").toString().toLowerCase();
     }
     function filteredRows(){
@@ -660,6 +840,8 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
         if(fDim.value&&r.dimension!==fDim.value)return false;
         if(fStatus.value&&r.status!==fStatus.value)return false;
         if(fConf.value&&r.confidence!==fConf.value)return false;
+        if(fClass.value&&r.claim_class!==fClass.value)return false;
+        if(fCitable.checked&&!isCitable(r))return false;
         if(term&&hay(r).indexOf(term)<0)return false;
         return true;
       }).sort(function(a,b){var va=sortVal(a,sortKey),vb=sortVal(b,sortKey);return (va<vb?-1:va>vb?1:0)*sortDir;});
@@ -679,23 +861,27 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
         var d=DMAP[r.dimension]||{f:r.dimension,spine:false};
         var pin=(r.source&&r.source.pinpoint)||"—";
         h+="<tr data-id='"+esc(r.id)+"'>";
-        h+="<td class='tj'>"+esc(r.jurisdiction)+"</td>";
+        h+="<td class='tj'>"+esc(r.jurisdiction)+(isCitable(r)?"<span class='cite-star' title='citable as law (tier1_legal + in_force + resolution_text)'>§</span>":"")+"</td>";
         h+="<td class='td-dim'>"+esc(d.f)+(d.spine?" <span class='spm'>★</span>":"")+"</td>";
         h+="<td><span class='tcref'>"+esc(r.constraint_ref||"—")+"</span></td>";
         h+="<td class='td-req'>"+esc(r.requirement_summary)+"</td>";
         h+="<td class='td-pin'>"+esc(pin)+"</td>";
         h+="<td>"+esc(r.status||"—")+"</td>";
+        h+="<td>"+ccBadge(r)+"</td>";
         h+="<td><span class='cf "+(r.confidence||"low")+"'>"+esc(r.confidence||"low")+"</span></td>";
         h+="<td>v"+esc(r.version_added||"—")+"</td>";
         h+="</tr>";
       });
       rtblBody.innerHTML=h;
-      tblcount.textContent=rows.length+" of "+records.length+" records";
+      var citeCount=rows.filter(isCitable).length;
+      tblcount.textContent=rows.length+" of "+records.length+" records"+(fCitable.checked?" · citable law only":(citeCount?" · "+citeCount+" citable":""));
+      document.getElementById("citebanner").classList.toggle("on",fCitable.checked);
     }
     rtblHead.addEventListener("click",function(e){var th=e.target.closest("th[data-col]");if(!th)return;var k=th.getAttribute("data-col");if(!COLS.find(function(c){return c.k===k&&c.sortable;}))return;if(sortKey===k)sortDir*=-1;else{sortKey=k;sortDir=1;}renderTable();});
     rtblBody.addEventListener("click",function(e){var tr=e.target.closest("tr[data-id]");if(tr){selectRecord(tr.getAttribute("data-id"));}});
-    [fJur,fDim,fStatus,fConf].forEach(function(sel){sel.addEventListener("change",renderTable);});
-    document.getElementById("f-reset").addEventListener("click",function(){fJur.value="";fDim.value="";fStatus.value="";fConf.value="";renderTable();});
+    [fJur,fDim,fStatus,fConf,fClass].forEach(function(sel){sel.addEventListener("change",renderTable);});
+    fCitable.addEventListener("change",renderTable);
+    document.getElementById("f-reset").addEventListener("click",function(){fJur.value="";fDim.value="";fStatus.value="";fConf.value="";fClass.value="";fCitable.checked=false;renderTable();});
 
     // keyword drives both views
     if(q)q.addEventListener("input",function(){applyFilter();renderTable();});
@@ -717,6 +903,182 @@ table.rtbl .tcref{font-family:var(--mono);font-size:11px;color:var(--accent)}
     if(!def)def=records[0];
     if(def)selectRecord(def.id);
     else insp.innerHTML="<div class='insp-hint'>Dataset unavailable in this preview. Open the live site, or view <a href='./dataset.json'>dataset.json</a> directly.</div>";
+
+    renderCompat(data); // analysis layer: §5.14 pairwise compatibility matrix
+    renderTimeline(data); // time engine: dated/contingent feasibility
+    renderSubstrate(data); // constraint substrate: feasibility composed from C1-C8 poles
+    renderStakeholders(data); // Atlas §8: persona projection of each corridor
+  }
+
+  // ---- compatibility matrix (analysis layer) ----
+  var CM_JURS=["US","EU","UK","SG","HK","CN","BR","CH","AE","TW","JP","KR"];
+  var CM_CLASS={"I":"cm-I","I/II":"cm-hyb","II":"cm-II","III":"cm-III"};
+  var CM_LABEL={"I":"Category I — dual authorization","I/II":"Category I/II — hybrid","II":"Category II — partnership","III":"Category III — unresolved"};
+  function renderCompat(data){
+    var sec=document.getElementById("compatibility");
+    var comp=data&&data.analysis&&data.analysis.compatibility;
+    if(!sec)return;
+    if(!comp||!comp.pairs||!comp.pairs.length){ sec.style.display="none"; return; }
+    sec.style.display="";
+    var byPair={}; comp.pairs.forEach(function(p){byPair[p.pair]=p;});
+    function getPair(a,b){ return byPair[[a,b].sort().join("-")]; }
+    // legend
+    var leg=document.getElementById("cmatrix-legend"); leg.innerHTML="";
+    ["I","I/II","II","III"].forEach(function(c){
+      leg.innerHTML+="<span class='lg'><span class='sw "+CM_CLASS[c]+"'></span>"+esc(CM_LABEL[c])+"</span>";
+    });
+    // head
+    var thead=document.querySelector("#cmatrix thead");
+    var h="<tr><th>From / To &rarr;</th>"; CM_JURS.forEach(function(j){h+="<th>"+j+"</th>";}); h+="</tr>";
+    thead.innerHTML=h;
+    // body
+    var tb=document.querySelector("#cmatrix tbody"); var rows="";
+    CM_JURS.forEach(function(a){
+      rows+="<tr><th title='"+esc(JFULL[a]||a)+"'>"+a+"</th>";
+      CM_JURS.forEach(function(b){
+        if(a===b){ rows+="<td class='cm-cell cm-diag'></td>"; return; }
+        var p=getPair(a,b); var cls=p?(CM_CLASS[p.category]||""):"";
+        var lbl=p?p.category:"";
+        rows+="<td class='cm-cell "+cls+"' data-pair='"+(p?p.pair:"")+"' title='"+esc(a+" / "+b+(p?(" — "+CM_LABEL[p.category]):""))+"' tabindex='0' role='button'>"+esc(lbl)+"</td>";
+      });
+      rows+="</tr>";
+    });
+    tb.innerHTML=rows;
+    var detail=document.getElementById("cmatrix-detail");
+    detail.innerHTML="<div class='cmd-empty'>Select a cell to see the category, the operative interaction sets, and the binding constraint for that jurisdiction pair.</div>";
+    function showPair(pairKey,cell){
+      var p=byPair[pairKey]; if(!p)return;
+      var prev=tb.querySelector(".cm-cell.sel"); if(prev)prev.classList.remove("sel");
+      if(cell)cell.classList.add("sel");
+      var axis=p.category_iii_axis?(" · <b>axis:</b> "+esc(p.category_iii_axis)):"";
+      var pj=(p.jurisdictions||[]).map(function(j){return esc(JFULL[j]||j);}).join(" &times; ");
+      detail.innerHTML="<div class='cmd-card'><h4>"+pj+"<span class='cmd-cat'>"+esc(CM_LABEL[p.category]||p.category)+"</span></h4>"
+        +"<div class='cmd-sets'><b>Operative interaction sets:</b> "+esc((p.interaction_sets||[]).join(", ")||"—")+axis+"</div>"
+        +"<p>"+esc(p.note||"")+"</p></div>";
+    }
+    tb.addEventListener("click",function(e){var c=e.target.closest(".cm-cell");if(c&&c.dataset.pair)showPair(c.dataset.pair,c);});
+    tb.addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")){var c=e.target.closest(".cm-cell");if(c&&c.dataset.pair){e.preventDefault();showPair(c.dataset.pair,c);}}});
+    // prime with the highest-stakes pair (CN-HK)
+    var seed=tb.querySelector(".cm-cell[data-pair='CN-HK']"); if(seed)showPair("CN-HK",seed);
+  }
+
+  // ---- time engine: dated/contingent feasibility ----
+  function clsChip(c){ var k=String(c||"").replace("/","").replace(/[^A-Za-z0-9_]/g,""); 
+    var map={"I":"c1","III":"cIII","II":"c2","T":"cT","III":"cIII","blocked":"cblocked","pre_regime":"cpre_regime"};
+    var cc=map[c]||(c==="I/II"?"c1":"c2"); return "<span class='tl-cls "+cc+"'>"+esc(c||"?")+"</span>"; }
+  function renderTimeline(data){
+    var sec=document.getElementById("timeline");
+    var tl=data&&data.analysis&&data.analysis.computed_timeline;
+    var ec=data&&data.analysis&&data.analysis.event_calendar;
+    if(!sec)return;
+    if(!tl||!ec){ sec.style.display="none"; return; }
+    sec.style.display="";
+    document.getElementById("timeline-headline").innerHTML="<b>How to read this.</b> "+esc(tl.headline||"");
+    // illustration edges (those that actually move with a scheduled regime change)
+    var edges=(tl.illustration_edge_timelines||[]).filter(function(e){
+      return (e.scheduled_transitions&&e.scheduled_transitions.some(function(t){return t.changed;}))
+          || (e.pending_contingent&&e.pending_contingent.length); });
+    if(!edges.length) edges=(tl.illustration_edge_timelines||[]).slice(0,4);
+    var eh="";
+    edges.forEach(function(e){
+      eh+="<div class='tl-edge'><div class='tle-h'>"+esc(e.edge)+"</div>";
+      eh+="<div class='tl-step'>"+clsChip(e.today_class)+"<span class='tl-when'>today</span></div>";
+      (e.scheduled_transitions||[]).forEach(function(t){
+        if(!t.changed)return;
+        eh+="<div class='tl-step'><span class='tl-arrow'>↓</span></div>";
+        eh+="<div class='tl-step'>"+clsChip(t.class_after)+"<span class='tl-when'>"+esc(t.date)+(t.precision&&t.precision!=="day"?" ("+esc(t.precision)+")":"")+" · "+esc(t.event_id)+"</span></div>";
+      });
+      (e.pending_contingent||[]).forEach(function(p){
+        eh+="<div class='tl-step'><span class='tl-arrow'>⇢</span><span class='tl-when'>if enacted:</span>"+clsChip(p.class_if_enacted)+"<span class='tl-when'>"+esc(p.event_id)+"</span></div>";
+      });
+      eh+="</div>";
+    });
+    document.getElementById("timeline-edges").innerHTML=eh;
+    // event calendar
+    var ev="";
+    (ec.events||[]).forEach(function(e){
+      var when=e.status==="contingent"?"no firm date":(e.effective_date||"—")+(e.precision&&e.precision!=="day"?" ("+e.precision+")":"");
+      ev+="<div class='tl-ev'><span class='tlev-date'>"+esc(when)+"</span>"
+        +"<span class='tlev-st st-"+esc(e.status)+"'>"+esc(e.status)+"</span>"
+        +"<span class='tlev-body'><b>"+esc(e.jurisdiction)+"</b> — "+esc(e.title)+"<br><span class='tlev-basis'>"+esc(e.basis||e.trigger||"")+"</span></span></div>";
+    });
+    document.getElementById("timeline-events").innerHTML=ev;
+  }
+
+  // ---- constraint substrate: feasibility composed from C1-C8 poles ----
+  function renderSubstrate(data){
+    var sec=document.getElementById("substrate");
+    var cs=data&&data.analysis&&data.analysis.computed_substrate;
+    if(!sec)return;
+    if(!cs){ sec.style.display="none"; return; }
+    sec.style.display="";
+    var cov=cs.coverage||{};
+    var c="";
+    c+="<div class='scov'><div class='scov-n'>"+esc((cov.cells_populated||0)+"/96")+"</div><div class='scov-l'>constraint poles populated</div></div>";
+    c+="<div class='scov'><div class='scov-n'>"+esc(cov.authored_corridors_definite||"0/9")+"</div><div class='scov-l'>authored corridors derivable from constraints</div></div>";
+    c+="<div class='scov'><div class='scov-n'>"+esc(cov.directed_edges_derivable||"–")+"</div><div class='scov-l'>directed edges derivable (rest = into UK, in transition)</div></div>";
+    c+="<div class='scov'><div class='scov-n'>"+(cs.cross_check&&cs.cross_check.clean?"clean":"—")+"</div><div class='scov-l'>cross-check vs signal compose() (all definite results)</div></div>";
+    var ck=data&&data.analysis&&data.analysis.computed_corridor_skeletons;
+    if(ck&&ck.coverage){var ec=ck.coverage;
+      c+="<div class='scov'><div class='scov-n'>"+esc(ec.edges_with_a_record+"/"+ec.edges_total)+"</div><div class='scov-l'>edges with a record ("+esc(ec.authored_rich_corridors)+" rich + "+esc(ec.computed_skeletons)+" computed skeletons)</div></div>";
+    }
+    document.getElementById("substrate-coverage").innerHTML=c;
+    var rows="<div class='sub-head'><span>edge</span><span>substrate</span><span>signal</span><span>interaction sets / why</span></div>";
+    var derivs=(cs.illustration_triangle_derivations||[]).concat(cs.cross_region_derivations||[]);
+    derivs.forEach(function(e){
+      var ok=e.agree_with_signal?"✓ agrees":(e.definite?"DIVERGES":"indeterminate");
+      rows+="<div class='sub-row'><span class='sr-edge'>"+esc(e.edge)+"</span>"
+        +"<span>"+clsChip(e.substrate_class)+"</span><span>"+clsChip(e.signal_class)+"</span>"
+        +"<span class='sr-sets'>"+esc((Object.keys(e.set_verdicts||{}).sort().join(", "))||"—")+" <span class='sr-ok'>"+esc(ok)+"</span></span></div>";
+    });
+    document.getElementById("substrate-triangle").innerHTML=rows;
+    // verification frontier — the inverse of substrate coverage
+    var wl=data&&data.analysis&&data.analysis.verification_worklist;
+    var host=document.getElementById("substrate-triangle");
+    if(wl&&wl.headline&&host){
+      var bj=wl.headline.by_jurisdiction||{};
+      var parts=Object.keys(bj).map(function(k){return k+" "+bj[k];}).join(", ");
+      var note=document.createElement("p");
+      note.className="sec-sub"; note.style.marginTop="18px";
+      note.innerHTML="<b>Verification frontier.</b> "+esc(String(wl.headline.tier1_legal_unverified))
+        +" tier1_legal cells are still unverified ("+esc(parts)+") — all lacking an official-text URL. This is the inverse of substrate coverage: each cell verified lifts the substrate and retires the standing liability. <code>evidence_tier</code> is now enforced — a cell may only claim a tier it has the evidence for — and <code>verification_worklist</code> scopes the pass per cell.";
+      host.parentNode.insertBefore(note, host.nextSibling);
+    }
+  }
+
+  // ---- stakeholder projection (Atlas §8) ----
+  function renderStakeholders(data){
+    var sec=document.getElementById("stakeholders");
+    var sp=data&&data.analysis&&data.analysis.computed_stakeholder_profiles;
+    var db=data&&data.analysis&&data.analysis.stakeholder_database;
+    if(!sec)return;
+    if(!sp||!sp.profiles||!sp.profiles.length){ sec.style.display="none"; return; }
+    sec.style.display="";
+    var sel=document.getElementById("sh-edge");
+    var edges=sp.corridors_projected||[];
+    sel.innerHTML=edges.map(function(e){return "<option value='"+esc(e)+"'>"+esc(e.replace("->"," → "))+"</option>";}).join("");
+    function paint(edge){
+      var rows=sp.profiles.filter(function(p){return p.edge===edge;});
+      var html="";
+      rows.forEach(function(p){
+        var read=(p.reading||[]).map(function(r){
+          var pole=r.pole?("<b>"+esc(r.pole)+"</b>"):"<i>unset</i>";
+          return "· "+esc(r.jurisdiction)+" "+esc(r.side_constraint||r.constraint||"")+": "+pole+" — "+esc(r.implication);
+        }).join("<br>");
+        html+="<div class='sh-card'>"
+          +"<span class='sh-arche'>"+esc((p.archetypes_engaged||[]).join(" ")||"—")+"</span>"
+          +"<div class='sh-label'>"+esc(p.label||p.stakeholder)+"</div>"
+          +"<div class='sh-lens'>"+esc(p.lens||"")+"</div>"
+          +"<div class='sh-head'>"+esc(p.headline||"")+"</div>"
+          +"<div class='sh-read'>"+read+"</div>"
+          +"<div class='sh-ver'>"+esc(p.verification_status||"")+"</div>"
+          +"</div>";
+      });
+      document.getElementById("sh-profiles").innerHTML=html;
+    }
+    sel.onchange=function(){paint(sel.value);};
+    paint(edges.indexOf("US->EU")>=0?"US->EU":edges[0]);
+    if(edges.indexOf("US->EU")>=0)sel.value="US->EU";
   }
 
   // Render from the embedded snapshot immediately (instant + robust, works on file:// too),

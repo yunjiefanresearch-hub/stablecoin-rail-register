@@ -1,0 +1,56 @@
+corridor_id: eu-us-eur-usd-settlement
+name: European Union -> United States (EUR->USD settlement)
+schema: corridor/v3-directed-edge
+origin: EU
+destination: US
+direction: directed
+currencies: EUR -> USD
+feasibility_class: Category II (comparability determination required)
+compatibility_category: I/II
+compatibility_pair: EU-US
+divergence:
+  kind: interaction_sets
+  against_pair: EU-US
+  pair_interaction_sets:
+  - B
+  - D
+  edge_interaction_sets: &id001
+  - A
+  - C
+  - D
+  reason: Directed-edge operative interaction sets (Corridor Atlas v0.2.3 §5, read at the destination
+    inbound gate for THIS direction) differ from the undirected pairwise sets (Architecture §5.14). The
+    Atlas generalizes the §5.12/§5.14 undirected pairs into directed edges and re-derives the operative
+    interaction sets per direction; the compatibility CATEGORY agrees, the interaction-set list may differ
+    by direction. This divergence is declared, not silent.
+archetypes:
+- RC
+- SC
+- TC
+- DC
+interaction_sets: *id001
+infrastructure_overlap: Project Agora (shared Western wholesale-settlement experimental path)
+inbound_mechanism:
+  test: GENIUS Act §18 comparability determination
+  detail: Unilateral Treasury comparability determination (on SCRC recommendation) + OCC registration
+    + US-held reserves; none granted to date.
+  administrator: US Treasury (Stablecoin Certification Review Committee) / OCC
+note: 'The asymmetric mirror of the dollar-into-Europe corridor, gated differently. A MiCA-authorized
+  euro issuer does not thereby gain US access; entry turns on a §18 Treasury comparability determination,
+  OCC registration, and US-held reserves. Because no comparability determination has been made to date,
+  the corridor is Category II in practice: operable in principle, pending a determination that does not
+  yet exist. The asymmetry is structural — the comparability gate is unilateral with no MiCA counterpart.'
+source:
+  primary: Fan, Cross-Border Digital-Finance Corridor Atlas v0.2.3 (June 2026), §5.2 (European Union ->
+    United States)
+  secondary: 'Fan, Cross-Border Stablecoin Architecture v3 (Twelve Jurisdictions, June 2026), §5.14 (EU
+    x US: Category I/II hybrid)'
+valid_as_of: 2026-06
+evidence_tier: firm_summary
+version_added: 0.5.0
+tags:
+- corridor
+- directed_edge
+- from_atlas_v0.2.3
+- v0.5.0_corridor_layer
+- directional_asymmetry

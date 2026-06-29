@@ -1,0 +1,41 @@
+id: tw-frs-capital_requirements-001
+jurisdiction: TW
+authority: FSC (would administer)
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: virtual asset / draft stablecoin (Virtual Asset Service Act)
+dimension: capital_requirements
+constraint_ref: C2
+requirement_summary: 'DRAFT: capital requirements to be specified by the FSC under the Virtual Asset Service Act.
+  No stablecoin capital regime is in force.'
+requirement_structured:
+  in_force: none
+  draft: FSC to specify under the Virtual Asset Service Act
+status: proposed
+source:
+  primary: Draft Virtual Asset Service Act
+  pinpoint: Capital (draft) — FSC to specify; NOT in force
+  url: https://english.ey.gov.tw/
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §Taiwan (Capital Requirements)
+- citation: 'Draft Virtual Asset Service Act bill (Executive Yuan referral): https://english.ey.gov.tw/. Official
+    primary text is Chinese (law.moj.gov.tw); there is no official English translation (FSC English materials are
+    summaries).'
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; an official URL for the
+  bill/announcement is provided (source.url), but this is a draft provision and is NOT operative law, so it is not
+  upgraded and remains firm_summary. STATUS proposed: not operative law.'
+confidence: low
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- draft_provision
+- v0.5.1_verification
+- draft_url_added
+- v0.7.0_claim_class
+- binding_pending_proposal
+binding_status: pending_proposal

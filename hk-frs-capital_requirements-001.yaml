@@ -2,23 +2,51 @@ id: hk-frs-capital_requirements-001
 jurisdiction: HK
 authority: HKMA
 instrument_type: fiat_referenced_stablecoin
-instrument_label_local: "specified stablecoin"
+instrument_label_local: specified stablecoin
 dimension: capital_requirements
 constraint_ref: C2
-requirement_summary: "HK$25 million minimum paid-up share capital (or currency equivalent), with HKMA empowered to require more based on business plan; HK$3 million minimum liquid capital; and excess liquid capital equivalent to at least 12 months of operating expenses. The HK$25m threshold, combined with the HK-incorporation-or-authorised-institution requirement, effectively limits applicants to banks and JV-backed large corporates."
+requirement_summary: HK$25 million minimum paid-up share capital (or currency equivalent), with HKMA empowered to
+  require more based on business plan; HK$3 million minimum liquid capital; and excess liquid capital equivalent
+  to at least 12 months of operating expenses. The HK$25m threshold, combined with the HK-incorporation-or-authorised-institution
+  requirement, effectively limits applicants to banks and JV-backed large corporates.
 requirement_structured:
-  min_paid_up_capital: "HK$25,000,000"
-  min_liquid_capital: "HK$3,000,000"
-  liquidity_buffer: ">=12 months operating expenses"
+  min_paid_up_capital: HK$25,000,000
+  min_liquid_capital: HK$3,000,000
+  liquidity_buffer: '>=12 months operating expenses'
 status: in_force
-effective_date: "2025-08-01"
+effective_date: '2025-08-01'
 source:
-  primary: "Stablecoins Ordinance (Cap. 656), capital requirements"
-  pinpoint: "HK$25m paid-up; HK$3m liquid capital; 12-month opex buffer"
+  primary: Stablecoins Ordinance (Cap. 656), capital requirements
+  pinpoint: HK$25m paid-up capital (statutory)
+  url: https://www.elegislation.gov.hk/hk/cap656
 secondary:
-  - citation: "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.21-22 (Hong Kong — Capital Requirements)"
-interpretation_note: "Provenance: transcribed from author's Compliance Matrix v0.9.3. Split-out capital half of the former reserve_capital dimension."
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.21-22 (Hong Kong — Capital Requirements)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3. Split-out capital half of
+  the former reserve_capital dimension.
+
+
+  [v0.9.5 verification] CAVEAT: HK$3m liquid-asset + 12-month-opex requirements are HKMA Guideline detail (guidance),
+  not the Ordinance. Confirmed for the statutory HK$25m paid-up minimum. The HK$3m liquid-asset and 12-month-opex
+  figures are HKMA Guideline detail (guidance).'
 confidence: high
-last_reviewed: "2026-06-17"
+claim_class: tier1_legal
+last_reviewed: '2026-06-27'
 version_added: 0.2.0
-tags: [apac, focus, from_matrix_v0.9.3, dimension_split]
+tags:
+- apac
+- focus
+- from_matrix_v0.9.3
+- dimension_split
+- v0.9.5_verification
+- binding_in_force_enacted
+- resolution_text_verified
+binding_status: in_force_enacted
+evidence_tier: resolution_text
+verification:
+  verified_by: external review (web retrieval against official sources)
+  verified_on: '2026-06-27'
+  method: official_text
+  against:
+    instrument: Stablecoins Ordinance (Cap. 656) + HKMA Guidelines
+    url: https://www.elegislation.gov.hk/hk/cap656
+    pinpoint: HK$25m paid-up capital (statutory)

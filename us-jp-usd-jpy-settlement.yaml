@@ -1,0 +1,58 @@
+corridor_id: us-jp-usd-jpy-settlement
+name: United States -> Japan (USD->JPY settlement)
+schema: corridor/v3-directed-edge
+origin: US
+destination: JP
+direction: directed
+currencies: USD -> JPY
+feasibility_class: Category II (channel determination required)
+compatibility_category: I/II
+compatibility_pair: JP-US
+divergence:
+  kind: interaction_sets
+  against_pair: JP-US
+  pair_interaction_sets:
+  - A
+  - C
+  - E
+  - F
+  edge_interaction_sets: &id001
+  - A
+  - C
+  reason: Directed-edge operative interaction sets (Corridor Atlas v0.2.3 §5, read at the destination
+    inbound gate for THIS direction) differ from the undirected pairwise sets (Architecture §5.14). The
+    Atlas generalizes the §5.12/§5.14 undirected pairs into directed edges and re-derives the operative
+    interaction sets per direction; the compatibility CATEGORY agrees, the interaction-set list may differ
+    by direction. This divergence is declared, not silent.
+archetypes:
+- RC
+- SC
+- TC
+- DC
+interaction_sets: *id001
+infrastructure_overlap: Project Agora (shared Western wholesale-settlement experimental path)
+inbound_mechanism:
+  test: Japan Electronic Payment Instruments inbound channel-determination
+  detail: Foreign token circulates only via a registered EPIESP holding reserves in Japan equal to customer
+    holdings, with the foreign issuer not issuing/redeeming/soliciting to Japanese users (recognition
+    + registration, not mutual recognition).
+  administrator: FSA / Local Finance Bureaus
+note: A dollar issuer reaching into Japan does not meet automatic dual authorization; it meets a channel.
+  A foreign-issued stablecoin circulates only via a registered EPIESP holding reserves in Japan equal
+  to customer holdings, while the foreign issuer does not issue/redeem/solicit to Japanese users. The
+  working example is USDC, admitted via SBI VC Trade (March 2025). Because the gating step is a recognition
+  + registration channel-determination rather than mutual recognition, the corridor is Category II — the
+  same class as entry into the US or the UAE — even though Japan is a fully live regime.
+source:
+  primary: Fan, Cross-Border Digital-Finance Corridor Atlas v0.2.3 (June 2026), §5.18 (United States ->
+    Japan)
+  secondary: 'Fan, Cross-Border Stablecoin Architecture v3 (Twelve Jurisdictions, June 2026), §5.14 (US
+    x JP: Category I/II hybrid — undirected §5.14 pair; see this edge''s `divergence` field)'
+valid_as_of: 2026-06
+evidence_tier: firm_summary
+version_added: 0.5.0
+tags:
+- corridor
+- directed_edge
+- from_atlas_v0.2.3
+- v0.5.0_corridor_layer

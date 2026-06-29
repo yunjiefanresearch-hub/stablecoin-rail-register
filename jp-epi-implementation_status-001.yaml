@@ -1,0 +1,50 @@
+id: jp-epi-implementation_status-001
+jurisdiction: JP
+authority: FSA
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: Electronic Payment Instrument (EPI)
+dimension: implementation_status
+requirement_summary: 'Live regime. Milestones: Electronic Payment Instruments regime in force (1 June 2023); USDC
+  admitted via the intermediary channel (March 2025); Act No. 66 of 2025 enacted, relaxing trust-type reserves (June
+  2025); JPYC Inc. registered as a Type II funds-transfer provider (18 August 2025); JPYC, the first registered
+  yen stablecoin, launched (27 October 2025); a megabank trust-structured stablecoin (MUFG, Mizuho, SMBC via Progmat
+  and Project Pax) targeted by the end of FY2026 (31 March 2027).'
+requirement_structured:
+  regime_stage: live
+  milestones:
+  - EPI regime in force 1 Jun 2023
+  - USDC admitted Mar 2025
+  - Act 66/2025 Jun 2025
+  - JPYC Inc. registered 18 Aug 2025
+  - JPYC launched 27 Oct 2025
+  - megabank trust token targeted by end FY2026 (31 Mar 2027)
+status: in_force
+effective_date: '2023-06-01'
+source:
+  primary: Payment Services Act commencement + FSA registrations (JPYC; USDC via SBI VC Trade)
+  pinpoint: Timeline — EPI 1 Jun 2023; USDC Mar 2025; Act 66/2025 Jun 2025; JPYC 27 Oct 2025; megabank trust token
+    by FY2026
+  url: https://laws.e-gov.go.jp/
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §Japan (Implementation Timeline)
+- citation: Payment Services Act (Act No. 59 of 2009) — official English at Japanese Law Translation (japaneselawtranslation.go.jp).
+- citation: 'USDC via SBI VC Trade (4 Mar 2025): https://www.sbigroup.co.jp/english/news/pdf/2025/0304_a_en.pdf.
+    Act No. 66 of 2025 full enforcement scheduled 13 Jun 2026 (Cabinet orders pending).'
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; VERIFIED against the
+  official primary text in the v0.5.1 verification pass (source.url is the official instrument). Japan is the most
+  operationally advanced of the v0.4.0 additions, with multiple live yen tokens and a working inbound channel.'
+confidence: high
+claim_class: tier2_operational
+evidence_tier: resolution_text
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- v0.5.1_verification
+- resolution_text_verified
+- v0.7.0_claim_class
+- binding_in_force_enacted
+binding_status: in_force_enacted

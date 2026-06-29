@@ -1,0 +1,42 @@
+id: kr-frs-reserve_backing-001
+jurisdiction: KR
+authority: FSC (would administer)
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: won-referenced stablecoin (draft Digital Asset Basic Act)
+dimension: reserve_backing
+constraint_ref: C2
+requirement_summary: 'DRAFT: more than one hundred percent reserves in safe assets, bank- or custodian-held, segregated.
+  No reserve regime is in force. Draft provisions only.'
+requirement_structured:
+  in_force: none
+  draft: '>100% reserves in safe assets, bank/custodian-held, segregated'
+status: proposed
+source:
+  primary: Draft Digital Asset Basic Act
+  pinpoint: Reserve/backing (draft) — >100% reserves in safe assets, bank/custodian-held, segregated; NOT in force
+  url: https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2210736/detailRP
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §South Korea (Reserve and Backing
+    Requirements)
+- citation: 'Draft Digital Asset Basic Act (bill No. 2210736): https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2210736/detailRP.
+    Official primary text is Korean (law.go.kr); there is no official English translation (FSC English materials
+    are summaries).'
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; an official URL for the
+  bill/announcement is provided (source.url), but this is a draft provision and is NOT operative law, so it is not
+  upgraded and remains firm_summary. STATUS proposed: not operative law.'
+confidence: medium
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- draft_provision
+- v0.5.1_verification
+- draft_url_added
+- v0.7.0_claim_class
+- binding_pending_proposal
+binding_status: pending_proposal

@@ -4,9 +4,9 @@ authority: MAS
 instrument_type: fiat_referenced_stablecoin
 instrument_label_local: single-currency stablecoin (SCS)
 dimension: implementation_status
-requirement_summary: The Payment Services Act came into force in January 2020; the SCS framework was finalised
-  on 15 August 2023; the FSMA Part 9 DTSP regime took effect 30 June 2025 with no transitional arrangement;
-  full SCS-framework implementation is targeted for mid-2026.
+requirement_summary: The Payment Services Act came into force in January 2020; the SCS framework was finalised on
+  15 August 2023; the FSMA Part 9 DTSP regime took effect 30 June 2025 with no transitional arrangement; full SCS-framework
+  implementation is targeted for mid-2026.
 requirement_structured:
   psa_in_force: Jan 2020
   scs_finalised: 15 Aug 2023
@@ -20,9 +20,12 @@ source:
   url: ''
 secondary:
 - citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.20 (Singapore — Implementation Timeline)
-interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
-  verification.'
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source verification.
+
+
+  [v0.9.5 verification] SCS framework implementation pending legislation (expected mid-2026); operational record.'
 confidence: high
+claim_class: tier2_operational
 last_reviewed: '2026-06-17'
 version_added: 0.3.0
 tags:
@@ -30,3 +33,7 @@ tags:
 - focus
 - from_matrix_v0.9.3
 - v0.3.0_backfill
+- v0.7.0_claim_class
+- v0.9.5_verification
+- binding_finalized_policy_pending
+binding_status: finalized_policy_pending

@@ -1,0 +1,32 @@
+id: uk-frs-securities_classification-001
+jurisdiction: UK
+authority: FCA; Bank of England (systemic)
+instrument_type: fiat_referenced_stablecoin
+dimension: securities_classification
+constraint_ref: C4
+requirement_summary: Regulated stablecoins are brought within the FSMA financial-services perimeter as a payments-adjacent
+  regulated activity rather than as transferable securities under the RAO's investment heads.
+requirement_structured:
+  perimeter: FSMA regulated activity (payments-adjacent)
+  securities: false
+status: in_force
+effective_date: null
+source:
+  primary: Financial Services and Markets Act 2000 (Regulated Activities) Order; FSMA 2026 stablecoin provisions
+  pinpoint: Regulated-activity perimeter for stablecoins vs. the investment (securities) heads
+interpretation_note: 'Authored in v0.9.2 to fill the UK.C4 constraint cell for the substrate sweep.
+
+
+  [v0.9.5 verification] Securities/RAO treatment under the FSMA 2026 perimeter; made-not-commenced.'
+confidence: medium
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- uk
+- securities_classification
+- v0.9.5_verification
+- binding_made_not_commenced
+binding_status: made_not_commenced

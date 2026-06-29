@@ -4,8 +4,8 @@ authority: MAS
 instrument_type: fiat_referenced_stablecoin
 instrument_label_local: single-currency stablecoin (SCS)
 dimension: redemption
-requirement_summary: SCS holders are entitled to redemption at par value within 5 business days of a valid
-  request, with no unreasonable fees or conditions, and customer assets are held under a statutory trust.
+requirement_summary: SCS holders are entitled to redemption at par value within 5 business days of a valid request,
+  with no unreasonable fees or conditions, and customer assets are held under a statutory trust.
 requirement_structured:
   par_redemption: at par within 5 business days of valid request
   fees: no unreasonable fees or conditions
@@ -14,13 +14,19 @@ status: transitional
 effective_date: '2023-08-15'
 source:
   primary: MAS Single-Currency Stablecoin Regulatory Framework (15 Aug 2023)
-  pinpoint: Redemption mechanics — par redemption within 5 business days; statutory trust
-  url: ''
+  pinpoint: 'SCS framework: redemption at par within 5 business days'
+  url: https://www.mas.gov.sg/news/media-releases/2023/mas-finalises-stablecoin-regulatory-framework
 secondary:
 - citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.18 (Singapore — Redemption Mechanics)
-interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
-  verification. Contrast HK''s 1-business-day par redemption.'
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source verification.
+  Contrast HK''s 1-business-day par redemption.
+
+
+  [v0.9.5 verification] HELD below resolution_text and status corrected to transitional: an SCS-FRAMEWORK requirement
+  (finalized MAS policy, 15 Aug 2023) whose implementing legislation is still being drafted (expected mid-2026)
+  — finalized policy, not enacted statute.'
 confidence: medium
+claim_class: tier1_legal
 last_reviewed: '2026-06-17'
 version_added: 0.3.0
 tags:
@@ -28,3 +34,18 @@ tags:
 - focus
 - from_matrix_v0.9.3
 - v0.3.0_backfill
+- v0.7.0_claim_class
+- v0.9.5_verification
+- binding_finalized_policy_pending
+- verification_reviewed
+binding_status: finalized_policy_pending
+evidence_tier: firm_summary
+verification:
+  verified_by: external review (web retrieval against official sources)
+  verified_on: '2026-06-27'
+  method: practitioner_corroboration
+  against:
+    instrument: Payment Services Act 2019 (enacted) + MAS Single-Currency Stablecoin Framework (finalized policy,
+      pending legislation)
+    url: https://www.mas.gov.sg/news/media-releases/2023/mas-finalises-stablecoin-regulatory-framework
+    pinpoint: 'SCS framework: redemption at par within 5 business days'

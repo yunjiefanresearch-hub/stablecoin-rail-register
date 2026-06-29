@@ -1,0 +1,55 @@
+corridor_id: hk-cn-hkd-cny-blocked
+name: Hong Kong SAR -> Mainland China (HKD->CNY/CNH, blocked)
+schema: corridor/v3-directed-edge
+origin: HK
+destination: CN
+direction: directed
+currencies: HKD -> CNY/CNH
+feasibility_class: Blocked at destination (issuance prohibition)
+compatibility_category: III
+compatibility_pair: CN-HK
+divergence:
+  kind: interaction_sets
+  against_pair: CN-HK
+  pair_interaction_sets:
+  - A
+  - F
+  edge_interaction_sets: &id001
+  - A
+  - D
+  - F
+  reason: Directed-edge operative interaction sets (Corridor Atlas v0.2.3 §5, read at the destination
+    inbound gate for THIS direction) differ from the undirected pairwise sets (Architecture §5.14). The
+    Atlas generalizes the §5.12/§5.14 undirected pairs into directed edges and re-derives the operative
+    interaction sets per direction; the compatibility CATEGORY agrees, the interaction-set list may differ
+    by direction. This divergence is declared, not silent.
+archetypes:
+- RC
+- DC
+interaction_sets: *id001
+infrastructure_overlap: mBridge (shared multi-central-bank-digital-currency axis)
+inbound_mechanism:
+  test: Destination prohibition
+  detail: No foreign stablecoin may circulate as a payment instrument in the mainland and no mainland
+    entity may issue one. PRC cross-border data and capital rules (PIPL, DSL, CAC Cross-Border Provisions,
+    SAFE) govern any data or capital leg.
+  administrator: PBOC / CAC / SAFE
+note: The mirror corridor is blocked at the destination. No foreign stablecoin, including an HKD-referenced
+  one, may circulate in the mainland as a payment instrument. Only the regulatory and digital-financial
+  archetypes are meaningful, and only at the level of data and capital flows. The contrast with the (also
+  Category III) PRC->HK direction is the clearest single illustration of why corridors must be directed.
+source:
+  primary: Fan, Cross-Border Digital-Finance Corridor Atlas v0.2.3 (June 2026), §5.8 (Hong Kong SAR ->
+    Mainland China)
+  secondary: 'Fan, Cross-Border Stablecoin Architecture v3 (Twelve Jurisdictions, June 2026), §5.14 (HK
+    x CN: Category III, prohibition axis — highest-stakes pair)'
+valid_as_of: 2026-06
+evidence_tier: firm_summary
+version_added: 0.5.0
+tags:
+- corridor
+- directed_edge
+- from_atlas_v0.2.3
+- v0.5.0_corridor_layer
+- blocked
+- category_iii

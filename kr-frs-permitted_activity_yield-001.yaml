@@ -1,0 +1,50 @@
+id: kr-frs-permitted_activity_yield-001
+jurisdiction: KR
+authority: FSC (would administer)
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: won-referenced stablecoin (draft Digital Asset Basic Act)
+dimension: permitted_activity_yield
+constraint_ref: C3
+requirement_summary: 'DRAFT (Value-Stabilised Assets Act track): prohibition on interest or discounts to holders.
+  No yield regime is in force. The draft yield prohibition would align Korea with the United States, the European
+  Union, and Japan, but it is not operative until enactment.'
+requirement_structured:
+  in_force: none
+  draft: prohibition on interest or discounts to holders (Value-Stabilised Assets Act track)
+  would_align_with: US, EU, Japan (prohibition cluster)
+status: proposed
+source:
+  primary: Draft Digital Asset Basic Act (Value-Stabilised Assets Act track)
+  pinpoint: Yield (draft) — prohibition on interest/discounts to holders; NOT in force
+  url: https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2210736/detailRP
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §South Korea (Yield and Interest
+    Treatment)
+- citation: 'Draft Digital Asset Basic Act (bill No. 2210736): https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2210736/detailRP.
+    Official primary text is Korean (law.go.kr); there is no official English translation (FSC English materials
+    are summaries).'
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; an official URL for the
+  bill/announcement is provided (source.url), but this is a draft provision and is NOT operative law, so it is not
+  upgraded and remains firm_summary. STATUS proposed: not operative law. On the C3 spine, Korea is a draft member
+  of the prohibition cluster.'
+interpretive_flag:
+  tension: Korea's draft yield prohibition would align it with the United States, the European Union, and Japan,
+    but it is not operative until enactment.
+  resolution_channel: Enactment of the Digital Asset Basic Act and its final text.
+confidence: medium
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- draft_provision
+- spine
+- v0.5.1_verification
+- draft_url_added
+- v0.7.0_claim_class
+- binding_pending_proposal
+binding_status: pending_proposal

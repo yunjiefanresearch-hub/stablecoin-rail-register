@@ -1,0 +1,40 @@
+id: jp-epi-aml_kyc-001
+jurisdiction: JP
+authority: FSA
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: Electronic Payment Instrument (EPI)
+dimension: aml_kyc
+requirement_summary: The FATF Travel Rule is operative (2022 amendment). Intermediaries hold a large share of customer
+  crypto-assets in cold storage, segregate user funds via trust, and enter liability-sharing agreements with issuers.
+requirement_structured:
+  travel_rule: operative (2022 amendment)
+  intermediary_controls:
+  - cold storage of a large share of customer crypto-assets
+  - user-fund segregation via trust
+  - issuer liability-sharing agreements
+status: in_force
+effective_date: '2023-06-01'
+source:
+  primary: Payment Services Act (2022 amendment); FSA AML framework
+  pinpoint: AML — FATF travel rule operative; intermediary cold storage / trust segregation / liability-sharing
+  url: https://laws.e-gov.go.jp/
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §Japan (AML / KYC Framework)
+- citation: Payment Services Act (Act No. 59 of 2009) — official English at Japanese Law Translation (japaneselawtranslation.go.jp).
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; VERIFIED against the
+  official primary text in the v0.5.1 verification pass (source.url is the official instrument).'
+confidence: high
+claim_class: tier1_legal
+evidence_tier: resolution_text
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- v0.5.1_verification
+- resolution_text_verified
+- v0.7.0_claim_class
+- binding_in_force_enacted
+binding_status: in_force_enacted

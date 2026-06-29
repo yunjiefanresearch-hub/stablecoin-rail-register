@@ -4,9 +4,9 @@ authority: FCA
 instrument_type: fiat_referenced_stablecoin
 instrument_label_local: UK qualifying stablecoin (UKQS)
 dimension: redemption
-requirement_summary: 'Redemption follows an issuer-controlled process within a backing-asset trust structure:
-  third parties holding backing assets do so on trust for the benefit of stablecoin holders. Specific
-  redemption mechanics are pending final FCA rules.'
+requirement_summary: 'Redemption follows an issuer-controlled process within a backing-asset trust structure: third
+  parties holding backing assets do so on trust for the benefit of stablecoin holders. Specific redemption mechanics
+  are pending final FCA rules.'
 requirement_structured:
   process: issuer-controlled
   trust: backing assets held on trust for holders
@@ -15,12 +15,15 @@ status: proposed
 source:
   primary: FSMA 2000 (Cryptoassets) Regulations 2026, SI 2026/102
   pinpoint: Redemption — issuer-controlled; backing-asset trust structure
-  url: ''
+  url: https://www.legislation.gov.uk/uksi/2026/102/contents/made
 secondary:
 - citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.15 (United Kingdom — Redemption Mechanics)
-interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
-  verification.'
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source verification.
+
+
+  [v0.9.5 verification] Redemption rules; made-not-commenced (operative 2027-10-25); held below resolution_text.'
 confidence: low
+claim_class: tier1_legal
 last_reviewed: '2026-06-17'
 version_added: 0.3.0
 tags:
@@ -28,3 +31,7 @@ tags:
 - focus
 - from_matrix_v0.9.3
 - v0.3.0_backfill
+- v0.7.0_claim_class
+- v0.9.5_verification
+- binding_made_not_commenced
+binding_status: made_not_commenced

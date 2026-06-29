@@ -1,19 +1,43 @@
 id: sg-scs-regulatory_authority-001
 jurisdiction: SG
-authority: "MAS"
+authority: MAS
 instrument_type: fiat_referenced_stablecoin
-instrument_label_local: "single-currency stablecoin (SCS)"
+instrument_label_local: single-currency stablecoin (SCS)
 dimension: regulatory_authority
-requirement_summary: "The MAS Single-Currency Stablecoin (SCS) framework, finalised August 2023, sits alongside the Payment Services Act 2019; a separate Digital Token Service Provider (DTSP) licensing regime operates under FSMA Part 9. MAS is the sole regulator."
+requirement_summary: The MAS Single-Currency Stablecoin (SCS) framework, finalised August 2023, sits alongside the
+  Payment Services Act 2019; a separate Digital Token Service Provider (DTSP) licensing regime operates under FSMA
+  Part 9. MAS is the sole regulator.
 status: in_force
 effective_date: null
 source:
-  primary: "MAS Single-Currency Stablecoin framework (Aug 2023); Payment Services Act 2019; FSMA Part 9 (DTSP)"
-  pinpoint: "MAS SCS framework; PSA 2019; FSMA Part 9"
+  primary: MAS Single-Currency Stablecoin framework (Aug 2023); Payment Services Act 2019; FSMA Part 9 (DTSP)
+  pinpoint: MAS authority under the Payment Services Act 2019
 secondary:
-  - citation: "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.2 (Executive Summary) / p.5 / SG detailed entry"
-interpretation_note: "Provenance: transcribed from author's Compliance Matrix v0.9.3."
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.2 (Executive Summary) / p.5 / SG detailed entry
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3.
+
+
+  [v0.9.5 verification] PROMOTED to firm_summary: MAS authority under the PS Act 2019 is in force; held at firm_summary
+  pending capture of the official PS Act text URL.'
 confidence: high
-last_reviewed: "2026-06-17"
+claim_class: tier1_legal
+last_reviewed: '2026-06-17'
 version_added: 0.2.0
-tags: [sg, focus, apac, from_matrix_v0.9.3]
+tags:
+- sg
+- focus
+- apac
+- from_matrix_v0.9.3
+- v0.9.5_verification
+- binding_in_force_enacted
+- verification_reviewed
+binding_status: in_force_enacted
+evidence_tier: firm_summary
+verification:
+  verified_by: external review (web retrieval against official sources)
+  verified_on: '2026-06-27'
+  method: practitioner_corroboration
+  against:
+    instrument: Payment Services Act 2019 (enacted) + MAS Single-Currency Stablecoin Framework (finalized policy,
+      pending legislation)
+    pinpoint: MAS authority under the Payment Services Act 2019

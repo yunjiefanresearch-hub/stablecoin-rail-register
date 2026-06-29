@@ -1,0 +1,57 @@
+id: tw-frs-issuer_pathway-001
+jurisdiction: TW
+authority: FSC (would administer)
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: virtual asset / draft stablecoin (Virtual Asset Service Act)
+dimension: issuer_pathway
+constraint_ref: C1
+requirement_summary: 'No stablecoin issuer is licensed yet (no licensing regime is in force). DRAFT: the Virtual
+  Asset Service Act would require an FSC licence for stablecoin issuance, available to a share company (corporation
+  limited by shares), with banks expected to lead initial issuance. These are draft provisions, not operative law.'
+requirement_structured:
+  in_force: no licensing regime; no issuer licensed
+  draft: FSC licence; share company; banks to lead initially
+  status_note: draft provisions only — not operative
+status: proposed
+source:
+  primary: Draft Virtual Asset Service Act (committee first review 3 Jun 2026)
+  pinpoint: Issuer pathway (draft) — FSC licence; share company; banks lead; NOT in force
+  url: https://english.ey.gov.tw/
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §Taiwan (Issuer Pathways and
+    Eligibility)
+- citation: 'Fan, Cross-Border Stablecoin Architecture v3 (Twelve Jurisdictions, June 2026), §2.1 (Constraint 1:
+    Issuer Eligibility)'
+- citation: 'Draft Virtual Asset Service Act bill (Executive Yuan referral): https://english.ey.gov.tw/. Official
+    primary text is Chinese (law.moj.gov.tw); there is no official English translation (FSC English materials are
+    summaries).'
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; an official URL for the
+  bill/announcement is provided (source.url), but this is a draft provision and is NOT operative law, so it is not
+  upgraded and remains firm_summary. STATUS proposed: the issuance-licensing provisions are draft, not operative
+  (Matrix CONDITIONAL-STATUS flag). The only in-force layer is AML registration (see tw-frs-aml_kyc-001).
+
+
+  [v0.9.5 verification] The TW issuer regime rests on the draft Virtual Asset Service Act (虛擬資產服務法), a bill; kept
+  proposed. NATIVE-LANGUAGE VERIFICATION (Chinese): confirmed against official FSC text — the Legislative Yuan Finance
+  Committee completed the article-by-article first review (初審) on 3 Jun 2026 and resolved to send it to the plenary
+  (no caucus negotiation), but it has NOT passed third reading. The draft stablecoin provisions match the register
+  (FSC permission + prior central-bank consent; issuer = share company; min capital set by FSC; par issuance/redemption;
+  no interest; reserves at domestic FIs, segregated). Procedurally more advanced than KR''s DABA (still in subcommittee).
+  The in-force VASP-AML registration layer is recorded separately.'
+confidence: medium
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- draft_provision
+- v0.5.1_verification
+- draft_url_added
+- v0.7.0_claim_class
+- v0.9.5_verification
+- binding_pending_proposal
+binding_status: pending_proposal

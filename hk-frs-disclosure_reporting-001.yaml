@@ -1,0 +1,33 @@
+id: hk-frs-disclosure_reporting-001
+jurisdiction: HK
+authority: Hong Kong Monetary Authority (HKMA)
+instrument_type: fiat_referenced_stablecoin
+dimension: disclosure_reporting
+constraint_ref: C8
+requirement_summary: Licensed issuers must meet disclosure, reserve-attestation and reporting requirements under
+  HKMA supervision, with supervisory coordination available.
+requirement_structured:
+  disclosure: reserve attestation + reporting
+  supervisor: HKMA
+status: in_force
+effective_date: null
+source:
+  primary: Stablecoins Ordinance (Cap. 656)
+  pinpoint: Disclosure, reserve attestation and supervisory reporting
+interpretation_note: 'Authored in v0.9.2 to fill the HK.C8 constraint cell for the substrate sweep.
+
+
+  [v0.9.5 verification] HK disclosure/reporting under the Ordinance + HKMA Guideline; binding status recorded; remains
+  firm_summary.'
+confidence: medium
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- hk
+- disclosure_reporting
+- v0.9.5_verification
+- binding_in_force_enacted
+binding_status: in_force_enacted

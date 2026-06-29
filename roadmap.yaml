@@ -1,38 +1,51 @@
 # Planned coverage. build.py renders these as planned (⬜vX.Y) cells in COVERAGE.md
 # wherever no record yet exists, for focus_jurisdictions + backfill_jurisdictions.
-# v0.3.0 state: HK / UK / SG at 11/15; only `disclosure_reporting` is empty across the
-# focus set. Brazil and Taiwan are forthcoming (shown as windows on the landing page).
-focus_jurisdictions: [US, HK, EU, UK, SG, CN]
-backfill_jurisdictions: [BR, TW]
+# v0.4.0 state: TWELVE-JURISDICTION EXPANSION. Switzerland (CH), the United Arab
+# Emirates (AE), Taiwan (TW), Japan (JP) and South Korea (KR) promoted to FULL focus
+# jurisdictions, built from the maintainer's revised substrate — Compliance Matrix
+# v0.9.6 and Cross-Border Stablecoin Architecture v3 (Twelve Jurisdictions). Taiwan
+# moves from a parked window to a full jurisdiction (AML layer in force; the Virtual
+# Asset Service Act issuance regime carried as draft/proposed records). The focus set
+# is now the same twelve jurisdictions the research substrate covers.
+focus_jurisdictions: [US, HK, EU, UK, SG, CN, BR, CH, AE, TW, JP, KR]
+backfill_jurisdictions: []
 planned:
   # jurisdiction: { dimension: version-scheduled }
-  # `disclosure_reporting` is the one dimension still empty across the whole focus set
+  # `disclosure_reporting` (C8) is populated for BR; still empty across the other eleven
+  # focus jurisdictions — scheduled across the v0.4.x verification window.
   US:
-    disclosure_reporting: "0.3.x"
+    disclosure_reporting: "0.4.x"
   HK:
-    securities_classification: "0.3.x"
-    disclosure_reporting: "0.3.x"
+    securities_classification: "0.4.x"
+    disclosure_reporting: "0.4.x"
   EU:
-    securities_classification: "0.3.x"
-    disclosure_reporting: "0.3.x"
+    securities_classification: "0.4.x"
+    disclosure_reporting: "0.4.x"
   UK:
-    disclosure_reporting: "0.3.x"
+    disclosure_reporting: "0.4.x"
   SG:
-    monetary_sovereignty: "0.3.x"
-    disclosure_reporting: "0.3.x"
+    monetary_sovereignty: "0.4.x"
+    disclosure_reporting: "0.4.x"
   CN:
-    disclosure_reporting: "0.3.x"
-  # Brazil — promote from corridor-only to a full jurisdiction (v0.3.x), built from
-  # primary sources (BCB virtual-assets framework, Drex, LGPD) via corridor fieldwork.
-  BR:
-    regulatory_authority: "0.3.x"
-    issuer_pathway: "0.3.x"
-    cross_border_data: "0.3.x"
-    monetary_sovereignty: "0.3.x"
-    aml_kyc: "0.3.x"
-  # Taiwan — add as an infrastructure jurisdiction (v0.4.0).
+    disclosure_reporting: "0.4.x"
+  # New focus jurisdictions — remaining cells scheduled for the v0.4.x verification pass.
+  CH:
+    bank_nonbank_routing: "0.4.x"
+    disclosure_reporting: "0.4.x"
+    custody: "0.4.x"
+  AE:
+    securities_classification: "0.4.x"
+    custody: "0.4.x"
+    disclosure_reporting: "0.4.x"
   TW:
-    regulatory_authority: "0.4.0"
-    issuer_pathway: "0.4.0"
-    securities_classification: "0.4.0"
-    aml_kyc: "0.4.0"
+    securities_classification: "0.4.x"
+    custody: "0.4.x"
+    disclosure_reporting: "0.4.x"
+  JP:
+    securities_classification: "0.4.x"
+    custody: "0.4.x"
+    disclosure_reporting: "0.4.x"
+  KR:
+    securities_classification: "0.4.x"
+    custody: "0.4.x"
+    disclosure_reporting: "0.4.x"

@@ -1,0 +1,50 @@
+id: tw-frs-permitted_activity_yield-001
+jurisdiction: TW
+authority: FSC (would administer)
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: virtual asset / draft stablecoin (Virtual Asset Service Act)
+dimension: permitted_activity_yield
+constraint_ref: C3
+requirement_summary: 'DRAFT: the bill prohibits paying interest or other returns to holders. No yield regime is
+  in force. The draft yield prohibition would align Taiwan with the prohibition cluster (EU, Hong Kong) rather than
+  the permission cluster (Switzerland, Brazil), but this is a draft provision, not operative law.'
+requirement_structured:
+  in_force: none
+  draft: prohibition on interest or other returns to holders
+  would_align_with: prohibition cluster (EU, HK)
+status: proposed
+source:
+  primary: Draft Virtual Asset Service Act
+  pinpoint: Yield (draft) — prohibition on interest/other returns; NOT in force
+  url: https://english.ey.gov.tw/
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §Taiwan (Yield and Interest
+    Treatment)
+- citation: 'Draft Virtual Asset Service Act bill (Executive Yuan referral): https://english.ey.gov.tw/. Official
+    primary text is Chinese (law.moj.gov.tw); there is no official English translation (FSC English materials are
+    summaries).'
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; an official URL for the
+  bill/announcement is provided (source.url), but this is a draft provision and is NOT operative law, so it is not
+  upgraded and remains firm_summary. STATUS proposed: not operative law. On the C3 spine, Taiwan is a draft member
+  of the prohibition cluster.'
+interpretive_flag:
+  tension: Taiwan's draft yield prohibition aligns it with the prohibition cluster (EU, HK) rather than the permission
+    cluster (Switzerland, Brazil), but whether it survives to enactment, and in what form, is open.
+  resolution_channel: Enactment of the Virtual Asset Service Act and its final text.
+confidence: medium
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- draft_provision
+- spine
+- v0.5.1_verification
+- draft_url_added
+- v0.7.0_claim_class
+- binding_pending_proposal
+binding_status: pending_proposal

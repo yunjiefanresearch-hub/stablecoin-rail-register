@@ -1,2 +1,4 @@
+# build.py uses jsonschema for full Draft 2020-12 validation, but degrades gracefully
+# to a built-in structural validator if it is absent (offline reproducibility).
 jsonschema>=4.21
 PyYAML>=6.0

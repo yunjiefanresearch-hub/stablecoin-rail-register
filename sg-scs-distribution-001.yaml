@@ -5,27 +5,30 @@ instrument_type: fiat_referenced_stablecoin
 instrument_label_local: single-currency stablecoin (SCS)
 dimension: distribution
 constraint_ref: C8
-requirement_summary: The 'MAS-regulated stablecoin' label is restricted to SCS-framework-compliant issuers;
-  misrepresenting a token as MAS-regulated carries financial penalties or imprisonment and placement on
-  the MAS Investor Alert List. Retail consumer protections prohibit high-risk activities such as lending
-  or staking using stablecoins, and foreign-issued stablecoins remain DPTs under the general regime.
+requirement_summary: The 'MAS-regulated stablecoin' label is restricted to SCS-framework-compliant issuers; misrepresenting
+  a token as MAS-regulated carries financial penalties or imprisonment and placement on the MAS Investor Alert List.
+  Retail consumer protections prohibit high-risk activities such as lending or staking using stablecoins, and foreign-issued
+  stablecoins remain DPTs under the general regime.
 requirement_structured:
   label_restriction: '''MAS-regulated stablecoin'' label limited to SCS-compliant issuers'
   misrepresentation: financial penalty / imprisonment; MAS Investor Alert List
   retail_protection: no lending or staking using stablecoins
   foreign_tokens: remain DPTs under general regime
-status: in_force
+status: transitional
 source:
   primary: Payment Services Act 2019 / MAS Single-Currency Stablecoin Regulatory Framework
-  pinpoint: Distribution and offering — label restriction; misrepresentation penalties; retail lending/staking
-    prohibition
-  url: ''
+  pinpoint: 'SCS framework: label/disclosure on distribution'
+  url: https://www.mas.gov.sg/news/media-releases/2023/mas-finalises-stablecoin-regulatory-framework
 secondary:
-- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), pp.19-20 (Singapore — Distribution and Offering
-    Restrictions)
-interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
-  verification.'
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), pp.19-20 (Singapore — Distribution and Offering Restrictions)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source verification.
+
+
+  [v0.9.5 verification] HELD below resolution_text and status corrected to transitional: an SCS-FRAMEWORK requirement
+  (finalized MAS policy, 15 Aug 2023) whose implementing legislation is still being drafted (expected mid-2026)
+  — finalized policy, not enacted statute.'
 confidence: medium
+claim_class: tier1_legal
 last_reviewed: '2026-06-17'
 version_added: 0.3.0
 tags:
@@ -33,3 +36,18 @@ tags:
 - focus
 - from_matrix_v0.9.3
 - v0.3.0_backfill
+- v0.7.0_claim_class
+- v0.9.5_verification
+- binding_finalized_policy_pending
+- verification_reviewed
+binding_status: finalized_policy_pending
+evidence_tier: firm_summary
+verification:
+  verified_by: external review (web retrieval against official sources)
+  verified_on: '2026-06-27'
+  method: practitioner_corroboration
+  against:
+    instrument: Payment Services Act 2019 (enacted) + MAS Single-Currency Stablecoin Framework (finalized policy,
+      pending legislation)
+    url: https://www.mas.gov.sg/news/media-releases/2023/mas-finalises-stablecoin-regulatory-framework
+    pinpoint: 'SCS framework: label/disclosure on distribution'

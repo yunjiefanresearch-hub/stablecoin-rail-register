@@ -1,0 +1,48 @@
+id: jp-epi-reserve_backing-001
+jurisdiction: JP
+authority: FSA
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: Electronic Payment Instrument (EPI)
+dimension: reserve_backing
+constraint_ref: C2
+requirement_summary: Full backing is the baseline; funds-transfer and bank types hold liquid backing. For the trust-type,
+  Act No. 66 of 2025 permits up to fifty percent of issuance value to be held in low-risk short-term assets (Japanese
+  or US government bonds with no more than three months remaining maturity, or terminable time deposits). The bond-eligibility
+  detail was the subject of an FSA consultation that ran until 27 February 2026; final standards were pending at
+  that date.
+requirement_structured:
+  baseline: full backing
+  trust_type_relaxation: up to 50% in low-risk short-term assets (JGB/US govt bonds <=3 months, or terminable time
+    deposits) under Act No. 66 of 2025
+  fsa_consultation: bond-eligibility detail; ran to 27 Feb 2026; final standards pending
+status: in_force
+effective_date: '2025-06-01'
+source:
+  primary: Payment Services Act; Act No. 66 of 2025 (trust-type backing relaxation)
+  pinpoint: Reserve/backing — full backing baseline; trust-type up to 50% short-term low-risk assets (Act 66/2025)
+  url: https://laws.e-gov.go.jp/
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §Japan (Reserve and Backing
+    Requirements)
+- citation: Payment Services Act (Act No. 59 of 2009) — official English at Japanese Law Translation (japaneselawtranslation.go.jp).
+- citation: Act No. 66 of 2025 (trust-type up to 50% short-term low-risk assets) is enacted; subordinate Cabinet
+    orders take full effect 13 Jun 2026 (pending).
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; the core point is confirmed
+  against the official primary text in the v0.5.1 pass (source.url added); some operational detail remains pending
+  and the tier is ''mixed''. The Act 66/2025 trust-type relaxation (up to 50% short-term low-risk assets) is the
+  key 2025 change; the bond-eligibility standards were still pending after the 27 Feb 2026 consultation.'
+confidence: high
+claim_class: tier1_legal
+evidence_tier: mixed
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- v0.5.1_verification
+- mixed_partial_verified
+- v0.7.0_claim_class
+- binding_in_force_enacted
+binding_status: in_force_enacted

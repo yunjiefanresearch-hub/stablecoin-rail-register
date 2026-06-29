@@ -1,84 +1,302 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/stablecoin-rail-register/schema/record.schema.json",
-  "title": "Cross-Border Stablecoin Register — obligation record",
-  "description": "One verified (jurisdiction x instrument x dimension) regulatory fact, versioned and sourced. v0.2.0-dev: dimension set expanded to align with the author's eight-constraint framework (Cross-Border Stablecoin Architecture, May 2026) and the ten-dimension Compliance Matrix v0.9.3.",
-  "type": "object",
-  "additionalProperties": false,
-  "required": ["id", "jurisdiction", "authority", "instrument_type", "dimension",
-               "requirement_summary", "status", "source", "confidence",
-               "last_reviewed", "version_added"],
-  "properties": {
-    "id": {
-      "type": "string",
-      "pattern": "^[a-z]{2}-[a-z_]+-[a-z_]+-[0-9]{3}$",
-      "description": "Stable id, e.g. hk-frs-permitted_activity_yield-001"
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://yunjiefanresearch-hub.github.io/stablecoin-rail-register/record.schema.json",
+ "title": "Cross-Border Stablecoin Register — obligation record",
+ "description": "One verified (jurisdiction x instrument x dimension) regulatory fact, versioned and sourced. v0.4.0: focus set expanded to twelve jurisdictions (US, EU, UK, SG, HK, CN, BR, CH, AE, TW, JP, KR), aligned to the maintainer's revised substrate — the Cross-Border Stablecoin Architecture v3 (Twelve Jurisdictions, June 2026) eight-constraint framework and the Multi-Jurisdiction Compliance Matrix v0.9.6. v0.7.0: adds the required `claim_class` axis (tier1_legal vs tier2_operational), orthogonal to `evidence_tier` (provenance strength) and `status` (in force vs draft), enabling the lawyer-citable subset = tier1_legal AND in_force AND resolution_text. v0.9.5 adds the orthogonal `binding_status` axis (binding status of the cited instrument), which caps citability: resolution_text is permitted only where binding_status is in_force_enacted.",
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "id",
+  "jurisdiction",
+  "authority",
+  "instrument_type",
+  "dimension",
+  "requirement_summary",
+  "status",
+  "source",
+  "confidence",
+  "claim_class",
+  "last_reviewed",
+  "version_added"
+ ],
+ "properties": {
+  "id": {
+   "type": "string",
+   "pattern": "^[a-z]{2}-[a-z_]+-[a-z_]+-[0-9]{3}$",
+   "description": "Stable id, e.g. hk-frs-permitted_activity_yield-001"
+  },
+  "jurisdiction": {
+   "type": "string",
+   "enum": [
+    "HK",
+    "TW",
+    "BR",
+    "US",
+    "EU",
+    "UK",
+    "SG",
+    "CN",
+    "CH",
+    "AE",
+    "JP",
+    "KR"
+   ]
+  },
+  "authority": {
+   "type": "string",
+   "minLength": 2
+  },
+  "instrument_type": {
+   "type": "string",
+   "enum": [
+    "fiat_referenced_stablecoin",
+    "payment_stablecoin",
+    "e_money_token",
+    "asset_referenced_token",
+    "tokenized_mmf",
+    "tokenized_security",
+    "other"
+   ]
+  },
+  "instrument_label_local": {
+   "type": "string"
+  },
+  "dimension": {
+   "type": "string",
+   "description": "15-value set. Split of the former reserve_capital into reserve_backing + capital_requirements, and four dimensions added from the eight-constraint framework: securities_classification (C4), bank_nonbank_routing (C5), monetary_sovereignty (C7), disclosure_reporting (C8).",
+   "enum": [
+    "regulatory_authority",
+    "issuer_pathway",
+    "reserve_backing",
+    "capital_requirements",
+    "permitted_activity_yield",
+    "securities_classification",
+    "bank_nonbank_routing",
+    "redemption",
+    "custody",
+    "aml_kyc",
+    "cross_border_data",
+    "monetary_sovereignty",
+    "disclosure_reporting",
+    "distribution",
+    "implementation_status"
+   ]
+  },
+  "constraint_ref": {
+   "type": "string",
+   "description": "Optional link to the eight-constraint framework, e.g. 'C3' or 'C4xC7'.",
+   "pattern": "^C[1-8]([x×]C[1-8])*$"
+  },
+  "requirement_summary": {
+   "type": "string",
+   "minLength": 1
+  },
+  "requirement_structured": {
+   "type": "object",
+   "additionalProperties": true
+  },
+  "status": {
+   "type": "string",
+   "enum": [
+    "in_force",
+    "transitional",
+    "proposed",
+    "consultation"
+   ]
+  },
+  "effective_date": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+  },
+  "source": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "primary"
+   ],
+   "properties": {
+    "primary": {
+     "type": "string",
+     "minLength": 3
     },
-    "jurisdiction": {
-      "type": "string",
-      "enum": ["HK", "TW", "BR", "US", "EU", "UK", "SG", "CN"]
+    "url": {
+     "type": "string",
+     "format": "uri"
     },
-    "authority": { "type": "string", "minLength": 2 },
-    "instrument_type": {
+    "pinpoint": {
+     "type": "string"
+    }
+   }
+  },
+  "secondary": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "citation"
+    ],
+    "properties": {
+     "citation": {
+      "type": "string"
+     },
+     "url": {
       "type": "string",
-      "enum": ["fiat_referenced_stablecoin", "payment_stablecoin", "e_money_token",
-               "asset_referenced_token", "tokenized_mmf", "tokenized_security", "other"]
-    },
-    "instrument_label_local": { "type": "string" },
-    "dimension": {
+      "format": "uri"
+     }
+    }
+   }
+  },
+  "interpretation_note": {
+   "type": "string"
+  },
+  "operational_notes": {
+   "type": "array",
+   "description": "Tier-2 operational/market illustrations attached to this record (a product launch, a registration, a working example), kept OUT of the load-bearing legal fields so they are never projected as citable law. This is the per-record home for a market fact that contextualises a tier1_legal claim: the claim itself stays in requirement_summary/source (citable to the instrument), while 'USDC went live via SBI VC Trade on 2025-03-26' lives here, read as-of-dated. The citable projection (citable_subset / citable_law) deliberately omits this field; the build forbids the same operational material from appearing in a citable record's source.primary or pinpoint.",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "note"
+    ],
+    "properties": {
+     "note": {
       "type": "string",
-      "description": "15-value set. Split of the former reserve_capital into reserve_backing + capital_requirements, and four dimensions added from the eight-constraint framework: securities_classification (C4), bank_nonbank_routing (C5), monetary_sovereignty (C7), disclosure_reporting (C8).",
-      "enum": ["regulatory_authority", "issuer_pathway",
-               "reserve_backing", "capital_requirements",
-               "permitted_activity_yield", "securities_classification",
-               "bank_nonbank_routing", "redemption", "custody",
-               "aml_kyc", "cross_border_data", "monetary_sovereignty",
-               "disclosure_reporting", "distribution", "implementation_status"]
-    },
-    "constraint_ref": {
-      "type": "string",
-      "description": "Optional link to the eight-constraint framework, e.g. 'C3' or 'C4xC7'.",
-      "pattern": "^C[1-8]([x×]C[1-8])*$"
-    },
-    "requirement_summary": { "type": "string", "minLength": 1 },
-    "requirement_structured": { "type": "object", "additionalProperties": true },
-    "status": { "type": "string", "enum": ["in_force", "transitional", "proposed", "consultation"] },
-    "effective_date": { "type": ["string", "null"], "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
-    "source": {
+      "minLength": 1
+     },
+     "as_of": {
+      "type": [
+       "string",
+       "null"
+      ],
+      "pattern": "^[0-9]{4}(-[0-9]{2})?(-[0-9]{2})?$"
+     },
+     "source": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["primary"],
       "properties": {
-        "primary": { "type": "string", "minLength": 3 },
-        "url": { "type": "string", "format": "uri" },
-        "pinpoint": { "type": "string" }
+       "primary": {
+        "type": "string"
+       },
+       "url": {
+        "type": "string",
+        "format": "uri"
+       }
       }
+     }
+    }
+   }
+  },
+  "interpretive_flag": {
+   "type": "object",
+   "description": "Carries the Compliance Matrix's [interpretive question] flag: the open tension and its expected resolution channel.",
+   "additionalProperties": false,
+   "properties": {
+    "tension": {
+     "type": "string"
     },
-    "secondary": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": ["citation"],
-        "properties": {
-          "citation": { "type": "string" },
-          "url": { "type": "string", "format": "uri" }
-        }
+    "resolution_channel": {
+     "type": "string"
+    }
+   }
+  },
+  "confidence": {
+   "type": "string",
+   "enum": [
+    "high",
+    "medium",
+    "low"
+   ]
+  },
+  "claim_class": {
+   "type": "string",
+   "description": "The EPISTEMIC KIND of the record's load-bearing claim, distinct from how well it is sourced (evidence_tier) and from whether it is in force (status). 'tier1_legal' = a proposition of law: what a binding instrument (statute, regulation, official guidance) requires, permits, or prohibits — a fact a lawyer could cite to the instrument. 'tier2_operational' = a report of market/operational fact: what is actually live, who is registered, what products launched, what banking rails or liquidity exist — corroborated by registrations, company filings, market data, or media, and properly read as-of-dated. The distinction follows the Corridor Atlas §7 split between primary-source legal constraints (Tier 1) and market-reported operability (Tier 2), which the Atlas warns must not be read at the same confidence. The lawyer-citable subset is the intersection claim_class=tier1_legal AND status=in_force AND evidence_tier=resolution_text. A draft legal provision is still tier1_legal (its non-bindingness is carried by status=proposed), and an operational fact is tier2_operational even when confirmed against an official registration page (its kind, not its sourcing, is what excludes it from citable law).",
+   "enum": [
+    "tier1_legal",
+    "tier2_operational"
+   ]
+  },
+  "evidence_tier": {
+   "type": "string",
+   "description": "Provenance of the load-bearing facts. resolution_text = confirmed against the official normativo/statutory text; firm_summary = corroborated by law-firm/practitioner analysis but not yet against the official text; mixed = some of each. Independent of confidence, which measures corroboration strength.",
+   "enum": [
+    "resolution_text",
+    "firm_summary",
+    "mixed"
+   ]
+  },
+  "binding_status": {
+   "type": "string",
+   "description": "The BINDING STATUS of the instrument the cell rests on — a third axis, orthogonal to evidence_tier (how well-sourced) and claim_class (legal vs operational). It caps citability independently of verification: a cell can only be cited as CURRENT LAW (resolution_text) if its instrument is actually enacted-and-in-force. 'in_force_enacted' = an enacted statute/regulation in force now (the only status eligible for resolution_text). 'made_not_commenced' = made/passed but not yet commenced (e.g. a statutory instrument with a future commencement day) — real law, not yet operative. 'finalized_policy_pending' = a finalized regulator policy still awaiting implementing legislation (not enacted law). 'pending_proposal' = a pending bill, NPRM, or consultation (not law). 'prohibition' = the cell rests on a prohibition/absence-of-regime, so there is no positive permitted-activity rule to confirm (cannot be resolution_text as a positive proposition). 'no_regime' = no operative regime addresses the cell. The build forbids resolution_text on any status other than in_force_enacted.",
+   "enum": [
+    "in_force_enacted",
+    "made_not_commenced",
+    "finalized_policy_pending",
+    "pending_proposal",
+    "prohibition",
+    "no_regime"
+   ]
+  },
+  "last_reviewed": {
+   "type": "string",
+   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+  },
+  "verification": {
+   "type": "object",
+   "additionalProperties": false,
+   "description": "Audit record of HOW the load-bearing fact was verified, supporting a safe, traceable evidence_tier promotion. method=official_text means the claim was confirmed against the primary statutory/normative text (the basis for resolution_text/mixed); method=practitioner_corroboration means it rests on law-firm/practitioner analysis (the basis for firm_summary). 'against' identifies what it was checked against; 'excerpt' is an OPTIONAL short operative phrase (keep minimal — provenance, not reproduction).",
+   "required": [
+    "verified_on",
+    "method"
+   ],
+   "properties": {
+    "verified_by": {
+     "type": "string"
+    },
+    "verified_on": {
+     "type": "string",
+     "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "method": {
+     "type": "string",
+     "enum": [
+      "official_text",
+      "practitioner_corroboration"
+     ]
+    },
+    "against": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "instrument": {
+       "type": "string"
+      },
+      "url": {
+       "type": "string"
+      },
+      "pinpoint": {
+       "type": "string"
       }
+     }
     },
-    "interpretation_note": { "type": "string" },
-    "interpretive_flag": {
-      "type": "object",
-      "description": "Carries the Compliance Matrix's [interpretive question] flag: the open tension and its expected resolution channel.",
-      "additionalProperties": false,
-      "properties": {
-        "tension": { "type": "string" },
-        "resolution_channel": { "type": "string" }
-      }
-    },
-    "confidence": { "type": "string", "enum": ["high", "medium", "low"] },
-    "last_reviewed": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
-    "version_added": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
-    "tags": { "type": "array", "items": { "type": "string" } }
+    "excerpt": {
+     "type": "string",
+     "maxLength": 240
+    }
+   }
+  },
+  "version_added": {
+   "type": "string",
+   "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+  },
+  "tags": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
   }
+ }
 }

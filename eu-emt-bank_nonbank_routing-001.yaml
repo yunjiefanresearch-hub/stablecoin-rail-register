@@ -1,0 +1,30 @@
+id: eu-emt-bank_nonbank_routing-001
+jurisdiction: EU
+authority: EBA/ESMA; national competent authorities
+instrument_type: e_money_token
+dimension: bank_nonbank_routing
+constraint_ref: C5
+requirement_summary: Because EMT issuers must be credit institutions or e-money institutions, issuance sits inside
+  the bank / e-money prudential framework; reserve assets must be safeguarded and segregated from the issuer's estate.
+requirement_structured:
+  issuer_status:
+  - credit institution
+  - EMI
+  reserve_safeguarding: true
+status: in_force
+effective_date: null
+source:
+  primary: MiCA, Regulation (EU) 2023/1114; EMD2 (Directive 2009/110/EC)
+  pinpoint: Issuer prudential status; safeguarding/segregation of reserve assets
+interpretation_note: Authored in v0.9.2 to fill the EU.C5 constraint cell for the substrate sweep.
+confidence: high
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- eu
+- bank_nonbank_routing
+- binding_in_force_enacted
+binding_status: in_force_enacted

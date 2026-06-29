@@ -5,9 +5,9 @@ instrument_type: fiat_referenced_stablecoin
 instrument_label_local: UK qualifying stablecoin (UKQS)
 dimension: custody
 constraint_ref: C2
-requirement_summary: Any firm holding client crypto-assets for more than 24 hours, or with the ability
-  to override client authority, is a regulated custodian requiring a safeguarding licence. This 24-hour
-  custody rule has significant operational implications for wallet operators with UK user exposure.
+requirement_summary: Any firm holding client crypto-assets for more than 24 hours, or with the ability to override
+  client authority, is a regulated custodian requiring a safeguarding licence. This 24-hour custody rule has significant
+  operational implications for wallet operators with UK user exposure.
 requirement_structured:
   trigger: holding client crypto-assets > 24 hours, or ability to override client authority
   consequence: regulated custodian; safeguarding licence required
@@ -17,14 +17,17 @@ effective_date: '2026-02-01'
 source:
   primary: FSMA 2000 (Cryptoassets) Regulations 2026, SI 2026/102; FCA CP25/14
   pinpoint: Custody — 24-hour rule; safeguarding licence for regulated custodians
-  url: ''
+  url: https://www.legislation.gov.uk/uksi/2026/102/contents/made
 secondary:
-- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.15 (United Kingdom — Distribution and Offering
-    Restrictions; custody rule)
-interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
-  verification. This is the first record on the custody dimension; the 24-hour test is the operative custody
-  trigger.'
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.15 (United Kingdom — Distribution and Offering Restrictions;
+    custody rule)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source verification.
+  This is the first record on the custody dimension; the 24-hour test is the operative custody trigger.
+
+
+  [v0.9.5 verification] Custody under SI 2026/102 + FCA rules; made-not-commenced; held below resolution_text.'
 confidence: medium
+claim_class: tier1_legal
 last_reviewed: '2026-06-17'
 version_added: 0.3.0
 tags:
@@ -33,3 +36,7 @@ tags:
 - from_matrix_v0.9.3
 - v0.3.0_backfill
 - new_dimension
+- v0.7.0_claim_class
+- v0.9.5_verification
+- binding_made_not_commenced
+binding_status: made_not_commenced

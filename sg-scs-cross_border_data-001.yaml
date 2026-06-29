@@ -5,10 +5,9 @@ instrument_type: fiat_referenced_stablecoin
 instrument_label_local: single-currency stablecoin (SCS)
 dimension: cross_border_data
 constraint_ref: C6
-requirement_summary: Cross-border personal-data transfer is governed by the Personal Data Protection Act
-  2012 (PDPA), which requires reasonable safeguards — consent, contract, certification, or transfer to
-  a jurisdiction with comparable protection. MAS Outsourcing Guidelines and Technology Risk Management
-  Guidelines apply to data hosting.
+requirement_summary: Cross-border personal-data transfer is governed by the Personal Data Protection Act 2012 (PDPA),
+  which requires reasonable safeguards — consent, contract, certification, or transfer to a jurisdiction with comparable
+  protection. MAS Outsourcing Guidelines and Technology Risk Management Guidelines apply to data hosting.
 requirement_structured:
   statute: Personal Data Protection Act 2012 (PDPA)
   transfer_gates:
@@ -24,9 +23,13 @@ source:
   url: ''
 secondary:
 - citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.19 (Singapore — Cross-Border Data Treatment)
-interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
-  verification. The PDPA gate set is materially lighter than the PRC PIPL/DSL regime.'
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source verification.
+  The PDPA gate set is materially lighter than the PRC PIPL/DSL regime.
+
+
+  [v0.9.5 verification] SG cross-border data (PDPA) baseline in force; binding status recorded.'
 confidence: medium
+claim_class: tier1_legal
 last_reviewed: '2026-06-17'
 version_added: 0.3.0
 tags:
@@ -34,3 +37,7 @@ tags:
 - focus
 - from_matrix_v0.9.3
 - v0.3.0_backfill
+- v0.7.0_claim_class
+- v0.9.5_verification
+- binding_in_force_enacted
+binding_status: in_force_enacted

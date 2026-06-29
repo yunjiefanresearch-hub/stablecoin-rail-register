@@ -1,0 +1,56 @@
+corridor_id: us-hk-usd-hkd-settlement
+name: United States -> Hong Kong SAR (USD->HKD settlement)
+schema: corridor/v3-directed-edge
+origin: US
+destination: HK
+direction: directed
+currencies: USD -> HKD
+feasibility_class: Category I (dual authorization available)
+compatibility_category: I/II
+compatibility_pair: HK-US
+divergence:
+  kind: interaction_sets
+  against_pair: HK-US
+  pair_interaction_sets:
+  - A
+  - C
+  edge_interaction_sets: &id001
+  - A
+  - C
+  - D
+  reason: Directed-edge operative interaction sets (Corridor Atlas v0.2.3 §5, read at the destination
+    inbound gate for THIS direction) differ from the undirected pairwise sets (Architecture §5.14). The
+    Atlas generalizes the §5.12/§5.14 undirected pairs into directed edges and re-derives the operative
+    interaction sets per direction; the compatibility CATEGORY agrees, the interaction-set list may differ
+    by direction. This divergence is declared, not silent.
+archetypes:
+- RC
+- SC
+- TC
+- DC
+interaction_sets: *id001
+infrastructure_overlap: No shared production or pilot settlement rail; commercial rails subject to both
+  regimes
+inbound_mechanism:
+  test: HKMA fiat-referenced-stablecoin licence
+  detail: Licence required to issue in Hong Kong or to issue an HKD-referenced token anywhere; the first
+    cohort is HKD-only and bank-led, so a non-HKD or crypto-native issuer needs a later licence or a partnership
+    with a licensed issuer.
+  administrator: HKMA
+note: A dollar issuer seeking Hong Kong distribution confronts a first cohort that is HKD-only and bank-led.
+  There is no general inbound recognition of a foreign dollar token for payment use; the operator needs
+  a later HKMA licence for a non-HKD product (timing not public) or a partnership with a licensed HK issuer.
+  The regulatory corridor is the gating archetype; the settlement corridor is contingent on it.
+source:
+  primary: Fan, Cross-Border Digital-Finance Corridor Atlas v0.2.3 (June 2026), §5.3 (United States ->
+    Hong Kong SAR)
+  secondary: 'Fan, Cross-Border Stablecoin Architecture v3 (Twelve Jurisdictions, June 2026), §5.14 (US
+    x HK: Category I/II hybrid — undirected §5.14 pair; see this edge''s `divergence` field)'
+valid_as_of: 2026-06
+evidence_tier: firm_summary
+version_added: 0.5.0
+tags:
+- corridor
+- directed_edge
+- from_atlas_v0.2.3
+- v0.5.0_corridor_layer

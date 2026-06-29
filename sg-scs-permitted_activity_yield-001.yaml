@@ -1,24 +1,55 @@
 id: sg-scs-permitted_activity_yield-001
 jurisdiction: SG
-authority: "MAS"
+authority: MAS
 instrument_type: fiat_referenced_stablecoin
-instrument_label_local: "single-currency stablecoin (SCS)"
+instrument_label_local: single-currency stablecoin (SCS)
 dimension: permitted_activity_yield
 constraint_ref: C3
-requirement_summary: "Yield is not directly prohibited, but the MAS-regulated SCS label is restricted to SGD or G10-pegged tokens issued from Singapore-incorporated entities, and SCS issuers are forbidden from engaging in lending or staking. The activity prohibition (no lend/stake) is the operative yield-adjacent constraint rather than a flat interest ban."
+requirement_summary: Yield is not directly prohibited, but the MAS-regulated SCS label is restricted to SGD or G10-pegged
+  tokens issued from Singapore-incorporated entities, and SCS issuers are forbidden from engaging in lending or
+  staking. The activity prohibition (no lend/stake) is the operative yield-adjacent constraint rather than a flat
+  interest ban.
 requirement_structured:
-  direct_yield_ban: "not explicit"
-  issuer_lending_or_staking: "prohibited"
-  label_scope: "SGD or G10-pegged, Singapore-incorporated issuer"
-status: in_force
+  direct_yield_ban: not explicit
+  issuer_lending_or_staking: prohibited
+  label_scope: SGD or G10-pegged, Singapore-incorporated issuer
+status: transitional
 effective_date: null
 source:
-  primary: "MAS Single-Currency Stablecoin framework (Aug 2023) — issuer activity restrictions"
-  pinpoint: "No lending/staking by SCS issuers; SGD/G10 label scope"
+  primary: MAS Single-Currency Stablecoin framework (Aug 2023) — issuer activity restrictions
+  pinpoint: 'SCS framework: no lending/staking by SCS issuers; SGD/G10 label scope'
+  url: https://www.mas.gov.sg/news/media-releases/2023/mas-finalises-stablecoin-regulatory-framework
 secondary:
-  - citation: "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.2 / p.5 (SG — Yield)"
-interpretation_note: "Provenance: transcribed from author's Compliance Matrix v0.9.3. Singapore shows that the yield dimension and the activity-restriction dimension can collapse into one another — useful contrast for the C3 spine."
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.2 / p.5 (SG — Yield)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3. Singapore shows that the
+  yield dimension and the activity-restriction dimension can collapse into one another — useful contrast for the
+  C3 spine.
+
+
+  [v0.9.5 verification] HELD below resolution_text and status corrected to transitional: an SCS-FRAMEWORK requirement
+  (finalized MAS policy, 15 Aug 2023) whose implementing legislation is still being drafted (expected mid-2026)
+  — finalized policy, not enacted statute.'
 confidence: high
-last_reviewed: "2026-06-17"
+claim_class: tier1_legal
+last_reviewed: '2026-06-17'
 version_added: 0.2.0
-tags: [sg, focus, apac, spine, from_matrix_v0.9.3]
+tags:
+- sg
+- focus
+- apac
+- spine
+- from_matrix_v0.9.3
+- v0.9.5_verification
+- binding_finalized_policy_pending
+- verification_reviewed
+binding_status: finalized_policy_pending
+evidence_tier: firm_summary
+verification:
+  verified_by: external review (web retrieval against official sources)
+  verified_on: '2026-06-27'
+  method: practitioner_corroboration
+  against:
+    instrument: Payment Services Act 2019 (enacted) + MAS Single-Currency Stablecoin Framework (finalized policy,
+      pending legislation)
+    url: https://www.mas.gov.sg/news/media-releases/2023/mas-finalises-stablecoin-regulatory-framework
+    pinpoint: 'SCS framework: no lending/staking by SCS issuers; SGD/G10 label scope'

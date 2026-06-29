@@ -1,0 +1,32 @@
+id: uk-frs-bank_nonbank_routing-001
+jurisdiction: UK
+authority: FCA; Bank of England (systemic)
+instrument_type: fiat_referenced_stablecoin
+dimension: bank_nonbank_routing
+constraint_ref: C5
+requirement_summary: Issuance is undertaken by FCA-authorized firms; systemic payment stablecoins fall additionally
+  under Bank of England oversight, separating conduct authorization from systemic prudential supervision.
+requirement_structured:
+  conduct_authoriser: FCA
+  systemic_supervisor: Bank of England
+status: in_force
+effective_date: null
+source:
+  primary: FSMA 2026 (conduct + systemic regimes); Banking Act 2009 (systemic)
+  pinpoint: Authorized-firm issuance; FCA conduct vs. BoE systemic split
+interpretation_note: 'Authored in v0.9.2 to fill the UK.C5 constraint cell for the substrate sweep.
+
+
+  [v0.9.5 verification] Bank/non-bank routing under the FSMA 2026 perimeter; made-not-commenced.'
+confidence: medium
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- uk
+- bank_nonbank_routing
+- v0.9.5_verification
+- binding_made_not_commenced
+binding_status: made_not_commenced

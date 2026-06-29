@@ -1,0 +1,54 @@
+id: kr-frs-issuer_pathway-001
+jurisdiction: KR
+authority: FSC (would administer)
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: won-referenced stablecoin (draft Digital Asset Basic Act)
+dimension: issuer_pathway
+constraint_ref: C1
+requirement_summary: 'No stablecoin issuer is licensed; domestic won-stablecoin issuance is effectively prohibited
+  under current law. Future eligibility is contested: the BOK seeks bank-led consortia holding at least fifty-one
+  percent; the FSC favours a more fintech-inclusive model. These are draft provisions, not operative law, and reported
+  minimum-capital figures diverge across drafts (a press-versus-draft discrepancy) and should be treated as provisional.'
+requirement_structured:
+  in_force: won-stablecoin issuance effectively prohibited; no issuer licensed
+  contested_eligibility: BOK >=51% bank consortium vs FSC fintech-inclusive
+  figures: minimum-capital figures diverge across drafts (provisional)
+status: proposed
+source:
+  primary: Virtual Asset User Protection Act (current law); draft Digital Asset Basic Act
+  pinpoint: Issuer pathway — won-issuance effectively prohibited; future eligibility contested (BOK vs FSC); NOT
+    in force
+  url: https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2210736/detailRP
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §South Korea (Issuer Pathways
+    and Eligibility)
+- citation: 'Fan, Cross-Border Stablecoin Architecture v3 (Twelve Jurisdictions, June 2026), §2.1 (Constraint 1:
+    Issuer Eligibility)'
+- citation: 'Draft Digital Asset Basic Act (bill No. 2210736): https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2210736/detailRP.
+    Official primary text is Korean (law.go.kr); there is no official English translation (FSC English materials
+    are summaries).'
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; an official URL for the
+  bill/announcement is provided (source.url), but this is a draft provision and is NOT operative law, so it is not
+  upgraded and remains firm_summary. STATUS proposed: issuance is effectively prohibited today and the future pathway
+  is contested (the BOK-vs-FSC eligibility fight is the principal item stalling the bill).
+
+
+  [v0.9.5 verification] The KR issuer regime rests on the draft Digital Asset Basic Act (a bill); kept proposed.
+  The in-force VAUPA layer is recorded separately.'
+confidence: medium
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- draft_provision
+- v0.5.1_verification
+- draft_url_added
+- v0.7.0_claim_class
+- v0.9.5_verification
+- binding_pending_proposal
+binding_status: pending_proposal

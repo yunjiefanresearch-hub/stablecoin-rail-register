@@ -1,20 +1,47 @@
 id: us-pss-capital_requirements-001
 jurisdiction: US
-authority: "OCC, FDIC"
+authority: OCC, FDIC
 instrument_type: payment_stablecoin
-instrument_label_local: "payment stablecoin"
+instrument_label_local: payment stablecoin
 dimension: capital_requirements
 constraint_ref: C2
-requirement_summary: "De novo PPSIs must hold minimum capital of the greater of $5 million or the chartering-condition amount, for 36 months. An operational backstop of 12 months of operating expenses must be held in cash, FDIC-insured deposits, or short-dated Treasuries (<=93 days). Two consecutive quarter-ends below the capital or backstop requirement trigger mandatory liquidation."
+requirement_summary: De novo PPSIs must hold minimum capital of the greater of $5 million or the chartering-condition
+  amount, for 36 months. An operational backstop of 12 months of operating expenses must be held in cash, FDIC-insured
+  deposits, or short-dated Treasuries (<=93 days). Two consecutive quarter-ends below the capital or backstop requirement
+  trigger mandatory liquidation.
 status: proposed
 effective_date: null
 source:
-  primary: "GENIUS Act capital provisions; OCC/FDIC NPRM (de novo capital; operational backstop; liquidation trigger)"
-  pinpoint: "min capital = greater of $5m or chartering amount (36 mo); 12-mo opex backstop; 2-quarter breach -> liquidation"
+  primary: GENIUS Act capital provisions; OCC/FDIC NPRM (de novo capital; operational backstop; liquidation trigger)
+  pinpoint: capital left to OCC/FDIC rulemaking; figures from the OCC/FDIC NPRM (proposed)
+  url: https://www.federalregister.gov/documents/2025/09/19/2025-18226/genius-act-implementation
 secondary:
-  - citation: "Fan, Compliance Matrix v0.9.3 (18 May 2026), p.8 (US — Capital Requirements)"
-interpretation_note: "Provenance: transcribed from author's Compliance Matrix v0.9.3. Capital half of the split reserve_capital dimension."
+- citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), p.8 (US — Capital Requirements)
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3. Capital half of the split
+  reserve_capital dimension.
+
+
+  [v0.9.5 verification] HELD below resolution_text: GENIUS leaves capital to rulemaking; the figures (min greater
+  of $5m or chartering amount) come from the OCC/FDIC NPRM (proposed), not final law.'
 confidence: medium
-last_reviewed: "2026-06-17"
+claim_class: tier1_legal
+last_reviewed: '2026-06-17'
 version_added: 0.2.0
-tags: [us, anchor, from_matrix_v0.9.3, dimension_split]
+tags:
+- us
+- anchor
+- from_matrix_v0.9.3
+- dimension_split
+- v0.9.5_verification
+- binding_pending_proposal
+- verification_reviewed
+binding_status: pending_proposal
+evidence_tier: firm_summary
+verification:
+  verified_by: external review (web retrieval against official sources)
+  verified_on: '2026-06-27'
+  method: practitioner_corroboration
+  against:
+    instrument: GENIUS Act (Pub. L., signed 18 Jul 2025); OCC/FDIC NPRMs + CLARITY Act (H.R.3633) pending
+    url: https://www.federalregister.gov/documents/2025/09/19/2025-18226/genius-act-implementation
+    pinpoint: capital left to OCC/FDIC rulemaking; figures from the OCC/FDIC NPRM (proposed)

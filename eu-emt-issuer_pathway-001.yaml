@@ -1,0 +1,30 @@
+id: eu-emt-issuer_pathway-001
+jurisdiction: EU
+authority: EBA/ESMA; national competent authorities
+instrument_type: e_money_token
+dimension: issuer_pathway
+constraint_ref: C1
+requirement_summary: Issuance of an e-money token is restricted to entities authorized as credit institutions or
+  electronic money institutions; no other entity may issue. An authorizable private token exists.
+requirement_structured:
+  permitted_issuers:
+  - credit institution
+  - electronic money institution
+  exportable_token: true
+status: in_force
+effective_date: null
+source:
+  primary: Markets in Crypto-Assets Regulation (MiCA), Regulation (EU) 2023/1114
+  pinpoint: Title IV — EMT issuance restricted to authorized credit institutions or e-money institutions
+interpretation_note: Authored in v0.9.2 to fill the EU.C1 constraint cell for the substrate sweep.
+confidence: high
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- eu
+- issuer_pathway
+- binding_in_force_enacted
+binding_status: in_force_enacted

@@ -1,0 +1,27 @@
+id: tw-frs-securities_classification-001
+jurisdiction: TW
+authority: Financial Supervisory Commission (FSC)
+instrument_type: fiat_referenced_stablecoin
+dimension: securities_classification
+constraint_ref: C4
+requirement_summary: Under the draft Virtual Asset Service Act, the securities characterization of stablecoins is
+  not yet fixed; today VASPs operate under AML registration without a settled securities classification.
+requirement_structured:
+  status: draft VAS Act
+  securities: unsettled
+status: proposed
+effective_date: null
+source:
+  primary: Draft Virtual Asset Service Act; AML registration regime for VASPs
+  pinpoint: Securities characterization — pending the enacted VAS Act
+interpretation_note: Authored in v0.9.2 to fill the TW.C4 constraint cell for the substrate sweep.
+confidence: low
+claim_class: tier1_legal
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- tw
+- securities_classification
+- binding_pending_proposal
+binding_status: pending_proposal

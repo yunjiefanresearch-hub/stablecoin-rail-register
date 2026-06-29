@@ -1,0 +1,53 @@
+name: build
+
+# Enforces the register's central promise: every record validates against record.schema.json,
+# the analysis layer is structurally well-formed, and the derived artifacts (dataset.json,
+# COVERAGE.md, records.md) regenerate cleanly. Runs on every push and pull request so an invalid
+# record cannot be merged.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml jsonschema
+
+      - name: Rebuild the analysis layer (compatibility matrix, interaction sets, patterns, open questions)
+        run: python scripts/build_analysis.py
+
+      - name: Rebuild the corridor layer (directed edges)
+        run: python scripts/build_corridors.py
+
+      - name: Rebuild the computed layer (compose() preview — computed-vs-authored diff)
+        run: python scripts/compose.py
+
+      - name: Validate all records + analysis layer and regenerate derived artifacts
+        run: python build.py
+
+      - name: Regenerate the static landing page from dataset.json
+        run: python build_site.py
+
+      - name: Fail if the build produced uncommitted changes to derived artifacts
+        run: |
+          if ! git diff --quiet -- dataset.json COVERAGE.md records.md index.html analysis/; then
+            echo "::error::Derived artifacts are out of date. Run build.py + build_site.py and commit the result."
+            git --no-pager diff --stat -- dataset.json COVERAGE.md records.md index.html analysis/
+            exit 1
+          fi
+          echo "Derived artifacts are in sync."

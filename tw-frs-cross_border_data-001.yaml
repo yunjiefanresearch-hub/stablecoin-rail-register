@@ -1,0 +1,35 @@
+id: tw-frs-cross_border_data-001
+jurisdiction: TW
+authority: FSC / PDPA competent authority
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: virtual asset / draft stablecoin (Virtual Asset Service Act)
+dimension: cross_border_data
+constraint_ref: C6
+requirement_summary: The Personal Data Protection Act (PDPA) applies. Cross-border data transfer is subject to the
+  PDPA and to competent-authority restrictions.
+requirement_structured:
+  statute: Personal Data Protection Act (PDPA)
+  transfer_rule: subject to PDPA + competent-authority restrictions
+status: in_force
+source:
+  primary: Personal Data Protection Act (PDPA)
+  pinpoint: Cross-border data — PDPA + competent-authority restrictions
+  url: ''
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §Taiwan (Cross-Border Data
+    Treatment)
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; pending primary-source
+  verification.'
+confidence: medium
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- v0.7.0_claim_class
+- binding_in_force_enacted
+binding_status: in_force_enacted

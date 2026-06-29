@@ -1,0 +1,42 @@
+corridor_id: hk-us-hkd-usd-settlement
+name: Hong Kong SAR -> United States (HKD->USD settlement)
+schema: corridor/v3-directed-edge
+origin: HK
+destination: US
+direction: directed
+currencies: HKD -> USD
+feasibility_class: Category II (comparability determination required)
+compatibility_category: I/II
+compatibility_pair: HK-US
+archetypes:
+- RC
+- SC
+- TC
+- DC
+interaction_sets:
+- A
+- C
+infrastructure_overlap: No shared production or pilot settlement rail; commercial rails subject to both
+  regimes
+inbound_mechanism:
+  test: GENIUS Act §18 comparability determination
+  detail: Unilateral Treasury comparability determination (on SCRC recommendation) + OCC registration
+    + US-held reserves; none granted to date.
+  administrator: US Treasury (Stablecoin Certification Review Committee) / OCC
+note: In the reverse direction an HKD-referenced token entering the US meets the same §18 comparability
+  gate as any other foreign token. The Hong Kong extraterritorial rule is not the binding constraint here;
+  the US inbound gate is. Category II for the same reason the euro-into-US corridor is.
+source:
+  primary: Fan, Cross-Border Digital-Finance Corridor Atlas v0.2.3 (June 2026), §5.4 (Hong Kong SAR ->
+    United States)
+  secondary: 'Fan, Cross-Border Stablecoin Architecture v3 (Twelve Jurisdictions, June 2026), §5.14 (US
+    x HK: Category I/II hybrid)'
+valid_as_of: 2026-06
+evidence_tier: firm_summary
+version_added: 0.5.0
+tags:
+- corridor
+- directed_edge
+- from_atlas_v0.2.3
+- v0.5.0_corridor_layer
+- directional_asymmetry

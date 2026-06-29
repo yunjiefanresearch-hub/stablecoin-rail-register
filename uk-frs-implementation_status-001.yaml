@@ -4,10 +4,10 @@ authority: FCA; Bank of England; HM Treasury
 instrument_type: fiat_referenced_stablecoin
 instrument_label_local: UK qualifying stablecoin (UKQS)
 dimension: implementation_status
-requirement_summary: SI 2026/102 was published February 2026 and is in force; the Bank of England published
-  revised systemic-stablecoin proposals on 10 November 2025; HM Treasury published a draft amendment SI
-  on 21 April 2026; final FCA policy statements are expected summer 2026, perimeter guidance September
-  2026, and the full crypto regime takes effect late 2027.
+requirement_summary: SI 2026/102 was published February 2026 and is in force; the Bank of England published revised
+  systemic-stablecoin proposals on 10 November 2025; HM Treasury published a draft amendment SI on 21 April 2026;
+  final FCA policy statements are expected summer 2026, perimeter guidance September 2026, and the full crypto regime
+  takes effect late 2027.
 requirement_structured:
   si_published: Feb 2026 (in force)
   boe_proposals: 10 Nov 2025
@@ -23,9 +23,10 @@ source:
   url: ''
 secondary:
 - citation: Fan, Compliance Matrix v0.9.3 (18 May 2026), pp.16-17 (United Kingdom — Implementation Timeline)
-interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source
-  verification. The regime is mid-transition: a published SI but pending final FCA rules.'
+interpretation_note: 'Provenance: transcribed from author''s Compliance Matrix v0.9.3; pending primary-source verification.
+  The regime is mid-transition: a published SI but pending final FCA rules.'
 confidence: high
+claim_class: tier2_operational
 last_reviewed: '2026-06-17'
 version_added: 0.3.0
 tags:
@@ -33,3 +34,6 @@ tags:
 - focus
 - from_matrix_v0.9.3
 - v0.3.0_backfill
+- v0.7.0_claim_class
+- binding_made_not_commenced
+binding_status: made_not_commenced

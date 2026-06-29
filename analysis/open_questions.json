@@ -1,0 +1,52 @@
+{
+  "schema": "cbsr-analysis/open_questions",
+  "source": "Fan, Cross-Border Stablecoin Architecture v3 (Twelve Jurisdictions, June 2026), §7 (Implementation and Open Questions)",
+  "note": "Sections 7.1-7.4 are the four developments the paper identifies as determining which architectural options become operationally viable; 7.5 is the BIS wholesale-settlement infrastructure-implications question. Each is preserved with its conditional regulatory status.",
+  "questions": [
+    {
+      "id": "7.1",
+      "title": "Joint NPRM architecture (§404 implementation)",
+      "question": "What will the joint Notice of Proposed Rulemaking that CLARITY §404 (as reported) directs the SEC, CFTC, and Treasury to issue within twelve months of enactment actually contain?",
+      "affects": "The §4 yield-separation architecture and the permitted/prohibited boundary for routing arrangements.",
+      "status": "unresolved",
+      "conditional_flag": "Depends on enactment of CLARITY substantially as reported and on the joint NPRM's actual content (not yet issued)."
+    },
+    {
+      "id": "7.2",
+      "title": "People's Republic of China boundary stability",
+      "question": "Will the PRC boundary observed in October 2025 and April 2026 hold, relax, or tighten?",
+      "affects": "The §3.3 three-pattern typology (especially Pattern A viability).",
+      "status": "unresolved",
+      "material_developments": [
+        "PRC modifies the cross-border data framework to facilitate HKMA supervisor-to-supervisor information-sharing;",
+        "the HKMA announces a second cohort including one or more PRC-connected entities;",
+        "the PRC publicly authorizes state-owned bank HK affiliates to apply/operate under HK licences."
+      ],
+      "conditional_flag": "None of the three developments has occurred as of publication; the §3.3 patterns are configured against the boundary as currently observed."
+    },
+    {
+      "id": "7.3",
+      "title": "Operationalization of the Article 58(3) cap",
+      "question": "How will the EBA operationalize the Article 58(3) means-of-exchange cap (adopted methodology guidance and Member State competent-authority practice)?",
+      "affects": "The §5.14 cross-currency cross-border analysis for USD-referenced stablecoins in the EU.",
+      "status": "unresolved",
+      "conditional_flag": "The EBA has not finalized the relevant methodology guidance; thresholds are one million daily transactions or EUR 200m daily value (quarterly average, means-of-exchange use)."
+    },
+    {
+      "id": "7.4",
+      "title": "HKMA second-cohort composition",
+      "question": "What will the composition of the second cohort of HKMA stablecoin licences be (currency coverage; PRC-connected applicants; USD-referenced products)?",
+      "affects": "US x HK and EU x HK pair feasibility; PRC boundary stability (§7.2).",
+      "status": "unresolved",
+      "conditional_flag": "The HKMA has not announced the second cohort."
+    },
+    {
+      "id": "7.5",
+      "title": "BIS Project Agorá and Project Ensemble implications",
+      "question": "How will the wholesale-settlement experiments (Project Agorá, Project Ensemble, mBridge) interact with private stablecoin architectures at the infrastructure layer?",
+      "affects": "The Digital-Financial corridor archetype and infrastructure-axis membership across edges.",
+      "status": "unresolved",
+      "conditional_flag": "Infrastructure implications are forward-looking; the Corridor Atlas develops the infrastructure layer."
+    }
+  ]
+}

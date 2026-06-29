@@ -1,0 +1,31 @@
+id: jp-epi-bank_nonbank_routing-001
+jurisdiction: JP
+authority: Financial Services Agency (FSA)
+instrument_type: e_money_token
+dimension: bank_nonbank_routing
+constraint_ref: C5
+requirement_summary: Issuance runs through a closed trichotomy — banks, funds-transfer service providers, and trust
+  companies — with distribution by registered EPI service providers, so roles are separated by licensed function.
+requirement_structured:
+  issuer_types:
+  - bank
+  - funds-transfer provider
+  - trust company
+  distribution: registered EPIESP
+status: in_force
+effective_date: null
+source:
+  primary: Payment Services Act (Electronic Payment Instruments regime)
+  pinpoint: Closed issuer trichotomy; distribution via registered EPIESP
+interpretation_note: Authored in v0.9.2 to fill the JP.C5 constraint cell for the substrate sweep.
+confidence: high
+claim_class: tier1_legal
+evidence_tier: firm_summary
+last_reviewed: '2026-06-27'
+version_added: 0.9.2
+tags:
+- v0.9.2_cell_sweep
+- jp
+- bank_nonbank_routing
+- binding_in_force_enacted
+binding_status: in_force_enacted

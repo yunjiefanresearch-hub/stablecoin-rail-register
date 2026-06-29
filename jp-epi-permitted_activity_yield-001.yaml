@@ -1,0 +1,56 @@
+id: jp-epi-permitted_activity_yield-001
+jurisdiction: JP
+authority: FSA
+instrument_type: fiat_referenced_stablecoin
+instrument_label_local: Electronic Payment Instrument (EPI)
+dimension: permitted_activity_yield
+constraint_ref: C3
+requirement_summary: 'Holders are not remunerated: Electronic Payment Instruments are payment instruments, and issuer
+  economics come from reserve interest. Whether an intermediary-layer (EPIESP) lending service over an admitted
+  foreign token is issuer-paid yield or a separate intermediary product is an open C3xC5 boundary question at the
+  intermediary level, not a feature of the issuer-layer rule.'
+requirement_structured:
+  holder_yield: prohibited (holders not remunerated)
+  issuer_economics: reserve interest
+  intermediary_boundary_case: EPIESP-layer lending over an admitted foreign token — intermediary-level, not issuer-paid
+    yield (open C3xC5 question)
+status: in_force
+effective_date: '2023-06-01'
+source:
+  primary: Payment Services Act (Electronic Payment Instruments regime)
+  pinpoint: Yield — holders not remunerated; issuer earns reserve interest
+  url: https://laws.e-gov.go.jp/
+secondary:
+- citation: Fan, Multi-Jurisdiction Stablecoin Compliance Matrix v0.9.6 (June 2026), §Japan (Yield and Interest
+    Treatment)
+- citation: Payment Services Act (Act No. 59 of 2009) — official English at Japanese Law Translation (japaneselawtranslation.go.jp).
+operational_notes:
+- note: A secondary-layer lending service over USDC at SBI VC Trade (an EPIESP) has been reported, with a reported
+    launch around March 2026 — the concrete instance of the intermediary-layer yield boundary case. Market-reported,
+    not confirmed against the official text.
+  as_of: 2026-03
+interpretation_note: 'Provenance: transcribed from the author''s Compliance Matrix v0.9.6; VERIFIED against the
+  official primary text in the v0.5.1 verification pass (source.url is the official instrument). On the C3 spine
+  Japan is a prohibition-cluster member at the issuer layer; the intermediary-layer lending boundary case (the C3xC5
+  routing question) is flagged below and its concrete reported instance is in operational_notes (Tier-2).'
+interpretive_flag:
+  tension: Whether an intermediary-layer (EPIESP) lending service over an admitted foreign token is issuer-paid
+    yield or a separate intermediary product.
+  resolution_channel: FSA supervisory treatment of EPIESP-layer lending/yield services.
+confidence: high
+claim_class: tier1_legal
+evidence_tier: resolution_text
+last_reviewed: '2026-06-27'
+version_added: 0.4.0
+tags:
+- apac
+- focus
+- from_matrix_v0.9.6
+- v0.4.0_expansion
+- spine
+- v0.5.1_verification
+- resolution_text_verified
+- v0.7.0_claim_class
+- v0.7.1_claim_purity
+- binding_in_force_enacted
+binding_status: in_force_enacted
